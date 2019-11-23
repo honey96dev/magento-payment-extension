@@ -15,7 +15,6 @@ import {
   DEFAULT_PASSWORD,
   isDev,
   PASSWORD_MIN_LENGTH,
-  ROUTE_BASE,
   SUCCESS,
   TRANSITION_TIME,
   UNKNOWN_SERVER_ERROR,
@@ -125,7 +124,7 @@ export default (props) => {
         <MDBModalFooter className="mx-5 pt-3 mb-1">
           <p className="font-small grey-text d-flex justify-content-end">
             {t("AUTH.NOT_REGISTERED")}
-            <Link to={`${ROUTE_BASE}/${routes.auth.signUp}`} className="blue-text ml-1">{t("AUTH.SIGN_UP")}</Link>
+            <Link to={routes.auth.signUp} className="blue-text ml-1">{t("AUTH.SIGN_UP")}</Link>
           </p>
         </MDBModalFooter>
       </MDBCard>

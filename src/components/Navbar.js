@@ -22,7 +22,6 @@ import {changeLanguage} from "core/i18n";
 import routes from "core/routes";
 import authActions from "actions/auth";
 import UserService from "../services/UserService";
-import {ROUTE_BASE} from "../core/globals";
 
 export default ({thresholdY}) => {
   const {t} = useTranslation();
@@ -59,26 +58,26 @@ export default ({thresholdY}) => {
 
   return (
     <MDBNavbar color={flag ? "mdb-color" : "white"} light={!flag} dark={flag} expand="md" scrolling fixed="top">
-      <MDBNavbarBrand href={`${ROUTE_BASE}/${routes.root}`}>
+      <MDBNavbarBrand href={routes.root}>
         <strong>{t("SITE_NAME")}</strong>
       </MDBNavbarBrand>
       <MDBNavbarToggler onClick={toggleCollapse}/>
       <MDBCollapse isOpen={collapse} navbar className="text-left">
         <MDBNavbarNav left>
-          <MDBNavItem active={pathname === `${ROUTE_BASE}/${routes.root}`}>
-            <MDBNavLink to={`${ROUTE_BASE}/${routes.root}`}>{t("NAVBAR.HOME")}</MDBNavLink>
+          <MDBNavItem active={pathname === routes.root}>
+            <MDBNavLink to={routes.root}>{t("NAVBAR.HOME")}</MDBNavLink>
           </MDBNavItem>
-          <MDBNavItem active={pathname.startsWith(`${ROUTE_BASE}/${routes.posts.root}`)}>
-            <MDBNavLink to={`${ROUTE_BASE}/${routes.posts.root}`}>{t("NAVBAR.POSTS")}</MDBNavLink>
+          <MDBNavItem active={pathname.startsWith(routes.posts.root)}>
+            <MDBNavLink to={routes.posts.root}>{t("NAVBAR.POSTS")}</MDBNavLink>
           </MDBNavItem>
-          <MDBNavItem active={pathname.startsWith(`${ROUTE_BASE}/${routes.news.root}`)}>
-            <MDBNavLink to={`${ROUTE_BASE}/${routes.news.root}`}>{t("NAVBAR.NEWS")}</MDBNavLink>
+          <MDBNavItem active={pathname.startsWith(routes.news.root)}>
+            <MDBNavLink to={routes.news.root}>{t("NAVBAR.NEWS")}</MDBNavLink>
           </MDBNavItem>
-          <MDBNavItem active={pathname.startsWith(`${ROUTE_BASE}/${routes.video.root}`)}>
-            <MDBNavLink to={`${ROUTE_BASE}/${routes.video.root}`}>{t("NAVBAR.VIDEO")}</MDBNavLink>
+          <MDBNavItem active={pathname.startsWith(routes.video.root)}>
+            <MDBNavLink to={routes.video.root}>{t("NAVBAR.VIDEO")}</MDBNavLink>
           </MDBNavItem>
-          <MDBNavItem active={pathname.startsWith(`${ROUTE_BASE}/${routes.vote.root}`)}>
-            <MDBNavLink to={`${ROUTE_BASE}/${routes.vote.root}`}>{t("NAVBAR.VOTE")}</MDBNavLink>
+          <MDBNavItem active={pathname.startsWith(routes.vote.root)}>
+            <MDBNavLink to={routes.vote.root}>{t("NAVBAR.VOTE")}</MDBNavLink>
           </MDBNavItem>
         </MDBNavbarNav>
         <MDBNavbarNav right>
@@ -100,11 +99,11 @@ export default ({thresholdY}) => {
               </MDBDropdownToggle>
               <MDBDropdownMenu className="text-left">
                 {!auth.signedIn && <Fragment>
-                  <MDBDropdownItem onClick={() => history.push(`${ROUTE_BASE}/${routes.auth.signIn}`)}>{t("AUTH.SIGN_IN")}</MDBDropdownItem>
-                  {/*<MDBDropdownItem onClick={() => history.push(`${ROUTE_BASE}/${routes.auth.signUp}`)}>{t("AUTH.SIGN_UP")}</MDBDropdownItem>*/}
+                  <MDBDropdownItem onClick={() => history.push(routes.auth.signIn)}>{t("AUTH.SIGN_IN")}</MDBDropdownItem>
+                  {/*<MDBDropdownItem onClick={() => history.push(routes.auth.signUp)}>{t("AUTH.SIGN_UP")}</MDBDropdownItem>*/}
                 </Fragment>}
                 {auth.signedIn && <Fragment>
-                  <MDBDropdownItem onClick={() => history.push(`${ROUTE_BASE}/${routes.profile.main}`)}>{t("AUTH.MY_ACCOUNT")}</MDBDropdownItem>
+                  <MDBDropdownItem onClick={() => history.push(routes.profile.main)}>{t("AUTH.MY_ACCOUNT")}</MDBDropdownItem>
                   {/*<MDBDropdownItem onClick={() => history.push(routes.profile.myPosts.root)}>{t("PROFILE.MY_POSTS.MY_POSTS")}</MDBDropdownItem>*/}
                   <MDBDropdownItem onClick={handleSignOut}>{t("AUTH.SIGN_OUT")}</MDBDropdownItem>
                 </Fragment>}

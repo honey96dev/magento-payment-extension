@@ -1,13 +1,12 @@
 import React from "react";
 import {useTranslation} from "react-i18next";
 import {BrowserRouter} from "react-router-dom";
+import {useSelector} from "react-redux";
 
 import Router from "components/Router";
 import apis from "core/apis";
 import {setBaseUrl, setHeader} from "apis/fetch";
 import i18n from "core/i18n";
-import {useSelector} from "react-redux";
-import {ROUTE_BASE} from "../core/globals";
 
 setBaseUrl(apis.baseUrl);
 setHeader({lang: i18n.language});

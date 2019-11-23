@@ -35,9 +35,10 @@ export default {
       NOT_SAME: "Make sure same to {{field}}",
     },
     QUESTION: {
-      DELETE_CONFIRM: "Do you want to delete '{{item}}'?",
+      DELETE: "Do you want to delete '{{item}}'?",
     },
     ERROR: {
+      SORRY: "Sorry",
       UNKNOWN_SERVER_ERROR: "Unknown server error",
       NO_DATA: "There is no data",
       ERROR_404: "Ops, Page not found",

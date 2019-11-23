@@ -2,11 +2,13 @@ import React, {Fragment, useEffect} from "react";
 import {Link, useHistory, useParams} from "react-router-dom";
 import {
   MDBBreadcrumb,
-  MDBBreadcrumbItem, MDBCol,
+  MDBBreadcrumbItem,
+  MDBCol,
   MDBIcon,
   MDBNav,
   MDBNavItem,
-  MDBNavLink, MDBRow,
+  MDBNavLink,
+  MDBRow,
   MDBTabContent,
   MDBTabPane
 } from "mdbreact";
@@ -14,7 +16,7 @@ import {useTranslation} from "react-i18next";
 import {Helmet} from "react-helmet";
 
 import routes from "core/routes";
-import {ROUTE_BASE} from "core/globals";
+import PersonalInfo from "./partial/PersonalInfo";
 import ChangePassword from "./partial/ChangePassword";
 
 import "./MainPage.scss";
@@ -28,7 +30,7 @@ export default (props) => {
   const TAB_SOCIAL_MEDIA = "social-media";
   const TAB_PASSWORD = "password";
 
-  tab = tab || TAB_PASSWORD;
+  tab = tab || TAB_PERSONAL_INFO;
   let CURRENT_TAB;
   switch (tab) {
     case TAB_PERSONAL_INFO:
@@ -56,7 +58,7 @@ export default (props) => {
         <title>{t("PROFILE.PROFILE")} - {t("SITE_NAME")}</title>
       </Helmet>
       <MDBBreadcrumb>
-        <MDBBreadcrumbItem><Link to={`${ROUTE_BASE}/${routes.profile.main}`}>{t('PROFILE.PROFILE')}</Link></MDBBreadcrumbItem>
+        <MDBBreadcrumbItem><Link to={routes.profile.main}>{t('PROFILE.PROFILE')}</Link></MDBBreadcrumbItem>
         <MDBBreadcrumbItem active>{CURRENT_TAB}</MDBBreadcrumbItem>
       </MDBBreadcrumb>
       <MDBRow>
@@ -66,13 +68,13 @@ export default (props) => {
         <MDBCol md={9}>
           <div className="classic-tabs">
             <MDBNav classicTabs color='mdb-color'>
-              {/*<MDBNavItem>*/}
-              {/*  <MDBNavLink to={`${routes.profile.main}/${TAB_PERSONAL_INFO}`} link={routes.profile.main} active={tab === TAB_PERSONAL_INFO} role="tab" onClick={e => handleChangeTab(TAB_PERSONAL_INFO)} >*/}
-              {/*    <MDBIcon icon="user" /> {t("PROFILE.MAIN.PERSONAL_INFO")}*/}
-              {/*  </MDBNavLink>*/}
-              {/*</MDBNavItem>*/}
               <MDBNavItem>
-                <MDBNavLink to={`${ROUTE_BASE}/${routes.profile.main}/${TAB_PASSWORD}`} link={routes.profile.main} active={tab === TAB_PASSWORD} role="tab" onClick={e => handleChangeTab(TAB_PASSWORD)} >
+                <MDBNavLink to={`${routes.profile.main}/${TAB_PERSONAL_INFO}`} link={routes.profile.main} active={tab === TAB_PERSONAL_INFO} role="tab" onClick={e => handleChangeTab(TAB_PERSONAL_INFO)} >
+                  <MDBIcon icon="user" /> {t("PROFILE.MAIN.PERSONAL_INFO")}
+                </MDBNavLink>
+              </MDBNavItem>
+              <MDBNavItem>
+                <MDBNavLink to={`${routes.profile.main}/${TAB_PASSWORD}`} link={routes.profile.main} active={tab === TAB_PASSWORD} role="tab" onClick={e => handleChangeTab(TAB_PASSWORD)} >
                   <MDBIcon icon="key" /> {t("PROFILE.MAIN.PASSWORD")}
                 </MDBNavLink>
               </MDBNavItem>
@@ -81,9 +83,9 @@ export default (props) => {
               className="card"
               activeItem={tab}
             >
-              {/*<MDBTabPane tabId={TAB_PERSONAL_INFO} role="tabpanel">*/}
-              {/*  <PersonalInfo/>*/}
-              {/*</MDBTabPane>*/}
+              <MDBTabPane tabId={TAB_PERSONAL_INFO} role="tabpanel">
+                <PersonalInfo/>
+              </MDBTabPane>
               <MDBTabPane tabId={TAB_PASSWORD} role="tabpanel">
                 <ChangePassword/>
               </MDBTabPane>

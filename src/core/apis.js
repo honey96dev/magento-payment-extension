@@ -17,6 +17,5 @@ export default {
     delete: "posts/delete",
     get: "posts/get",
     commentList: "posts/comment-list",
-    writeComment: "posts/write-comment",
   },
 };

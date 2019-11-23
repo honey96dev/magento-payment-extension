@@ -3,7 +3,6 @@ import {Route, Switch} from "react-router-dom";
 import {MDBContainer} from "mdbreact";
 
 import routes from "core/routes";
-import {ROUTE_BASE} from "core/globals";
 import Navbar from "components/Navbar";
 import SignedInRoute from "components/SignedInRoute";
 import Footer from "components/Footer";
@@ -20,8 +19,8 @@ export default (props) => {
       <Navbar/>
       <MDBContainer className={"section"}>
         <Switch>
-          <SignedInRoute path={`${ROUTE_BASE}/${routes.profile.main}`} exact component={MainPage}/>
-          <SignedInRoute path={`${ROUTE_BASE}/${routes.profile.main}/:tab`} exact component={MainPage}/>
+          <SignedInRoute path={routes.profile.main} exact component={MainPage}/>
+          <SignedInRoute path={`${routes.profile.main}/:tab`} exact component={MainPage}/>
           <Route component={Error404}/>
         </Switch>
       </MDBContainer>

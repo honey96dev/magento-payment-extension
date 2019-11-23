@@ -26,6 +26,17 @@ export default {
     });
   },
 
+  delete: (params) => {
+    return new Promise((resolve, reject) => {
+      fetch(POST, apis.posts.delete, params)
+        .then(res => {
+          resolve(res);
+        }, err => {
+          reject(err);
+        });
+    });
+  },
+
   get: (params) => {
     return new Promise((resolve, reject) => {
       fetch(POST, apis.posts.get, params)
@@ -40,17 +51,6 @@ export default {
   commentList: (params) => {
     return new Promise((resolve, reject) => {
       fetch(POST, apis.posts.commentList, params)
-        .then(res => {
-          resolve(res);
-        }, err => {
-          reject(err);
-        });
-    });
-  },
-
-  writeComment: (params) => {
-    return new Promise((resolve, reject) => {
-      fetch(POST, apis.posts.writeComment, params)
         .then(res => {
           resolve(res);
         }, err => {

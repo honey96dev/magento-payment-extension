@@ -3,14 +3,12 @@ import {Route, Switch} from "react-router-dom";
 import {MDBCol, MDBContainer, MDBRow} from "mdbreact";
 
 import routes from "core/routes";
-import {ROUTE_BASE} from "core/globals";
 import Navbar from "components/Navbar";
 import Footer from "components/Footer";
 import BackToTop from "components/BackToTop";
 import SignInPage from "./SignInPage";
-// import SignUpPage from "./SignUpPage";
-
 import "./AuthPage.scss";
+// import SignUpPage from "./SignUpPage";
 
 export default () => {
   return (
@@ -21,7 +19,7 @@ export default () => {
           <MDBCol lg="3" md="0"/>
           <MDBCol lg="6">
             <Switch>
-              <Route path={`${ROUTE_BASE}/${routes.auth.signIn}`} component={SignInPage}/>
+              <Route path={routes.auth.signIn} component={SignInPage}/>
               {/*<Route path={routes.auth.signUp} component={SignUpPage}/>*/}
             </Switch>
           </MDBCol>

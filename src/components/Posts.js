@@ -3,7 +3,7 @@ import {useTranslation} from "react-i18next";
 
 import PostListItem from "./partial/PostListItem";
 
-export default ({items, detailLabel, detailLink}) => {
+export default ({items, detailLabel, detailLink, handleDelete}) => {
   const {t} = useTranslation();
 
   const dir = t('DIRECTION');
@@ -13,7 +13,7 @@ export default ({items, detailLabel, detailLink}) => {
     <div className={"text-left mt-3"}>
       {items.map((item, index) => (
         <Fragment key={item.id}>
-          <PostListItem id={item.id} date={item.date} time={item.time} author={`${item.firstName} ${item.lastName}`} comments={item.comments} media={item.media} title={item.title} description={item.description} detailLabel={detailLabel} detailLink={detailLink} />
+          <PostListItem id={item.id} date={item.date} time={item.time} author={`${item.firstName} ${item.lastName}`} comments={item.comments} media={item.media} title={item.title} description={item.description} detailLabel={detailLabel} detailLink={detailLink} handleDelete={handleDelete} />
           {index < count && <hr className="my-5"/>}
         </Fragment>
       ))}

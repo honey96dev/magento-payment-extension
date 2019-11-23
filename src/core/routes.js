@@ -1,33 +1,35 @@
+import {ROUTE_BASE} from "core/globals";
+
 export const routes = {
-  root: "",
+  root: `${ROUTE_BASE}/`,
   auth: {
-    root: "auth",
-    signIn: "auth/sign-in",
-    signUp: "auth/sign-up",
+    root: `${ROUTE_BASE}/auth`,
+    signIn: `${ROUTE_BASE}/auth/sign-in`,
+    signUp: `${ROUTE_BASE}/auth/sign-up`,
   },
   profile: {
-    root: "profile",
-    main: "profile/main",
+    root: `${ROUTE_BASE}/profile`,
+    main: `${ROUTE_BASE}/profile/main`,
     myPosts: {
-      root: "profile/my-posts",
-      detail: "profile/my-posts/detail",
+      root: `${ROUTE_BASE}/profile/my-posts`,
+      detail: `${ROUTE_BASE}/profile/my-posts/detail`,
     },
   },
   posts: {
-    root: "posts",
-    all: "posts",
-    add: "posts/add",
-    detail: "posts/detail",
-    comment: "posts/comment",
+    root: `${ROUTE_BASE}/posts`,
+    all: `${ROUTE_BASE}/posts`,
+    add: `${ROUTE_BASE}/posts/add`,
+    detail: `${ROUTE_BASE}/posts/detail`,
+    comment: `${ROUTE_BASE}/posts/comment`,
   },
   news: {
-    root: "news",
+    root: `${ROUTE_BASE}/news`,
   },
   video: {
-    root: "video",
+    root: `${ROUTE_BASE}/video`,
   },
   vote: {
-    root: "vote",
+    root: `${ROUTE_BASE}/vote`,
   },
 };
 

@@ -22,9 +22,6 @@ import {useDispatch} from "react-redux";
 import {CSSTransition} from "react-transition-group";
 import {animateScroll as scroll} from "react-scroll";
 import {Helmet} from "react-helmet";
-
-// import "moment/locale/ar";
-
 import {
   ALERT_DANGER,
   DATE_FORMAT_ISO,
@@ -54,7 +51,8 @@ import UserService from "services/UserService";
 import auth from "actions/auth";
 
 import "./SignUpPage.scss";
-import {ROUTE_BASE} from "../../core/globals";
+
+// import "moment/locale/ar";
 
 export default (props) => {
   const dispatch = useDispatch();
@@ -265,7 +263,7 @@ export default (props) => {
         <MDBModalFooter className="mx-5 pt-3 mb-1">
           <p className="font-small grey-text d-flex justify-content-end">
             {t("AUTH.ALREADY_REGISTERED")}
-            <Link to={`${ROUTE_BASE}/${routes.auth.signIn}`} className="blue-text ml-1">{t("AUTH.SIGN_IN")}</Link>
+            <Link to={routes.auth.signIn} className="blue-text ml-1">{t("AUTH.SIGN_IN")}</Link>
           </p>
         </MDBModalFooter>
       </MDBCard>

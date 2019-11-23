@@ -35,9 +35,10 @@ export default {
       NOT_SAME: "تأكد من نفسه إلى {{field}}",
     },
     QUESTION: {
-      DELETE_CONFIRM: "هل تريد حذف '{{item}}'؟",
+      DELETE: "هل تريد حذف '{{item}}'؟",
     },
     ERROR: {
+      SORRY: "آسف",
       UNKNOWN_SERVER_ERROR: "خطأ غير معروف في الخادم",
       NO_DATA: "ليس هنالك معلومات",
       ERROR_404: "لم يتم العثور على الصفحة",
