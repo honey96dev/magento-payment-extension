@@ -1,33 +1,33 @@
 import React, {Fragment, useEffect, useState} from "react";
-import {useHistory, useParams} from "react-router-dom";
+import {Link, useHistory, useParams} from "react-router-dom";
 import {
   MDBAlert,
   MDBBreadcrumb,
   MDBBreadcrumbItem,
   MDBBtn,
   MDBCol,
+  MDBIcon,
   MDBModal,
   MDBModalBody,
   MDBModalFooter,
   MDBModalHeader,
-  MDBRow
+  MDBRow,
+  MDBTable,
+  MDBTableBody,
+  MDBTableHead
 } from "mdbreact";
 import {useTranslation} from "react-i18next";
-import {sprintf} from "sprintf-js";
 import {animateScroll as scroll} from "react-scroll";
 import {Helmet} from "react-helmet";
 import {CSSTransition} from "react-transition-group";
-
-import Posts from "components/Posts";
 import Loading from "components/Loading";
 import ErrorNoData from "components/ErrorNoData";
 import Pagination from "components/Pagination";
-import PostsService from "services/PostsService";
+import VoteService from "services/VoteService";
 import {ALERT_DANGER, SUCCESS, TRANSITION_TIME} from "core/globals";
 import routes from "core/routes";
-import apis from "core/apis";
 
-import "./AllPostsPage.scss";
+import "./QuestionsPage.scss";
 
 export default () => {
   const {page} = useParams();
@@ -39,22 +39,50 @@ export default () => {
   const [modal, setModal] = useState({});
 
   const [pageCount, setPageCount] = useState(0);
-  const [posts, setPosts] = useState([]);
+  const [items, setItems] = useState([]);
 
   const currentPage = page ? parseInt(page) : 1;
+
+  const columns = [
+    {
+      label: '#',
+      field: 'id',
+      sort: 'asc',
+    },
+    {
+      label: t("VOTE.QUESTION"),
+      field: 'question',
+      sort: 'asc',
+    },
+    {
+      label: t("VOTE.START_DATE"),
+      field: 'startDate',
+      sort: 'asc',
+    },
+    {
+      label: t("VOTE.END_DATE"),
+      field: 'endDate',
+      sort: 'asc'
+    },
+    {
+      label: '',
+      field: 'button',
+      sort: 'asc'
+    }
+  ];
 
   useEffect(e => {
     scroll.scrollToTop({
       duration: TRANSITION_TIME,
     });
-    PostsService.list({page})
+    VoteService.questions({page})
       .then(res => {
         if (res.result === SUCCESS) {
-          setPageCount(res.pageCount);
-          for (let item of res.data) {
-            item["media"] = (item["media"].startsWith("http://") || item["media"].startsWith("https://")) ? item["media"] : sprintf("%s%s", apis.assetsBaseUrl, item["media"]);
+          for (let row of res.data) {
+            row['button'] = makeButtons(row.id, row.number);
           }
-          setPosts(res.data);
+          setPageCount(res.pageCount);
+          setItems(res.data);
         } else {
           setAlert({
             show: true,
@@ -74,19 +102,29 @@ export default () => {
       });
   }, [page, t]);
 
+  const makeButtons = (id, number) => {
+    return (
+      <Fragment>
+        <Link to={`${routes.vote.addQuestion}/${id}`}><MDBBtn tag="a" size="sm" color="indigo" floating><MDBIcon icon="edit"/></MDBBtn></Link>
+        <Link to={`${routes.vote.answers}/${id}`}><MDBBtn tag="a" size="sm" color="primary" className="mx-2" floating><MDBIcon icon="comments"/></MDBBtn></Link>
+        <MDBBtn tag="a" size="sm" color="danger" floating onClick={e => handleDelete(id, "#" + number)}><MDBIcon icon="trash"/></MDBBtn>
+      </Fragment>
+    );
+  };
+
   const toggleModal = e => {
     setModal(Object.assign({}, modal, {show: !modal.show}));
   };
 
-  const deletePost = id => {
-    PostsService.delete({id: modal.deleteId, page})
+  const deleteItem = id => {
+    VoteService.deleteQuestion({id: modal.deleteId, page})
       .then(res => {
         if (res.result === SUCCESS) {
-          setPageCount(res.pageCount);
-          for (let item of res.data) {
-            item["media"] = (item["media"].startsWith("http://") || item["media"].startsWith("https://")) ? item["media"] : sprintf("%s%s", apis.assetsBaseUrl, item["media"]);
+          for (let row of res.data) {
+            row['button'] = makeButtons(row.id, row.number);
           }
-          setPosts(res.data);
+          setPageCount(res.pageCount);
+          setItems(res.data);
         } else {
           setAlert({
             show: true,
@@ -115,24 +153,28 @@ export default () => {
   };
 
   const handlePageChange = page => {
-    history.push(`${routes.posts.all}/${page}`);
+    history.push(`${routes.vote.questions}/${page}`);
   };
 
   const handleDelete = (id, title) => {
     setModal(Object.assign({}, modal, {show: true, title: t("COMMON.BUTTON.DELETE"), message: t("COMMON.QUESTION.DELETE", {item: title}), deleteId: id}));
   };
-
+  
   return (
     <Fragment>
       <Helmet>
-        <title>{t("NAVBAR.POSTS")} - {t("SITE_NAME")}</title>
+        <title>{t("NAVBAR.VOTE.VOTE")} - {t("SITE_NAME")}</title>
       </Helmet>
       <MDBBreadcrumb>
-        <MDBBreadcrumbItem active>{t('NAVBAR.POSTS')}</MDBBreadcrumbItem>
+        <MDBBreadcrumbItem>{t('NAVBAR.VOTE.VOTE')}</MDBBreadcrumbItem>
+        <MDBBreadcrumbItem active>{t('NAVBAR.VOTE.QUESTIONS')}</MDBBreadcrumbItem>
       </MDBBreadcrumb>
       {!!loading && <Loading/>}
-      {!loading && !posts.length && <ErrorNoData/>}
-      {!loading && !!posts.length && <MDBRow>
+      {!loading && !items.length && <ErrorNoData/>}
+      {!loading && !!items.length && <MDBRow>
+        <MDBCol md={12}>
+          <h3 className="mt-4 font-weight-bold text-center">{t("NAVBAR.VOTE.QUESTIONS")}</h3>
+        </MDBCol>
         <MDBCol md={12}>
           <CSSTransition in={alert.show} classNames="fade-transition" timeout={TRANSITION_TIME} unmountOnExit appear>
             <MDBAlert color={alert.color} dismiss onClosed={() => setAlert({})}>{alert.message}</MDBAlert>
@@ -143,8 +185,36 @@ export default () => {
             <Pagination circle current={currentPage} pageCount={pageCount} width={10} onChange={handlePageChange}/>
           </div>
         </MDBCol>
+        <MDBCol md={12} className="text-left mt-3">
+          <div className="full-width">
+            <Link to={routes.vote.addQuestion}>
+              <MDBBtn size="sm" color="primary">
+                {t("NAVBAR.VOTE.ADD_QUESTION")}
+              </MDBBtn>
+            </Link>
+          </div>
+        </MDBCol>
         <MDBCol md={12}>
-          <Posts items={posts} detailLabel={t("COMMON.BUTTON.READ_MORE")} detailLink={routes.posts.detail} handleDelete={handleDelete} />
+          <MDBTable responsive striped>
+            <MDBTableHead>
+              <tr className="text-left">
+                {columns.map(item => (
+                  <th>{item.label}</th>
+                ))}
+              </tr>
+            </MDBTableHead>
+            <MDBTableBody>
+              {items.map(item => (
+                <tr className="text-left">
+                  <td>{item.number}</td>
+                  <td>{item.question}</td>
+                  <td className="date-col">{item.startDate}</td>
+                  <td className="date-col">{item.endDate}</td>
+                  <td className="p-2 edit-col">{item.button}</td>
+                </tr>
+              ))}
+            </MDBTableBody>
+          </MDBTable>
         </MDBCol>
         <MDBCol md={12} className="text-center">
           <div className="mt-5">
@@ -156,7 +226,7 @@ export default () => {
         <MDBModalHeader toggle={toggleModal}>{modal.title}</MDBModalHeader>
         <MDBModalBody className="text-left">{modal.message}</MDBModalBody>
         <MDBModalFooter>
-          <MDBBtn type="button" color="danger" onClick={deletePost}>{t("COMMON.BUTTON.DELETE")}</MDBBtn>
+          <MDBBtn type="button" color="danger" onClick={deleteItem}>{t("COMMON.BUTTON.DELETE")}</MDBBtn>
           <MDBBtn type="button" color="secondary" onClick={toggleModal}>{t("COMMON.BUTTON.CANCEL")}</MDBBtn>
         </MDBModalFooter>
       </MDBModal>

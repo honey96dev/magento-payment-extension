@@ -1,8 +1,8 @@
 import {isDev} from "core/globals";
 
 export default {
-  baseUrl: isDev ? "http://localhost:8080/admin-api/" : "/admin-api/",
-  assetsBaseUrl: isDev ? "http://localhost:8080/assets/" : "/assets/",
+  baseUrl: isDev ? "http://localhost:8080/admin/api/" : "/api/",
+  assetsBaseUrl: isDev ? "http://localhost:8080/admin/assets/" : "/assets/",
   auth: {
     signIn: "auth/sign-in",
     signUp: "auth/sign-up",
@@ -17,5 +17,27 @@ export default {
     delete: "posts/delete",
     get: "posts/get",
     commentList: "posts/comment-list",
+  },
+  news: {
+    list: "news/list",
+    save: "news/save",
+    delete: "news/delete",
+    get: "news/get",
+  },
+  video: {
+    list: "video/list",
+    save: "video/save",
+    delete: "video/delete",
+    get: "video/get",
+  },
+  vote: {
+    questions: "vote/questions",
+    saveQuestion: "vote/save-question",
+    deleteQuestion: "vote/delete-question",
+    getQuestion: "vote/get-question",
+    answers: "vote/answers",
+    saveAnswer: "vote/save-answer",
+    deleteAnswer: "vote/delete-answer",
+    getAnswer: "vote/get-answer",
   },
 };

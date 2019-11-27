@@ -69,9 +69,22 @@ export default {
   NAVBAR: {
     HOME: "Home",
     POSTS: "Posts",
-    NEWS: "News",
-    VIDEO: "Video",
-    VOTE: "Vote",
+    NEWS: {
+      NEWS: "News",
+      ALL: "All News",
+      ADD: "Add News",
+    },
+    VIDEO: {
+      VIDEO: "Video",
+      ALL: "All Video",
+      ADD: "Add Video",
+    },
+    VOTE: {
+      VOTE: "Vote",
+      QUESTIONS: "Questions",
+      ADD_QUESTION: "Add Question",
+      RESULT: "Result",
+    },
   },
   AUTH: {
     EMAIL: "Email",
@@ -129,6 +142,34 @@ export default {
       ALREADY_WROTE_COMMENT: "You have already written a comment on this post",
       COMMENTS: "Comments",
       NO_COMMENT: "There is no comment yet",
+    },
+  },
+  NEWS: {
+    TITLE: "Title",
+    TEXT: "Text",
+    DESCRIPTION: "Description",
+    URL: "URL",
+    ADD: {
+      ADD_NEWS: "Add News",
+      MODIFY_NEWS: "Modify News",
+    },
+  },
+  VIDEO: {
+    TITLE: "Title",
+    URL: "URL",
+    IS_FILE: "Video File?",
+    ADD: {
+      ADD_VIDEO: "Add Video",
+      MODIFY_VIDEO: "Modify Video",
+    },
+  },
+  VOTE: {
+    QUESTION: "Question",
+    START_DATE: "Start Date",
+    END_DATE: "End Date",
+    ADD_QUESTION: {
+      ADD_QUESTION: "Add Question",
+      MODIFY_QUESTION: "Modify Question",
     },
   },
 };

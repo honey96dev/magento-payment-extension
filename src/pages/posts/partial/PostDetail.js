@@ -29,7 +29,7 @@ export default ({data, comments}) => {
         </p>
       </div>
       <div className="text-center">
-        <img src={data.media} className="post-detail-media view overlay rounded z-depth-1-half mb-4"/>
+        <img src={data.media} alt={data.media} className="post-detail-media view overlay rounded z-depth-1-half mb-4"/>
       </div>
       <div>
         <div className="text-left">

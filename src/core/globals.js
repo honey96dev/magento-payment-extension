@@ -1,7 +1,8 @@
 export const isDev = !process.env.NODE_ENV || process.env.NODE_ENV === "development";
 
 // export const ROUTE_BASE = process.env.PUBLIC_URL;
-export const ROUTE_BASE = isDev ? "" : process.env.PUBLIC_URL;
+export const ROUTE_BASE = "";
+// export const ROUTE_BASE = isDev ? "" : process.env.PUBLIC_URL;
 export const PERSIST_KEY = "knowledge:admin";
 
 export const SUCCESS = "success";
@@ -23,8 +24,12 @@ export const SAUDI_PHONE_PREFIX = "+966";
 export const USERNAME_MAX_LENGTH = 20;
 export const PASSWORD_MIN_LENGTH = 6;
 
+export const PAGINATION_WIDTH = 10;
+export const PAGINATION_WIDTH_MOBILE = 6;
+
 export const DESCRIPTION_LENGTH_BREAKPOINT = 400;
 
+export const TEXTAREA_ROWS0 = 3;
 export const TEXTAREA_ROWS1 = 10;
 export const TEXTAREA_ROWS2 = 18;
 export const TEXTAREA_MAXLENGTH = 4096;

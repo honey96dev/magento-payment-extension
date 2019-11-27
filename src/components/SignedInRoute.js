@@ -1,10 +1,9 @@
 import React from "react";
 import {Redirect, Route, useHistory} from "react-router-dom";
-import {useDispatch, useSelector} from "react-redux";
+import {useSelector} from "react-redux";
 import routes from "core/routes";
 
 export default ({component, ...props}) => {
-  const dispatch = useDispatch();
   const {auth} = useSelector(state => state);
   const history = useHistory();
 

@@ -18,5 +18,8 @@ export default {
     } catch (e) {
       return false;
     }
-  }
+  },
+  isURL: value => {
+    return value.startsWith("http://") || value.startsWith("https://");
+  },
 }

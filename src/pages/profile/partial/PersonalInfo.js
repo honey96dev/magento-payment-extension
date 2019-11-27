@@ -1,32 +1,10 @@
 import React, {Fragment, useEffect, useState} from "react";
-import {
-  MDBAlert,
-  MDBBtn,
-  MDBCol,
-  MDBDatePicker,
-  MDBIcon,
-  MDBInput,
-  MDBInputGroup,
-  MDBRow,
-  MDBSelect,
-  MDBSelectInput,
-  MDBSelectOption,
-  MDBSelectOptions
-} from "mdbreact";
+import {MDBAlert, MDBBtn, MDBCol, MDBIcon, MDBInput, MDBRow} from "mdbreact";
 import {CSSTransition} from "react-transition-group";
 import {useTranslation} from "react-i18next";
-import {sprintf} from "sprintf-js";
-import {useSelector, useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 
-import {
-  ALERT_DANGER,
-  DATE_FORMAT_ISO,
-  GENDER_FEMALE,
-  GENDER_MALE,
-  SAUDI_PHONE_PREFIX, SUCCESS,
-  TRANSITION_TIME,
-  USERNAME_MAX_LENGTH
-} from "core/globals";
+import {ALERT_DANGER, SUCCESS, TRANSITION_TIME, USERNAME_MAX_LENGTH} from "core/globals";
 import validators from "core/validators";
 import authActions from "actions/auth";
 import ProfileService from "services/ProfileService";
@@ -66,6 +44,7 @@ export default () => {
   const handleSubmit = e => {
     e.preventDefault();
 
+    setLoading(true);
     const params = {id, email, username};
     ProfileService.save(params)
       .then(res => {
@@ -78,6 +57,7 @@ export default () => {
           message: res.message,
         });
         setEditing(false);
+        setLoading(false);
       })
       .catch(err => {
         setAlert({
@@ -85,6 +65,7 @@ export default () => {
           color: ALERT_DANGER,
           message: t('COMMON.ERROR.UNKNOWN_SERVER_ERROR'),
         });
+        setLoading(false);
       });
   };
 

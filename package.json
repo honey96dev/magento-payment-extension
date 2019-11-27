@@ -1,13 +1,13 @@
 {
   "name": "hrgulf-knowledge-admin",
   "version": "1.0.0",
-  "homepage": "/admin/",
   "private": true,
   "// If You want to install mdbreact from our GitLab repository, please replace '4.21.1' with gitURL provided here ->": "git+https://oauth2:<YOUR-TOKEN-GOES-HERE>@git.mdbootstrap.com/mdb/react/re-pro.git",
   "dependencies": {
     "@fortawesome/fontawesome-pro": "^5.8.2",
     "@rehooks/window-scroll-position": "^1.0.1",
     "axios": "^0.19.0",
+    "dateformat": "^3.0.3",
     "google-libphonenumber": "^3.2.6",
     "i18next": "^19.0.0",
     "i18next-browser-languagedetector": "^4.0.1",
@@ -17,6 +17,7 @@
     "moment": "^2.24.0",
     "node-sass": "^4.12.0",
     "react": "^16.9.0",
+    "react-device-detect": "^1.9.10",
     "react-dom": "^16.9.0",
     "react-helmet": "^5.2.1",
     "react-i18next": "^11.0.1",

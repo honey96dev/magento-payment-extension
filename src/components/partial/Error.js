@@ -1,11 +1,8 @@
 import React, {Fragment} from "react";
-import {useTranslation} from "react-i18next";
 
 import "./Error.scss";
 
 export default ({heading, message}) => {
-  const {t} = useTranslation();
-
   return (
     <Fragment>
       <div className="match-parent">

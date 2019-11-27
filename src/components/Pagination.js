@@ -1,5 +1,7 @@
 import React, {Fragment, useEffect, useState} from "react";
 import {MDBIcon, MDBPageItem, MDBPageNav, MDBPagination} from "mdbreact";
+import {PAGINATION_WIDTH, PAGINATION_WIDTH_MOBILE} from "core/globals";
+import {isMobile} from "react-device-detect";
 import {useTranslation} from "react-i18next";
 
 export default ({circle, current, pageCount, width, onChange}) => {
@@ -11,7 +13,7 @@ export default ({circle, current, pageCount, width, onChange}) => {
   const dir2 = t("DIRECTION") === "ltr" ? "right" : "left";
 
   useEffect(e => {
-    const half = Math.ceil((width || 10) / 2);
+    const half = Math.ceil((width || (isMobile ? PAGINATION_WIDTH_MOBILE : PAGINATION_WIDTH)) / 2);
     let begin = (current - half) < 1 ? 1 : (current - half);
     let end = (current + half - 1) > pageCount ? pageCount : (current + half - 1);
     if ((end - begin) < width) {

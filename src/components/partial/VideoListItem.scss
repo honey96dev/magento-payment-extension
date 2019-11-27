@@ -1,0 +1,17 @@
+@import "../../assets/consts";
+
+.post-media {
+  width: 100%;
+  max-height: $postitem-media-maxheight;
+  object-fit: cover;
+}
+
+.post-media2 {
+  width: 100%;
+  height: $postitem-media-maxheight;
+  object-fit: cover;
+}
+
+.infor-section {
+  display: inline-flex;
+}

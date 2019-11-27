@@ -69,9 +69,22 @@ export default {
   NAVBAR: {
     HOME: "البداية",
     POSTS: "المشاركات",
-    NEWS: "الأخبار",
-    VIDEO: "الفيديوهات",
-    VOTE: "الفيديوهات",
+    NEWS: {
+      NEWS: "الأخبار",
+      ALL: "جميع الأخبار",
+      ADD: "إضافة الأخبار",
+    },
+    VIDEO: {
+      VIDEO: "الفيديوهات",
+      ALL: "كل الفيديو",
+      ADD: "أضف فيديو",
+    },
+    VOTE: {
+      VOTE: "تصويت",
+      QUESTIONS: "الأسئلة",
+      ADD_QUESTION: "أضف سؤال",
+      RESULT: "نتيجة",
+    },
   },
   AUTH: {
     EMAIL: "البريد الإلكتروني",
@@ -129,6 +142,34 @@ export default {
       ALREADY_WROTE_COMMENT: "لقد كتبت بالفعل تعليقًا على هذا المنشور",
       COMMENTS: "تعليقات",
       NO_COMMENT: "لا يوجد أي تعليق حتى الان",
+    },
+  },
+  NEWS: {
+    TITLE: "عنوان",
+    TEXT: "نص",
+    DESCRIPTION: "وصف",
+    URL: "URL",
+    ADD: {
+      ADD_NEWS: "إضافة الأخبار",
+      MODIFY_NEWS: "تعديل الأخبار",
+    },
+  },
+  VIDEO: {
+    TITLE: "عنوان",
+    URL: "URL",
+    IS_FILE: "ملف فيديو؟",
+    ADD: {
+      ADD_VIDEO: "أضف فيديو",
+      MODIFY_VIDEO: "تعديل الفيديو",
+    },
+  },
+  VOTE: {
+    QUESTION: "سؤال",
+    START_DATE: "تاريخ البدء",
+    END_DATE: "تاريخ الانتهاء",
+    ADD_QUESTION: {
+      ADD_QUESTION: "أضف سؤال",
+      MODIFY_QUESTION: "تعديل السؤال",
     },
   },
 };

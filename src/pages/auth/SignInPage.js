@@ -2,7 +2,7 @@ import React, {Fragment, useEffect, useState} from "react";
 import {useTranslation} from "react-i18next";
 import {Link, useHistory} from "react-router-dom";
 import {MDBAlert, MDBBtn, MDBCard, MDBCardBody, MDBIcon, MDBInput, MDBModalFooter} from "mdbreact";
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch} from "react-redux";
 import {CSSTransition} from "react-transition-group";
 import {animateScroll as scroll} from "react-scroll";
 import {Helmet} from "react-helmet";
@@ -25,7 +25,7 @@ import validators from "core/validators";
 import "./SignInPage.scss";
 
 export default (props) => {
-  const {auth: {redirectUrl}} = useSelector(state => state);
+  // const {auth: {redirectUrl}} = useSelector(state => state);
   const dispatch = useDispatch();
   const {t} = useTranslation();
   const history = useHistory();

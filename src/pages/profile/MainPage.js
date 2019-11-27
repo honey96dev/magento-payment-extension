@@ -42,6 +42,8 @@ export default (props) => {
     case TAB_PASSWORD:
       CURRENT_TAB = t("PROFILE.MAIN.PASSWORD");
       break;
+    default:
+      break;
   }
 
   useEffect(e => {

@@ -24,12 +24,20 @@ export const routes = {
   },
   news: {
     root: `${ROUTE_BASE}/news`,
+    all: `${ROUTE_BASE}/news`,
+    add: `${ROUTE_BASE}/news/add`,
   },
   video: {
     root: `${ROUTE_BASE}/video`,
+    all: `${ROUTE_BASE}/video`,
+    add: `${ROUTE_BASE}/video/add`,
   },
   vote: {
     root: `${ROUTE_BASE}/vote`,
+    questions: `${ROUTE_BASE}/vote`,
+    addQuestion: `${ROUTE_BASE}/vote/add`,
+    answers: `${ROUTE_BASE}/vote/answers`,
+    result: `${ROUTE_BASE}/vote/result`,
   },
 };
 

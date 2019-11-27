@@ -1,5 +1,5 @@
 import React, {Fragment} from "react";
-import {MDBAlert, MDBCol, MDBIcon} from "mdbreact";
+import {MDBAlert, MDBIcon} from "mdbreact";
 import {useTranslation} from "react-i18next";
 
 import "./Comments.scss";

@@ -43,13 +43,13 @@ export default ({thresholdY}) => {
     setCollapse(!collapse);
   };
 
-  const handleMouseEnter = e => {
-    console.log(e);
-  };
-
-  const handleMouseLeave = e => {
-    console.log(e);
-  };
+  // const handleMouseEnter = e => {
+  //   console.log(e);
+  // };
+  //
+  // const handleMouseLeave = e => {
+  //   console.log(e);
+  // };
 
   const handleSignOut = e => {
     UserService.signOut();
@@ -71,13 +71,38 @@ export default ({thresholdY}) => {
             <MDBNavLink to={routes.posts.root}>{t("NAVBAR.POSTS")}</MDBNavLink>
           </MDBNavItem>
           <MDBNavItem active={pathname.startsWith(routes.news.root)}>
-            <MDBNavLink to={routes.news.root}>{t("NAVBAR.NEWS")}</MDBNavLink>
+            <MDBDropdown>
+              <MDBDropdownToggle nav caret>
+                <span className="mr-2">{t("NAVBAR.NEWS.NEWS")}</span>
+              </MDBDropdownToggle>
+              <MDBDropdownMenu className="text-left">
+                <MDBDropdownItem onClick={() => history.push(routes.news.add)}>{t("NAVBAR.NEWS.ADD")}</MDBDropdownItem>
+                <MDBDropdownItem onClick={() => history.push(routes.news.all)}>{t("NAVBAR.NEWS.ALL")}</MDBDropdownItem>
+              </MDBDropdownMenu>
+            </MDBDropdown>
           </MDBNavItem>
           <MDBNavItem active={pathname.startsWith(routes.video.root)}>
-            <MDBNavLink to={routes.video.root}>{t("NAVBAR.VIDEO")}</MDBNavLink>
+            <MDBDropdown>
+              <MDBDropdownToggle nav caret>
+                <span className="mr-2">{t("NAVBAR.VIDEO.VIDEO")}</span>
+              </MDBDropdownToggle>
+              <MDBDropdownMenu className="text-left">
+                <MDBDropdownItem onClick={() => history.push(routes.video.add)}>{t("NAVBAR.VIDEO.ADD")}</MDBDropdownItem>
+                <MDBDropdownItem onClick={() => history.push(routes.video.all)}>{t("NAVBAR.VIDEO.ALL")}</MDBDropdownItem>
+              </MDBDropdownMenu>
+            </MDBDropdown>
           </MDBNavItem>
           <MDBNavItem active={pathname.startsWith(routes.vote.root)}>
-            <MDBNavLink to={routes.vote.root}>{t("NAVBAR.VOTE")}</MDBNavLink>
+            <MDBDropdown>
+              <MDBDropdownToggle nav caret>
+                <span className="mr-2">{t("NAVBAR.VOTE.VOTE")}</span>
+              </MDBDropdownToggle>
+              <MDBDropdownMenu className="text-left">
+                <MDBDropdownItem onClick={() => history.push(routes.vote.questions)}>{t("NAVBAR.VOTE.QUESTIONS")}</MDBDropdownItem>
+                <MDBDropdownItem onClick={() => history.push(routes.vote.addQuestion)}>{t("NAVBAR.VOTE.ADD_QUESTION")}</MDBDropdownItem>
+                <MDBDropdownItem onClick={() => history.push(routes.vote.result)}>{t("NAVBAR.VOTE.RESULT")}</MDBDropdownItem>
+              </MDBDropdownMenu>
+            </MDBDropdown>
           </MDBNavItem>
         </MDBNavbarNav>
         <MDBNavbarNav right>
