@@ -7,6 +7,7 @@ import {
   MDBCard,
   MDBCardBody,
   MDBCol,
+  MDBDatePicker,
   MDBInput,
   MDBRow
 } from "mdbreact";
@@ -16,18 +17,18 @@ import {useSelector} from "react-redux";
 import {animateScroll as scroll} from "react-scroll";
 import {Helmet} from "react-helmet";
 import {CSSTransition} from "react-transition-group";
+import dateformat from "dateformat";
 
 import routes from "core/routes";
-import validators from "core/validators";
-import VideoService from "services/VideoService";
-import {ALERT_DANGER, SUCCESS, TEXTAREA_ROWS2, TRANSITION_TIME} from "core/globals";
-import Loading from "components/Loading";
+import {ALERT_DANGER, DATE_FORMAT_ISO, SUCCESS, TEXTAREA_ROWS0, TRANSITION_TIME} from "core/globals";
+import Loading from "components/Loading"
+import VoteService from "services/VoteService";
 
-import "./NewVideoPage.scss";
+import "./NewAnswerPage.scss";
 
 
 export default ({}) => {
-  const {id} = useParams();
+  const {questionId, id} = useParams();
   const {t} = useTranslation();
   const history = useHistory();
   const {auth} = useSelector(state => state);
@@ -37,9 +38,7 @@ export default ({}) => {
   const [modal, setModal] = useState({});
   const [touched, setTouched] = useState({});
   const [itemId, setItemId] = useState();
-  const [title, setTitle] = useState("");
-  const [url, setUrl] = useState("");
-  const [isFile, setIsFile] = useState(false);
+  const [answer, setAnswer] = useState("");
 
   useEffect(e => {
     scroll.scrollToTop({
@@ -48,15 +47,11 @@ export default ({}) => {
     setItemId(id);
     !id && setLoading(false);
     !id && setItemId(undefined);
-    !id && setTitle("");
-    !id && setUrl("");
-    !id && setIsFile(false);
-    !!id && VideoService.get({id})
+    !id && setAnswer("");
+    !!id && VoteService.getAnswer({id})
       .then(res => {
         if (res.result === SUCCESS) {
-          setTitle(res.data.title);
-          setUrl(res.data.url);
-          setIsFile(res.data.isFile);
+          setAnswer(res.data.answer);
         } else {
           setAlert({
             show: true,
@@ -77,15 +72,11 @@ export default ({}) => {
       });
   }, [id]);
 
-  const toggleModal = e => {
-    setModal(Object.assign({}, modal, {show: !modal.show}));
-  };
-
   const handleSubmit = async e => {
     e.preventDefault();
 
     try {
-      let res = await VideoService.save({id: itemId, userId: auth.user.id, title, url, isFile});
+      let res = await VoteService.saveAnswer({id: itemId, userId: auth.user.id, questionId, answer});
       !itemId && setItemId(res.data.insertId);
       setAlert({
         show: true,
@@ -105,18 +96,16 @@ export default ({}) => {
     history.goBack();
   };
 
-  const handleDelete = (id, title) => {
-    setModal(Object.assign({}, modal, {show: true, title: t("COMMON.BUTTON.DELETE"), message: t("COMMON.QUESTION.DELETE", {item: title}), deleteId: id}));
-  };
-
   return (
     <div>
       <Helmet>
-        <title>{!!itemId ? t("VIDEO.ADD.MODIFY_VIDEO") : t("VIDEO.ADD.ADD_VIDEO")} - {t("SITE_NAME")}</title>
+        <title>{!!itemId ? t("VOTE.ADD_ANSWER.MODIFY_ANSWER") : t("VOTE.ADD_ANSWER.ADD_ANSWER")} - {t("SITE_NAME")}</title>
       </Helmet>
       <MDBBreadcrumb>
-        <MDBBreadcrumbItem><Link to={routes.video.all}>{t('NAVBAR.VIDEO.VIDEO')}</Link></MDBBreadcrumbItem>
-        <MDBBreadcrumbItem active>{!!itemId ? t("VIDEO.ADD.MODIFY_VIDEO") : t("VIDEO.ADD.ADD_VIDEO")}</MDBBreadcrumbItem>
+        <MDBBreadcrumbItem>{t('NAVBAR.VOTE.VOTE')}</MDBBreadcrumbItem>
+        <MDBBreadcrumbItem><Link to={routes.vote.questions}>{t('NAVBAR.VOTE.QUESTIONS')}</Link></MDBBreadcrumbItem>
+        <MDBBreadcrumbItem>{t('VOTE.ANSWERS.ANSWERS')}</MDBBreadcrumbItem>
+        <MDBBreadcrumbItem active>{!!itemId ? t("VOTE.ADD_ANSWER.MODIFY_ANSWER") : t("VOTE.ADD_ANSWER.ADD_ANSWER")}</MDBBreadcrumbItem>
       </MDBBreadcrumb>
       {!!loading && <Loading/>}
       <MDBCard>
@@ -124,27 +113,21 @@ export default ({}) => {
           <form onSubmit={handleSubmit}>
             <div className="text-center">
               <h3 className="dark-grey-text mt-3 mb-0">
-                <strong>{!!itemId ? t("VIDEO.ADD.MODIFY_VIDEO") : t("VIDEO.ADD.ADD_VIDEO")}</strong>
+                <strong>{!!itemId ? t("VOTE.ADD_ANSWER.MODIFY_ANSWER") : t("VOTE.ADD_ANSWER.ADD_ANSWER")}</strong>
               </h3>
             </div>
             <MDBRow>
               <MDBCol md={12}>
-                <MDBInput label={t("VIDEO.TITLE")} outline autoFocus value={title} onChange={e => setTitle(e.target.value)} onBlur={e => setTouched(Object.assign({}, touched, {title: true}))}>
-                  {touched.title && title.length === 0 && <div className="invalid-field">{t("COMMON.VALIDATION.REQUIRED", {field: t("VIDEO.TITLE")})}</div>}
+                <MDBInput label={t("VOTE.ANSWERS.ANSWER")} outline autoFocus value={answer} onChange={e => setAnswer(e.target.value)} onBlur={e => setTouched(Object.assign({}, touched, {answer: true}))}>
+                  {touched.answer && answer.length === 0 && <div className="invalid-field">{t("COMMON.VALIDATION.REQUIRED", {field: t("VOTE.ANSWERS.ANSWER")})}</div>}
                 </MDBInput>
-                <MDBInput label={t("VIDEO.URL")} outline value={url} onChange={e => setUrl(e.target.value)} onBlur={e => setTouched(Object.assign({}, touched, {url: true}))}>
-                  {touched.url && !validators.isURL(url) && <div className="invalid-field">{!!url.length ? t("COMMON.VALIDATION.INVALID", {field: t("VIDEO.URL")}) : t("COMMON.VALIDATION.REQUIRED", {field: t("VIDEO.URL")})}</div>}
-                </MDBInput>
-                <div className="my-4">
-                  <MDBInput label={t("VIDEO.IS_FILE")} type="checkbox" filled id="isFile" checked={isFile} onClick={e => setIsFile(!isFile)} />
-                </div>
               </MDBCol>
             </MDBRow>
             <CSSTransition in={alert.show} classNames="fade-transition" timeout={TRANSITION_TIME} unmountOnExit appear>
               <MDBAlert color={alert.color} dismiss onClosed={() => setAlert({})}>{alert.message}</MDBAlert>
             </CSSTransition>
             <Fragment>
-              <MDBBtn type="submit" color="indigo" size="sm" disabled={!title || !title.length || !url || !validators.isURL(url)}>{!!itemId ? t("COMMON.BUTTON.MODIFY") : t("COMMON.BUTTON.ADD")}</MDBBtn>
+              <MDBBtn type="submit" color="indigo" size="sm" disabled={!answer || !answer.length}>{!!itemId ? t("COMMON.BUTTON.MODIFY") : t("COMMON.BUTTON.ADD")}</MDBBtn>
               <MDBBtn flat size="sm" onClick={handleGoBack}>{t("COMMON.BUTTON.BACK")}</MDBBtn>
             </Fragment>
           </form>

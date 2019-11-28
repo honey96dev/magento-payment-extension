@@ -140,7 +140,7 @@ export default () => {
         </MDBCol>
         <MDBCol md={12} className="text-center">
           <div className="mt-5">
-            <Pagination circle current={currentPage} pageCount={pageCount} width={10} onChange={handlePageChange}/>
+            <Pagination circle current={currentPage} pageCount={pageCount} onChange={handlePageChange}/>
           </div>
         </MDBCol>
         <MDBCol md={12}>
@@ -148,7 +148,7 @@ export default () => {
         </MDBCol>
         <MDBCol md={12} className="text-center">
           <div className="mt-5">
-            <Pagination circle current={currentPage} pageCount={pageCount} width={10} onChange={handlePageChange}/>
+            <Pagination circle current={currentPage} pageCount={pageCount} onChange={handlePageChange}/>
           </div>
         </MDBCol>
       </MDBRow>}

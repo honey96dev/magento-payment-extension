@@ -171,5 +171,13 @@ export default {
       ADD_QUESTION: "Add Question",
       MODIFY_QUESTION: "Modify Question",
     },
+    ANSWERS: {
+      ANSWERS: "Answers",
+      ANSWER: "Answer",
+    },
+    ADD_ANSWER: {
+      ADD_ANSWER: "Add Answer",
+      MODIFY_ANSWER: "Modify Answer",
+    },
   },
 };

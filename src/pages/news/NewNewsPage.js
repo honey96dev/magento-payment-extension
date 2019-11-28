@@ -162,7 +162,7 @@ export default ({}) => {
             </div>
             <MDBRow>
               <MDBCol md={12}>
-                <MDBInput label={t("NEWS.TITLE")} outline value={title} onChange={e => setTitle(e.target.value)} onBlur={e => setTouched(Object.assign({}, touched, {title: true}))}>
+                <MDBInput label={t("NEWS.TITLE")} outline autoFocus value={title} onChange={e => setTitle(e.target.value)} onBlur={e => setTouched(Object.assign({}, touched, {title: true}))}>
                   {touched.title && title.length === 0 && <div className="invalid-field">{t("COMMON.VALIDATION.REQUIRED", {field: t("NEWS.TITLE")})}</div>}
                 </MDBInput>
                 <MDBInput label={t("NEWS.DESCRIPTION")} type="textarea" rows={TEXTAREA_ROWS2} outline value={description} onChange={e => setDescription(e.target.value)} onBlur={e => setTouched(Object.assign({}, touched, {description: true}))}>

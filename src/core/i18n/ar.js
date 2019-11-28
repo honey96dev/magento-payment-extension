@@ -171,5 +171,13 @@ export default {
       ADD_QUESTION: "أضف سؤال",
       MODIFY_QUESTION: "تعديل السؤال",
     },
+    ANSWERS: {
+      ANSWERS: "الأجوبة",
+      ANSWER: "إجابة",
+    },
+    ADD_ANSWER: {
+      ADD_ANSWER: "أضف إجابة",
+      MODIFY_ANSWER: "تعديل الجواب",
+    },
   },
 };

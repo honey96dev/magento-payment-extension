@@ -37,6 +37,7 @@ export const routes = {
     questions: `${ROUTE_BASE}/vote`,
     addQuestion: `${ROUTE_BASE}/vote/add`,
     answers: `${ROUTE_BASE}/vote/answers`,
+    addAnswer: `${ROUTE_BASE}/vote/answers/add`,
     result: `${ROUTE_BASE}/vote/result`,
   },
 };

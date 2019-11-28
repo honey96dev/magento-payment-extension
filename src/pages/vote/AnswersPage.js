@@ -30,7 +30,7 @@ import routes from "core/routes";
 import "./AnswersPage.scss";
 
 export default () => {
-  const {page} = useParams();
+  const {id, page, page2} = useParams();
   const {t} = useTranslation();
   const history = useHistory();
 
@@ -39,6 +39,7 @@ export default () => {
   const [modal, setModal] = useState({});
 
   const [pageCount, setPageCount] = useState(0);
+  const [question, setQuestion] = useState("");
   const [items, setItems] = useState([]);
 
   const currentPage = page ? parseInt(page) : 1;
@@ -50,19 +51,9 @@ export default () => {
       sort: 'asc',
     },
     {
-      label: t("VOTE.QUESTION"),
-      field: 'question',
+      label: t("VOTE.ANSWERS.ANSWER"),
+      field: 'answer',
       sort: 'asc',
-    },
-    {
-      label: t("VOTE.START_DATE"),
-      field: 'startDate',
-      sort: 'asc',
-    },
-    {
-      label: t("VOTE.END_DATE"),
-      field: 'endDate',
-      sort: 'asc'
     },
     {
       label: '',
@@ -75,7 +66,26 @@ export default () => {
     scroll.scrollToTop({
       duration: TRANSITION_TIME,
     });
-    VoteService.questions({page})
+    VoteService.getQuestion({id})
+      .then(res => {
+        if (res.result === SUCCESS) {
+          setQuestion(res.data.question);
+        } else {
+          setAlert({
+            show: true,
+            color: ALERT_DANGER,
+            message: res.message,
+          });
+        }
+      })
+      .catch(err => {
+        setAlert({
+          show: true,
+          color: ALERT_DANGER,
+          message: t('COMMON.ERROR.UNKNOWN_SERVER_ERROR'),
+        });
+      });
+    VoteService.answers({questionId: id, page})
       .then(res => {
         if (res.result === SUCCESS) {
           for (let row of res.data) {
@@ -102,12 +112,11 @@ export default () => {
       });
   }, [page, t]);
 
-  const makeButtons = (id, number) => {
+  const makeButtons = (id2, number) => {
     return (
       <Fragment>
-        <Link to={`${routes.vote.addQuestion}/${id}`}><MDBBtn tag="a" size="sm" color="indigo" floating><MDBIcon icon="edit"/></MDBBtn></Link>
-        <Link to={`${routes.vote.answers}/${id}`}><MDBBtn tag="a" size="sm" color="primary" className="mx-2" floating><MDBIcon icon="comments"/></MDBBtn></Link>
-        <MDBBtn tag="a" size="sm" color="danger" floating onClick={e => handleDelete(id, "#" + number)}><MDBIcon icon="trash"/></MDBBtn>
+        <Link to={`${routes.vote.addAnswer}/${id}/${id2}`}><MDBBtn tag="a" size="sm" color="indigo" className="mx-2" floating><MDBIcon icon="edit"/></MDBBtn></Link>
+        <MDBBtn tag="a" size="sm" color="danger" floating onClick={e => handleDelete(id2, "#" + number)}><MDBIcon icon="trash"/></MDBBtn>
       </Fragment>
     );
   };
@@ -117,7 +126,7 @@ export default () => {
   };
 
   const deleteItem = id => {
-    VoteService.deleteQuestion({id: modal.deleteId, page})
+    VoteService.deleteAnswer({id: modal.deleteId, page})
       .then(res => {
         if (res.result === SUCCESS) {
           for (let row of res.data) {
@@ -153,7 +162,7 @@ export default () => {
   };
 
   const handlePageChange = page => {
-    history.push(`${routes.vote.questions}/${page}`);
+    history.push(`${routes.vote.answers}/${id}/${page}/${page2 || ""}`);
   };
 
   const handleDelete = (id, title) => {
@@ -163,29 +172,39 @@ export default () => {
   return (
     <Fragment>
       <Helmet>
-        <title>{t("NAVBAR.VOTE.VOTE")} - {t("SITE_NAME")}</title>
+        <title>{t("VOTE.ANSWERS.ANSWERS")} - {t("SITE_NAME")}</title>
       </Helmet>
       <MDBBreadcrumb>
-        <MDBBreadcrumbItem active>{t('NAVBAR.VOTE.VOTE')}</MDBBreadcrumbItem>
+        <MDBBreadcrumbItem>{t('NAVBAR.VOTE.VOTE')}</MDBBreadcrumbItem>
+        <MDBBreadcrumbItem><Link to={`${routes.vote.questions}/${page2 || ""}`}>{t('NAVBAR.VOTE.QUESTIONS')}</Link></MDBBreadcrumbItem>
+        <MDBBreadcrumbItem active>{t('VOTE.ANSWERS.ANSWERS')}</MDBBreadcrumbItem>
       </MDBBreadcrumb>
       {!!loading && <Loading/>}
-      {!loading && !items.length && <ErrorNoData/>}
-      {!loading && !!items.length && <MDBRow>
+      {!loading && <MDBRow>
+        <MDBCol md={12}>
+          <h3 className="mt-4 font-weight-bold text-center">{t("VOTE.ANSWERS.ANSWERS")}</h3>
+          <p className="text-left"><span className="font-weight-bold">{t("VOTE.QUESTION")}: </span>{question}</p>
+        </MDBCol>
         <MDBCol md={12}>
           <CSSTransition in={alert.show} classNames="fade-transition" timeout={TRANSITION_TIME} unmountOnExit appear>
             <MDBAlert color={alert.color} dismiss onClosed={() => setAlert({})}>{alert.message}</MDBAlert>
           </CSSTransition>
         </MDBCol>
-        <MDBCol md={12} className="text-center">
+        {!!pageCount && <MDBCol md={12} className="text-center">
           <div className="mt-5">
-            <Pagination circle current={currentPage} pageCount={pageCount} width={10} onChange={handlePageChange}/>
+            <Pagination circle current={currentPage} pageCount={pageCount} onChange={handlePageChange}/>
           </div>
-        </MDBCol>
+        </MDBCol>}
         <MDBCol md={12} className="text-left mt-3">
           <div className="full-width">
-            <Link to={routes.vote.addQuestion}>
+            <Link to={`${routes.vote.addAnswer}/${id}`}>
               <MDBBtn size="sm" color="primary">
-                {t("NAVBAR.VOTE.ADD_QUESTION")}
+                {t("VOTE.ADD_ANSWER.ADD_ANSWER")}
+              </MDBBtn>
+            </Link>
+            <Link to={`${routes.vote.questions}/${page2 || ""}`}>
+              <MDBBtn size="sm" color="warning">
+                {t("COMMON.BUTTON.BACK")}
               </MDBBtn>
             </Link>
           </div>
@@ -194,29 +213,27 @@ export default () => {
           <MDBTable responsive striped>
             <MDBTableHead>
               <tr className="text-left">
-                {columns.map(item => (
-                  <th>{item.label}</th>
+                {columns.map((item, index) => (
+                  <th key={index}>{item.label}</th>
                 ))}
               </tr>
             </MDBTableHead>
             <MDBTableBody>
-              {items.map(item => (
-                <tr className="text-left">
+              {items.map((item, index) => (
+                <tr key={index} className="text-left">
                   <td>{item.number}</td>
-                  <td>{item.question}</td>
-                  <td className="date-col">{item.startDate}</td>
-                  <td className="date-col">{item.endDate}</td>
+                  <td>{item.answer}</td>
                   <td className="p-2 edit-col">{item.button}</td>
                 </tr>
               ))}
             </MDBTableBody>
           </MDBTable>
         </MDBCol>
-        <MDBCol md={12} className="text-center">
+        {!!pageCount && <MDBCol md={12} className="text-center">
           <div className="mt-5">
-            <Pagination circle current={currentPage} pageCount={pageCount} width={10} onChange={handlePageChange}/>
+            <Pagination circle current={currentPage} pageCount={pageCount} onChange={handlePageChange}/>
           </div>
-        </MDBCol>
+        </MDBCol>}
       </MDBRow>}
       <MDBModal isOpen={!!modal.show} toggle={toggleModal} centered>
         <MDBModalHeader toggle={toggleModal}>{modal.title}</MDBModalHeader>

@@ -106,7 +106,7 @@ export default () => {
     return (
       <Fragment>
         <Link to={`${routes.vote.addQuestion}/${id}`}><MDBBtn tag="a" size="sm" color="indigo" floating><MDBIcon icon="edit"/></MDBBtn></Link>
-        <Link to={`${routes.vote.answers}/${id}`}><MDBBtn tag="a" size="sm" color="primary" className="mx-2" floating><MDBIcon icon="comments"/></MDBBtn></Link>
+        <Link to={`${routes.vote.answers}/${id}/${page || 1}`}><MDBBtn tag="a" size="sm" color="primary" className="mx-2" floating><MDBIcon icon="comments"/></MDBBtn></Link>
         <MDBBtn tag="a" size="sm" color="danger" floating onClick={e => handleDelete(id, "#" + number)}><MDBIcon icon="trash"/></MDBBtn>
       </Fragment>
     );
@@ -182,7 +182,7 @@ export default () => {
         </MDBCol>
         <MDBCol md={12} className="text-center">
           <div className="mt-5">
-            <Pagination circle current={currentPage} pageCount={pageCount} width={10} onChange={handlePageChange}/>
+            <Pagination circle current={currentPage} pageCount={pageCount} onChange={handlePageChange}/>
           </div>
         </MDBCol>
         <MDBCol md={12} className="text-left mt-3">
@@ -198,14 +198,14 @@ export default () => {
           <MDBTable responsive striped>
             <MDBTableHead>
               <tr className="text-left">
-                {columns.map(item => (
-                  <th>{item.label}</th>
+                {columns.map((item, index) => (
+                  <th key={index}>{item.label}</th>
                 ))}
               </tr>
             </MDBTableHead>
             <MDBTableBody>
-              {items.map(item => (
-                <tr className="text-left">
+              {items.map((item, index) => (
+                <tr key={index} className="text-left">
                   <td>{item.number}</td>
                   <td>{item.question}</td>
                   <td className="date-col">{item.startDate}</td>
@@ -218,7 +218,7 @@ export default () => {
         </MDBCol>
         <MDBCol md={12} className="text-center">
           <div className="mt-5">
-            <Pagination circle current={currentPage} pageCount={pageCount} width={10} onChange={handlePageChange}/>
+            <Pagination circle current={currentPage} pageCount={pageCount} onChange={handlePageChange}/>
           </div>
         </MDBCol>
       </MDBRow>}

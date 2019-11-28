@@ -131,7 +131,7 @@ export default ({}) => {
             </div>
             <MDBRow>
               <MDBCol md={12}>
-                <MDBInput label={t("VOTE.QUESTION")} type="textarea" rows={TEXTAREA_ROWS0} outline value={question} onChange={e => setQuestion(e.target.value)} onBlur={e => setTouched(Object.assign({}, touched, {question: true}))}>
+                <MDBInput label={t("VOTE.QUESTION")} type="textarea" rows={TEXTAREA_ROWS0} outline autoFocus value={question} onChange={e => setQuestion(e.target.value)} onBlur={e => setTouched(Object.assign({}, touched, {question: true}))}>
                   {touched.question && question.length === 0 && <div className="invalid-field">{t("COMMON.VALIDATION.REQUIRED", {field: t("VOTE.QUESTION")})}</div>}
                 </MDBInput>
               </MDBCol>
