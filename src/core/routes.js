@@ -18,9 +18,9 @@ export const routes = {
   posts: {
     root: `${ROUTE_BASE}/posts`,
     all: `${ROUTE_BASE}/posts`,
-    add: `${ROUTE_BASE}/posts/add`,
+    allowed: `${ROUTE_BASE}/posts/allowed`,
+    denied: `${ROUTE_BASE}/posts/denied`,
     detail: `${ROUTE_BASE}/posts/detail`,
-    comment: `${ROUTE_BASE}/posts/comment`,
   },
   news: {
     root: `${ROUTE_BASE}/news`,

@@ -26,6 +26,8 @@ export default {
       LAST: "Last",
       READ_MORE: "Read more",
       MODIFY: "Modify",
+      ALLOW: "Allow",
+      DENY: "Deny",
     },
     VALIDATION: {
       REQUIRED: "{{field}} is required",
@@ -36,6 +38,8 @@ export default {
     },
     QUESTION: {
       DELETE: "Do you want to delete '{{item}}'?",
+      ALLOW: "Do you want to allow '{{item}}'?",
+      DENY: "Do you want to deny '{{item}}'?",
     },
     ERROR: {
       SORRY: "Sorry",
@@ -68,7 +72,12 @@ export default {
   },
   NAVBAR: {
     HOME: "Home",
-    POSTS: "Posts",
+    POSTS: {
+      POSTS: "Posts",
+      ALL: "All Posts",
+      ALLOWED: "Allowed Posts",
+      DENIED: "Denied Posts",
+    },
     NEWS: {
       NEWS: "News",
       ALL: "All News",

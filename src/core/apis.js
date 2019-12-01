@@ -17,6 +17,7 @@ export default {
     delete: "posts/delete",
     get: "posts/get",
     commentList: "posts/comment-list",
+    allow: "posts/allow",
   },
   news: {
     list: "news/list",

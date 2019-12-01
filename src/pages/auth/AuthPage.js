@@ -19,7 +19,7 @@ export default () => {
           <MDBCol lg="3" md="0"/>
           <MDBCol lg="6">
             <Switch>
-              <Route path={routes.auth.signIn} component={SignInPage}/>
+              <Route path={routes.auth.signIn} exact component={SignInPage}/>
               {/*<Route path={routes.auth.signUp} component={SignUpPage}/>*/}
             </Switch>
           </MDBCol>

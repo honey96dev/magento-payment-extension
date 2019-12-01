@@ -131,7 +131,7 @@ export default ({}) => {
         <title>{t("POSTS.DETAIL.POST_DETAIL")} - {t("SITE_NAME")}</title>
       </Helmet>
       <MDBBreadcrumb>
-        <MDBBreadcrumbItem><Link to={routes.posts.all}>{t('NAVBAR.POSTS')}</Link></MDBBreadcrumbItem>
+        <MDBBreadcrumbItem>{t('NAVBAR.POSTS.POSTS')}</MDBBreadcrumbItem>
         <MDBBreadcrumbItem active>{t('POSTS.DETAIL.POST_DETAIL')}</MDBBreadcrumbItem>
       </MDBBreadcrumb>
       {!!loading && <Loading/>}

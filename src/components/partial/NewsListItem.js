@@ -13,7 +13,19 @@ export default ({id, date, time, author, comments, media, title, description, de
 
   return (
     <MDBRow>
-      <MDBCol md={12}>
+      <MDBCol lg="5" xl="4">
+        <MDBView hover className="rounded z-depth-1-half mb-lg-0 mb-4">
+          <img
+            className="img-fluid post-media"
+            src={media}
+            alt=""
+          />
+          <Link to={`${detailLink}/${id}`}>
+            <MDBMask overlay="white-slight" />
+          </Link>
+        </MDBView>
+      </MDBCol>
+      <MDBCol lg="7" xl="8">
         <h3 className="font-weight-bold mb-3 p-0">
           <Link to={`${detailLink}/${id}`}>
             <strong>{title}</strong>

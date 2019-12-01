@@ -1,4 +1,4 @@
-import React, {Fragment, useEffect, useState} from "react";
+import React, {Fragment, useEffect, useMemo, useState} from "react";
 import {
   MDBAlert,
   MDBBreadcrumb,
@@ -10,6 +10,7 @@ import {
   MDBInput,
   MDBRow
 } from "mdbreact";
+import MDBFileupload from "mdb-react-fileupload";
 import {Link, useHistory, useParams} from "react-router-dom";
 import {useTranslation} from "react-i18next";
 import {useSelector} from "react-redux";
@@ -20,11 +21,12 @@ import {CSSTransition} from "react-transition-group";
 import routes from "core/routes";
 import validators from "core/validators";
 import NewsService from "services/NewsService";
-import {ALERT_DANGER, SUCCESS, TEXTAREA_ROWS2, TRANSITION_TIME} from "core/globals";
+import {ALERT_DANGER, FILEUPLOAD_MAXSIZE1, SUCCESS, TEXTAREA_ROWS2, TRANSITION_TIME} from "core/globals";
 import Loading from "components/Loading";
-import PostsService from "services/PostsService";
 
 import "./NewNewsPage.scss";
+import {sprintf} from "sprintf-js";
+import apis from "../../core/apis";
 
 
 export default ({}) => {
@@ -41,6 +43,10 @@ export default ({}) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [url, setUrl] = useState("");
+  const [file, setFile] = useState(null);
+  const [media, setMedia] = useState("");
+
+  const extensions = ["jpg", "jpeg", "png"];
 
   useEffect(e => {
     scroll.scrollToTop({
@@ -58,6 +64,7 @@ export default ({}) => {
           setTitle(res.data.title);
           setDescription(res.data.description);
           setUrl(res.data.url);
+          setMedia((res.data["media"].startsWith("http://") || res.data["media"].startsWith("https://")) ? res.data["media"] : sprintf("%s%s", apis.assetsBaseUrl, res.data["media"]));
         } else {
           setAlert({
             show: true,
@@ -78,47 +85,18 @@ export default ({}) => {
       });
   }, [id]);
 
-  const toggleModal = e => {
-    setModal(Object.assign({}, modal, {show: !modal.show}));
-  };
-
-  const deletePost = id => {
-    PostsService.delete({id: modal.deleteId})
-      .then(res => {
-        if (res.result === SUCCESS) {
-          handleGoBack();
-        } else {
-          setAlert({
-            show: true,
-            color: ALERT_DANGER,
-            message: res.message,
-          });
-          scroll.scrollToTop({
-            duration: TRANSITION_TIME,
-          });
-        }
-        setLoading(false);
-        toggleModal();
-      })
-      .catch(err => {
-        setAlert({
-          show: true,
-          color: ALERT_DANGER,
-          message: t('COMMON.ERROR.UNKNOWN_SERVER_ERROR'),
-        });
-        scroll.scrollToTop({
-          duration: TRANSITION_TIME,
-        });
-        setLoading(false);
-        toggleModal();
-      });
-  };
-
   const handleSubmit = async e => {
     e.preventDefault();
 
     try {
-      let res = await NewsService.save({id: newsId, userId: auth.user.id, title, description, url});
+      let params = new FormData();
+      !!newsId && params.append('id', newsId);
+      params.append('userId', auth.user.id);
+      params.append('title', title);
+      params.append('description', description);
+      params.append('url', url);
+      params.append('file', file);
+      let res = await NewsService.save(params);
       !newsId && setNewsId(res.data.insertId);
       setAlert({
         show: true,
@@ -138,10 +116,6 @@ export default ({}) => {
     history.goBack();
   };
 
-  const handleDelete = (id, title) => {
-    setModal(Object.assign({}, modal, {show: true, title: t("COMMON.BUTTON.DELETE"), message: t("COMMON.QUESTION.DELETE", {item: title}), deleteId: id}));
-  };
-
   return (
     <div>
       <Helmet>
@@ -152,7 +126,7 @@ export default ({}) => {
         <MDBBreadcrumbItem active>{!!newsId ? t("NEWS.ADD.MODIFY_NEWS") : t("NEWS.ADD.ADD_NEWS")}</MDBBreadcrumbItem>
       </MDBBreadcrumb>
       {!!loading && <Loading/>}
-      <MDBCard>
+      {!loading && <MDBCard>
         <MDBCardBody className="mx-md-4 mx-sm-1 text-left">
           <form onSubmit={handleSubmit}>
             <div className="text-center">
@@ -161,7 +135,7 @@ export default ({}) => {
               </h3>
             </div>
             <MDBRow>
-              <MDBCol md={12}>
+              <MDBCol md={8}>
                 <MDBInput label={t("NEWS.TITLE")} outline autoFocus value={title} onChange={e => setTitle(e.target.value)} onBlur={e => setTouched(Object.assign({}, touched, {title: true}))}>
                   {touched.title && title.length === 0 && <div className="invalid-field">{t("COMMON.VALIDATION.REQUIRED", {field: t("NEWS.TITLE")})}</div>}
                 </MDBInput>
@@ -171,6 +145,15 @@ export default ({}) => {
                 <MDBInput label={t("NEWS.URL")} outline value={url} onChange={e => setUrl(e.target.value)} onBlur={e => setTouched(Object.assign({}, touched, {url: true}))}>
                   {touched.url && !!url.length && !validators.isURL(url) && <div className="invalid-field">{!!url.length ? t("COMMON.VALIDATION.INVALID", {field: t("NEWS.URL")}) : t("COMMON.VALIDATION.REQUIRED", {field: t("NEWS.URL")})}</div>}
                 </MDBInput>
+              </MDBCol>
+              <MDBCol md={4}>
+                <div className="md-form">
+                  <MDBFileupload defaultFileSrc={media} getValue={setFile} showRemove={false} maxFileSize={FILEUPLOAD_MAXSIZE1} allowedFileExtensions={extensions}
+                                 messageDefault={t("COMMON.FILE_UPLOAD.DEFAULT")} messageReplace={t("COMMON.FILE_UPLOAD.REPLACE")}
+                                 messageRemove={t("COMMON.FILE_UPLOAD.REMOVE")} messageError={t("COMMON.FILE_UPLOAD.ERROR")}
+                                 errorFileSize={t("COMMON.FILE_UPLOAD.ERROR_FILESIZE", {max: FILEUPLOAD_MAXSIZE1})}
+                                 errorFileExtension={t("COMMON.FILE_UPLOAD.ERROR_FILEEXTENSION", {extensions: extensions.join(", ")})} />
+                </div>
               </MDBCol>
             </MDBRow>
             <CSSTransition in={alert.show} classNames="fade-transition" timeout={TRANSITION_TIME} unmountOnExit appear>
@@ -182,7 +165,7 @@ export default ({}) => {
             </Fragment>
           </form>
         </MDBCardBody>
-      </MDBCard>
+      </MDBCard>}
     </div>
   )
 };

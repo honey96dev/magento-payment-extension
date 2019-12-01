@@ -80,7 +80,7 @@ export default (props) => {
       <Helmet>
         <title>{t("AUTH.SIGN_IN")} - {t("SITE_NAME")}</title>
       </Helmet>
-      <MDBCard>
+      <MDBCard className="auth-card">
         <MDBCardBody className="mx-md-4 mx-sm-1">
           <form onSubmit={handleSubmit}>
             <div className="text-center">
@@ -105,9 +105,9 @@ export default (props) => {
                 })}</div>}
               </MDBInput>
             </div>
-            <p className="font-small blue-text d-flex justify-content-end pb-3">
-              <a className="blue-text ml-1">{t("AUTH.FORGOT_PASSWORD")}</a>
-            </p>
+            {/*<p className="font-small blue-text d-flex justify-content-end pb-3">*/}
+            {/*  <a className="blue-text ml-1">{t("AUTH.FORGOT_PASSWORD")}</a>*/}
+            {/*</p>*/}
             <CSSTransition in={alert.show} classNames="fade-transition" timeout={TRANSITION_TIME} unmountOnExit appear>
               <MDBAlert color={alert.color} dismiss onClosed={() => setAlert({})}>{alert.message}</MDBAlert>
             </CSSTransition>
@@ -121,12 +121,12 @@ export default (props) => {
             </div>
           </form>
         </MDBCardBody>
-        <MDBModalFooter className="mx-5 pt-3 mb-1">
-          <p className="font-small grey-text d-flex justify-content-end">
-            {t("AUTH.NOT_REGISTERED")}
-            <Link to={routes.auth.signUp} className="blue-text ml-1">{t("AUTH.SIGN_UP")}</Link>
-          </p>
-        </MDBModalFooter>
+        {/*<MDBModalFooter className="mx-5 pt-3 mb-1">*/}
+        {/*  <p className="font-small grey-text d-flex justify-content-end">*/}
+        {/*    {t("AUTH.NOT_REGISTERED")}*/}
+        {/*    <Link to={routes.auth.signUp} className="blue-text ml-1">{t("AUTH.SIGN_UP")}</Link>*/}
+        {/*  </p>*/}
+        {/*</MDBModalFooter>*/}
       </MDBCard>
     </Fragment>
   );

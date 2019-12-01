@@ -68,7 +68,17 @@ export default ({thresholdY}) => {
             <MDBNavLink to={routes.root}>{t("NAVBAR.HOME")}</MDBNavLink>
           </MDBNavItem>
           <MDBNavItem active={pathname.startsWith(routes.posts.root)}>
-            <MDBNavLink to={routes.posts.root}>{t("NAVBAR.POSTS")}</MDBNavLink>
+            {/*<MDBNavLink to={routes.posts.root}>{t("NAVBAR.POSTS")}</MDBNavLink>*/}
+            <MDBDropdown>
+              <MDBDropdownToggle nav caret>
+                <span className="mr-2">{t("NAVBAR.POSTS.POSTS")}</span>
+              </MDBDropdownToggle>
+              <MDBDropdownMenu className="text-left">
+                <MDBDropdownItem onClick={() => history.push(routes.posts.all)}>{t("NAVBAR.POSTS.ALL")}</MDBDropdownItem>
+                <MDBDropdownItem onClick={() => history.push(routes.posts.allowed)}>{t("NAVBAR.POSTS.ALLOWED")}</MDBDropdownItem>
+                <MDBDropdownItem onClick={() => history.push(routes.posts.denied)}>{t("NAVBAR.POSTS.DENIED")}</MDBDropdownItem>
+              </MDBDropdownMenu>
+            </MDBDropdown>
           </MDBNavItem>
           <MDBNavItem active={pathname.startsWith(routes.news.root)}>
             <MDBDropdown>

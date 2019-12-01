@@ -26,6 +26,8 @@ import {ALERT_DANGER, SUCCESS, TRANSITION_TIME} from "core/globals";
 import routes from "core/routes";
 
 import "./AllNewsPage.scss";
+import {sprintf} from "sprintf-js";
+import apis from "../../core/apis";
 
 export default () => {
   const {page} = useParams();
@@ -49,6 +51,9 @@ export default () => {
       .then(res => {
         if (res.result === SUCCESS) {
           setPageCount(res.pageCount);
+          for (let item of res.data) {
+            item["media"] = (item["media"].startsWith("http://") || item["media"].startsWith("https://")) ? item["media"] : sprintf("%s%s", apis.assetsBaseUrl, item["media"]);
+          }
           setItems(res.data);
         } else {
           setAlert({
@@ -78,6 +83,9 @@ export default () => {
       .then(res => {
         if (res.result === SUCCESS) {
           setPageCount(res.pageCount);
+          for (let item of res.data) {
+            item["media"] = (item["media"].startsWith("http://") || item["media"].startsWith("https://")) ? item["media"] : sprintf("%s%s", apis.assetsBaseUrl, item["media"]);
+          }
           setItems(res.data);
         } else {
           setAlert({

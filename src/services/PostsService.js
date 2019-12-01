@@ -58,4 +58,15 @@ export default {
         });
     });
   },
+
+  allow: (params) => {
+    return new Promise((resolve, reject) => {
+      fetch(POST, apis.posts.allow, params)
+        .then(res => {
+          resolve(res);
+        }, err => {
+          reject(err);
+        });
+    });
+  },
 };

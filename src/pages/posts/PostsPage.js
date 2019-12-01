@@ -6,6 +6,8 @@ import Navbar from "components/Navbar";
 import Footer from "components/Footer";
 import BackToTop from "components/BackToTop";
 import AllPostsPage from "./AllPostsPage";
+import AllowedPostsPage from "./AllowedPostsPage";
+import DeniedPostsPage from "./DeniedPostsPage";
 import PostDetailPage from "./PostDetailPage";
 import routes from "core/routes";
 
@@ -17,6 +19,10 @@ export default () => {
       <Navbar/>
       <MDBContainer className={"section"}>
         <Switch>
+          <Route path={`${routes.posts.allowed}`} exact component={AllowedPostsPage}/>
+          <Route path={`${routes.posts.allowed}/:page`} exact component={AllowedPostsPage}/>
+          <Route path={`${routes.posts.denied}`} exact component={DeniedPostsPage}/>
+          <Route path={`${routes.posts.denied}/:page`} exact component={DeniedPostsPage}/>
           <Route path={routes.posts.all} exact component={AllPostsPage}/>
           <Route path={`${routes.posts.all}/:page`} exact component={AllPostsPage}/>
           <Route path={`${routes.posts.detail}/:id`} component={PostDetailPage}/>

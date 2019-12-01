@@ -7,9 +7,9 @@ import {DESCRIPTION_LENGTH_BREAKPOINT} from "core/globals";
 
 import "./PostListItem.scss";
 
-export default ({id, date, time, author, comments, media, title, description, detailLabel, detailLink, handleDelete}) => {
+export default ({data, detailLabel, detailLink, handleAllow, handleDelete}) => {
   const {t} = useTranslation();
-  const desc = description.length > DESCRIPTION_LENGTH_BREAKPOINT ? description.substr(0, DESCRIPTION_LENGTH_BREAKPOINT) + " ..." : description;
+  const desc = data.description.length > DESCRIPTION_LENGTH_BREAKPOINT ? data.description.substr(0, DESCRIPTION_LENGTH_BREAKPOINT) + " ..." : data.description;
 
   return (
     <MDBRow>
@@ -17,47 +17,50 @@ export default ({id, date, time, author, comments, media, title, description, de
         <MDBView hover className="rounded z-depth-1-half mb-lg-0 mb-4">
           <img
             className="img-fluid post-media"
-            src={media}
+            src={data.media}
             alt=""
           />
-          <Link to={`${detailLink}/${id}`}>
+          <Link to={`${detailLink}/${data.id}`}>
             <MDBMask overlay="white-slight" />
           </Link>
         </MDBView>
       </MDBCol>
       <MDBCol lg="7" xl="8">
         <h3 className="font-weight-bold mb-3 p-0">
-          <Link to={`${detailLink}/${id}`}>
-            <strong>{title}</strong>
+          <Link to={`${detailLink}/${data.id}`}>
+            <strong>{data.title}</strong>
           </Link>
         </h3>
         <div className="infor-section">
           <p className="mr-2">
             <span className="mr-2"><MDBIcon icon="calendar-alt"/></span>
-            {date}
+            {data.date}
           </p>
-          <p className="mr-2">{time}</p>
+          <p className="mr-2">{data.time}</p>
           <p>{t("DIRECTION") === "ltr" ? "/" : "\\"}</p>
           <p className="mx-2">
             <span className="mr-2"><MDBIcon icon="user"/></span>
-            {author}
+            {data.author}
           </p>
           <p>{t("DIRECTION") === "ltr" ? "/" : "\\"}</p>
           <p className="mx-2">
             <span className="mr-2"><MDBIcon icon="comments"/></span>
-            {comments}
+            {data.comments}
           </p>
         </div>
         <p className="dark-grey-text">{desc}</p>
         {/*<p>*/}
         {/*  by <a href="#!" className="font-weight-bold">Jessica Clark</a>, 19/04/2018*/}
         {/*</p>*/}
-        <Link to={`${detailLink}/${id}`}>
+        <Link to={`${detailLink}/${data.id}`}>
           <MDBBtn size="sm" color="indigo">
             {detailLabel}
           </MDBBtn>
         </Link>
-        <MDBBtn size="sm" color="danger" onClick={e => !!handleDelete && handleDelete(id, title)}>
+        <MDBBtn size="sm" color={!data.allowedDate.length ? "primary" : "warning"} onClick={e => !!handleAllow && handleAllow(data.id, data.title, !data.allowedDate.length)}>
+          {!data.allowedDate.length ? t("COMMON.BUTTON.ALLOW") : t("COMMON.BUTTON.DENY")}
+        </MDBBtn>
+        <MDBBtn size="sm" color="danger" onClick={e => !!handleDelete && handleDelete(data.id, data.title)}>
           {t("COMMON.BUTTON.DELETE")}
         </MDBBtn>
       </MDBCol>

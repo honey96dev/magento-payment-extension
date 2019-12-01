@@ -47,7 +47,7 @@ export default () => {
     scroll.scrollToTop({
       duration: TRANSITION_TIME,
     });
-    PostsService.list({page})
+    PostsService.list({page, allowed: 1})
       .then(res => {
         if (res.result === SUCCESS) {
           setPageCount(res.pageCount);
@@ -165,11 +165,11 @@ export default () => {
   return (
     <Fragment>
       <Helmet>
-        <title>{t("NAVBAR.POSTS.POSTS")} - {t("SITE_NAME")}</title>
+        <title>{t("NAVBAR.POSTS.ALLOWED")} - {t("SITE_NAME")}</title>
       </Helmet>
       <MDBBreadcrumb>
         <MDBBreadcrumbItem>{t('NAVBAR.POSTS.POSTS')}</MDBBreadcrumbItem>
-        <MDBBreadcrumbItem active>{t('NAVBAR.POSTS.ALL')}</MDBBreadcrumbItem>
+        <MDBBreadcrumbItem active>{t('NAVBAR.POSTS.ALLOWED')}</MDBBreadcrumbItem>
       </MDBBreadcrumb>
       {!!loading && <Loading/>}
       {!loading && !posts.length && <ErrorNoData/>}

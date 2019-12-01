@@ -26,6 +26,8 @@ export default {
       LAST: "الاخير",
       READ_MORE: "قراءة المزيد",
       MODIFY: "تعديل",
+      ALLOW: "السماح",
+      DENY: "أنكر",
     },
     VALIDATION: {
       REQUIRED: "{{field}} مطلوب",
@@ -68,7 +70,12 @@ export default {
   },
   NAVBAR: {
     HOME: "البداية",
-    POSTS: "المشاركات",
+    POSTS: {
+      POSTS: "المشاركات",
+      ALL: "جميع المشاركات",
+      ALLOWED: "المشاركات المسموح بها",
+      DENIED: "المشاركات المرفوضة",
+    },
     NEWS: {
       NEWS: "الأخبار",
       ALL: "جميع الأخبار",
