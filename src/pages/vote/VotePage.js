@@ -9,6 +9,7 @@ import QuestionsPage from "./QuestionsPage";
 import NewQuestionPage from "./NewQuestionPage";
 import AnswersPage from "./AnswersPage";
 import NewAnswerPage from "./NewAnswerPage";
+import ResultPage from "./ResultPage";
 import routes from "core/routes";
 
 import "./VotePage.scss";
@@ -19,6 +20,8 @@ export default () => {
       <Navbar/>
       <MDBContainer className={"section"}>
         <Switch>
+          <Route path={`${routes.vote.result}/:page`} exact component={ResultPage}/>
+          <Route path={routes.vote.result} exact component={ResultPage}/>
           <Route path={`${routes.vote.addAnswer}/:questionId/:id`} exact component={NewAnswerPage}/>
           <Route path={`${routes.vote.addAnswer}/:questionId`} exact component={NewAnswerPage}/>
           <Route path={`${routes.vote.answers}/:id/:page/:page2`} exact component={AnswersPage}/>

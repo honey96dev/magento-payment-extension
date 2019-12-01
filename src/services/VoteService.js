@@ -89,4 +89,15 @@ export default {
         });
     });
   },
+
+  result: (params) => {
+    return new Promise((resolve, reject) => {
+      fetch(POST, apis.vote.result, params)
+        .then(res => {
+          resolve(res);
+        }, err => {
+          reject(err);
+        });
+    });
+  }
 };
