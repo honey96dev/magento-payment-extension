@@ -7,8 +7,8 @@ import Navbar from "components/Navbar";
 import Footer from "components/Footer";
 import BackToTop from "components/BackToTop";
 import SignInPage from "./SignInPage";
+
 import "./AuthPage.scss";
-// import SignUpPage from "./SignUpPage";
 
 export default () => {
   return (

@@ -17,16 +17,16 @@ import {useSelector} from "react-redux";
 import {animateScroll as scroll} from "react-scroll";
 import {Helmet} from "react-helmet";
 import {CSSTransition} from "react-transition-group";
+import {sprintf} from "sprintf-js";
 
 import routes from "core/routes";
+import apis from "core/apis";
 import validators from "core/validators";
 import NewsService from "services/NewsService";
 import {ALERT_DANGER, FILEUPLOAD_MAXSIZE1, SUCCESS, TEXTAREA_ROWS2, TRANSITION_TIME} from "core/globals";
 import Loading from "components/Loading";
 
 import "./NewNewsPage.scss";
-import {sprintf} from "sprintf-js";
-import apis from "../../core/apis";
 
 
 export default ({}) => {

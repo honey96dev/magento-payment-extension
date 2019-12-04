@@ -27,7 +27,7 @@ import {ALERT_DANGER, SUCCESS, TRANSITION_TIME} from "core/globals";
 import routes from "core/routes";
 import apis from "core/apis";
 
-import "./AllPostsPage.scss";
+import "./DeniedPostsPage.scss";
 
 export default () => {
   const {page} = useParams();

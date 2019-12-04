@@ -16,7 +16,9 @@ import {useTranslation} from "react-i18next";
 import {animateScroll as scroll} from "react-scroll";
 import {Helmet} from "react-helmet";
 import {CSSTransition} from "react-transition-group";
+import {sprintf} from "sprintf-js";
 
+import apis from "core/apis";
 import News from "components/News";
 import Loading from "components/Loading";
 import ErrorNoData from "components/ErrorNoData";
@@ -26,8 +28,6 @@ import {ALERT_DANGER, SUCCESS, TRANSITION_TIME} from "core/globals";
 import routes from "core/routes";
 
 import "./AllNewsPage.scss";
-import {sprintf} from "sprintf-js";
-import apis from "../../core/apis";
 
 export default () => {
   const {page} = useParams();

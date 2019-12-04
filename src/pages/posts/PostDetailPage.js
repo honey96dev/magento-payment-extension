@@ -1,4 +1,4 @@
-import React, {Fragment, useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import {
   MDBAlert,
   MDBBreadcrumb,
@@ -6,19 +6,18 @@ import {
   MDBBtn,
   MDBCol,
   MDBModal,
-  MDBModalBody, MDBModalFooter,
+  MDBModalBody,
+  MDBModalFooter,
   MDBModalHeader,
   MDBRow
 } from "mdbreact";
-import {Link, useHistory, useParams} from "react-router-dom";
+import {useHistory, useParams} from "react-router-dom";
 import {useTranslation} from "react-i18next";
 import {useSelector} from "react-redux";
 import {sprintf} from "sprintf-js";
 import {animateScroll as scroll} from "react-scroll";
 import {Helmet} from "react-helmet";
 import {CSSTransition} from "react-transition-group";
-
-import routes from "core/routes";
 import apis from "core/apis";
 import {ALERT_DANGER, SUCCESS, TRANSITION_TIME} from "core/globals";
 import Loading from "components/Loading";
