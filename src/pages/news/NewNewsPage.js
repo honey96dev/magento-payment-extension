@@ -90,7 +90,7 @@ export default ({}) => {
 
     try {
       let params = new FormData();
-      !!newsId && params.append('id', newsId);
+      !!newsId && params.append("id", newsId);
       params.append('userId', auth.user.id);
       params.append('title', title);
       params.append('description', description);

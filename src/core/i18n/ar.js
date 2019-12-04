@@ -38,6 +38,8 @@ export default {
     },
     QUESTION: {
       DELETE: "هل تريد حذف '{{item}}'؟",
+      ALLOW: "هل تريد السماح ل '{{item}}'؟",
+      DENY: "هل تريد إنكار '{{item}}'؟",
     },
     ERROR: {
       SORRY: "آسف",
@@ -88,6 +90,8 @@ export default {
     },
     VOTE: {
       VOTE: "تصويت",
+      PACKAGES: "رزمة",
+      ADD_PACKAGE: "إضافة حزمة",
       QUESTIONS: "الأسئلة",
       ADD_QUESTION: "أضف سؤال",
       RESULT: "نتيجة",
@@ -171,9 +175,17 @@ export default {
     },
   },
   VOTE: {
+    PACKAGE: "صفقة",
     QUESTION: "سؤال",
     START_DATE: "تاريخ البدء",
     END_DATE: "تاريخ الانتهاء",
+    ADD_PACKAGE: {
+      ADD_PACKAGE: "إضافة حزمة",
+      MODIFY_PACKAGE: "تعديل الحزمة",
+    },
+    QUESTIONS: {
+      QUESTIONS: "الأسئلة",
+    },
     ADD_QUESTION: {
       ADD_QUESTION: "أضف سؤال",
       MODIFY_QUESTION: "تعديل السؤال",

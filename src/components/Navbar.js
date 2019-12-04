@@ -108,9 +108,11 @@ export default ({thresholdY}) => {
                 <span className="mr-2">{t("NAVBAR.VOTE.VOTE")}</span>
               </MDBDropdownToggle>
               <MDBDropdownMenu className="text-left">
-                <MDBDropdownItem onClick={() => history.push(routes.vote.questions)}>{t("NAVBAR.VOTE.QUESTIONS")}</MDBDropdownItem>
-                <MDBDropdownItem onClick={() => history.push(routes.vote.addQuestion)}>{t("NAVBAR.VOTE.ADD_QUESTION")}</MDBDropdownItem>
-                <MDBDropdownItem onClick={() => history.push(routes.vote.result)}>{t("NAVBAR.VOTE.RESULT")}</MDBDropdownItem>
+                <MDBDropdownItem onClick={() => history.push(routes.vote.packages)}>{t("NAVBAR.VOTE.PACKAGES")}</MDBDropdownItem>
+                <MDBDropdownItem onClick={() => history.push(routes.vote.addPackage)}>{t("NAVBAR.VOTE.ADD_PACKAGE")}</MDBDropdownItem>
+                {/*<MDBDropdownItem onClick={() => history.push(routes.vote.questions)}>{t("NAVBAR.VOTE.QUESTIONS")}</MDBDropdownItem>*/}
+                {/*<MDBDropdownItem onClick={() => history.push(routes.vote.addQuestion)}>{t("NAVBAR.VOTE.ADD_QUESTION")}</MDBDropdownItem>*/}
+                {/*<MDBDropdownItem onClick={() => history.push(routes.vote.result)}>{t("NAVBAR.VOTE.RESULT")}</MDBDropdownItem>*/}
               </MDBDropdownMenu>
             </MDBDropdown>
           </MDBNavItem>

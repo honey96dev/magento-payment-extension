@@ -5,6 +5,8 @@ import {MDBContainer} from "mdbreact";
 import Navbar from "components/Navbar";
 import Footer from "components/Footer";
 import BackToTop from "components/BackToTop";
+import PackagesPage from "./PackagesPage";
+import NewPackagePage from "./NewPackagePage";
 import QuestionsPage from "./QuestionsPage";
 import NewQuestionPage from "./NewQuestionPage";
 import AnswersPage from "./AnswersPage";
@@ -20,16 +22,22 @@ export default () => {
       <Navbar/>
       <MDBContainer className={"section"}>
         <Switch>
-          <Route path={`${routes.vote.result}/:page`} exact component={ResultPage}/>
-          <Route path={routes.vote.result} exact component={ResultPage}/>
-          <Route path={`${routes.vote.addAnswer}/:questionId/:id`} exact component={NewAnswerPage}/>
-          <Route path={`${routes.vote.addAnswer}/:questionId`} exact component={NewAnswerPage}/>
-          <Route path={`${routes.vote.answers}/:id/:page/:page2`} exact component={AnswersPage}/>
-          <Route path={`${routes.vote.answers}/:id/:page2`} exact component={AnswersPage}/>
-          <Route path={`${routes.vote.addQuestion}/:id`} exact component={NewQuestionPage}/>
-          <Route path={routes.vote.addQuestion} exact component={NewQuestionPage}/>
-          <Route path={`${routes.vote.questions}/:page`} exact component={QuestionsPage}/>
-          <Route path={routes.vote.questions} exact component={QuestionsPage}/>
+          <Route path={`${routes.vote.result}/:packageId/:page?`} exact component={ResultPage}/>
+          {/*<Route path={`${routes.vote.result}/:packageId`} exact component={ResultPage}/>*/}
+          <Route path={`${routes.vote.addAnswer}/:questionId/:id?`} exact component={NewAnswerPage}/>
+          {/*<Route path={`${routes.vote.addAnswer}/:questionId`} exact component={NewAnswerPage}/>*/}
+          <Route path={`${routes.vote.answers}/:questionId/:packageId/:page?/:page2?/:page3?`} exact component={AnswersPage}/>
+          {/*<Route path={`${routes.vote.answers}/:questionId/:packageId/:page2`} exact component={AnswersPage}/>*/}
+          <Route path={`${routes.vote.addQuestion}/:packageId/:id?`} exact component={NewQuestionPage}/>
+          {/*<Route path={`${routes.vote.addQuestion}/:packageId`} exact component={NewQuestionPage}/>*/}
+          <Route path={`${routes.vote.questions}/:packageId/:page?/:page2?`} exact component={QuestionsPage}/>
+          {/*<Route path={`${routes.vote.questions}/:packageId/:page2`} exact component={QuestionsPage}/>*/}
+          {/*<Route path={`${routes.vote.questions}/:packageId`} exact component={QuestionsPage}/>*/}
+          <Route path={`${routes.vote.addPackage}/:id?/:page?`} exact component={NewPackagePage}/>
+          {/*<Route path={`${routes.vote.addPackage}/:id`} exact component={NewPackagePage}/>*/}
+          {/*<Route path={routes.vote.addPackage} exact component={NewPackagePage}/>*/}
+          <Route path={`${routes.vote.packages}/:page?`} exact component={PackagesPage}/>
+          {/*<Route path={routes.vote.packages} exact component={PackagesPage}/>*/}
         </Switch>
       </MDBContainer>
       <Footer/>

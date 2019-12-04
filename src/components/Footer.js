@@ -6,7 +6,7 @@ export default (props) => {
   const {t} = useTranslation();
 
   const dir = t('DIRECTION');
-  const classTextAlignRight = dir === 'rtl' ? 'text-align-right-lg' : '';
+  const classTextAlignRight = dir === 'rtl' ? 'text-align-right-lg' : "";
 
   return (
     <MDBFooter color="unique-color-dark" className="font-small pt-4 mt-4">

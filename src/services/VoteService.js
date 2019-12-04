@@ -3,6 +3,50 @@ import {POST} from "apis/constants";
 import apis from "core/apis";
 
 export default {
+  packages: (params) => {
+    return new Promise((resolve, reject) => {
+      fetch(POST, apis.vote.packages, params)
+        .then(res => {
+          resolve(res);
+        }, err => {
+          reject(err);
+        });
+    });
+  },
+
+  savePackage: (params) => {
+    return new Promise((resolve, reject) => {
+      fetch(POST, apis.vote.savePackage, params)
+        .then(res => {
+          resolve(res);
+        }, err => {
+          reject(err);
+        });
+    });
+  },
+
+  deletePackage: (params) => {
+    return new Promise((resolve, reject) => {
+      fetch(POST, apis.vote.deletePackage, params)
+        .then(res => {
+          resolve(res);
+        }, err => {
+          reject(err);
+        });
+    });
+  },
+
+  getPackage: (params) => {
+    return new Promise((resolve, reject) => {
+      fetch(POST, apis.vote.getPackage, params)
+        .then(res => {
+          resolve(res);
+        }, err => {
+          reject(err);
+        });
+    });
+  },
+
   questions: (params) => {
     return new Promise((resolve, reject) => {
       fetch(POST, apis.vote.questions, params)
@@ -46,6 +90,7 @@ export default {
         });
     });
   },
+
   answers: (params) => {
     return new Promise((resolve, reject) => {
       fetch(POST, apis.vote.answers, params)

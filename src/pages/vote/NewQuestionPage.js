@@ -6,7 +6,7 @@ import {
   MDBBtn,
   MDBCard,
   MDBCardBody,
-  MDBCol, MDBDatePicker,
+  MDBCol,
   MDBInput,
   MDBRow
 } from "mdbreact";
@@ -16,11 +16,9 @@ import {useSelector} from "react-redux";
 import {animateScroll as scroll} from "react-scroll";
 import {Helmet} from "react-helmet";
 import {CSSTransition} from "react-transition-group";
-import dateformat from "dateformat";
 
 import routes from "core/routes";
-import validators from "core/validators";
-import {ALERT_DANGER, DATE_FORMAT_ISO, SUCCESS, TEXTAREA_ROWS0, TRANSITION_TIME} from "core/globals";
+import {ALERT_DANGER, DESCRIPTION_LENGTH_BREAKPOINT2, SUCCESS, TEXTAREA_ROWS1, TRANSITION_TIME} from "core/globals";
 import Loading from "components/Loading"
 import VoteService from "services/VoteService";
 
@@ -28,19 +26,17 @@ import "./NewQuestionPage.scss";
 
 
 export default ({}) => {
-  const {id} = useParams();
+  const {packageId, id} = useParams();
   const {t} = useTranslation();
   const history = useHistory();
   const {auth} = useSelector(state => state);
 
   const [loading, setLoading] = useState(true);
   const [alert, setAlert] = useState({});
-  const [modal, setModal] = useState({});
   const [touched, setTouched] = useState({});
   const [itemId, setItemId] = useState();
+  const [packageName, setPackageName] = useState("");
   const [question, setQuestion] = useState("");
-  const [startDate, setStartDate] = useState();
-  const [endDate, setEndDate] = useState();
 
   useEffect(e => {
     scroll.scrollToTop({
@@ -50,14 +46,29 @@ export default ({}) => {
     !id && setLoading(false);
     !id && setItemId(undefined);
     !id && setQuestion("");
-    !id && setStartDate(new Date());
-    !id && setEndDate(new Date());
+    !!packageId && VoteService.getPackage({id: packageId})
+      .then(res => {
+        if (res.result === SUCCESS) {
+          setPackageName(res.data.name);
+        } else {
+          setAlert({
+            show: true,
+            color: ALERT_DANGER,
+            message: res.message,
+          });
+        }
+      })
+      .catch(err => {
+        setAlert({
+          show: true,
+          color: ALERT_DANGER,
+          message: t('COMMON.ERROR.UNKNOWN_SERVER_ERROR'),
+        });
+      });
     !!id && VoteService.getQuestion({id})
       .then(res => {
         if (res.result === SUCCESS) {
           setQuestion(res.data.question);
-          setStartDate(res.data.startDate);
-          setEndDate(res.data.endDate);
         } else {
           setAlert({
             show: true,
@@ -78,15 +89,11 @@ export default ({}) => {
       });
   }, [id]);
 
-  const toggleModal = e => {
-    setModal(Object.assign({}, modal, {show: !modal.show}));
-  };
-
   const handleSubmit = async e => {
     e.preventDefault();
 
     try {
-      let res = await VoteService.saveQuestion({id: itemId, userId: auth.user.id, question, startDate: dateformat(startDate, "yyyy-mm-dd"), endDate: dateformat(endDate, "yyyy-mm-dd")});
+      let res = await VoteService.saveQuestion({id: itemId, userId: auth.user.id, packageId, question});
       !itemId && setItemId(res.data.insertId);
       setAlert({
         show: true,
@@ -106,10 +113,6 @@ export default ({}) => {
     history.goBack();
   };
 
-  const handleDelete = (id, title) => {
-    setModal(Object.assign({}, modal, {show: true, title: t("COMMON.BUTTON.DELETE"), message: t("COMMON.QUESTION.DELETE", {item: title}), deleteId: id}));
-  };
-
   return (
     <div>
       <Helmet>
@@ -117,7 +120,8 @@ export default ({}) => {
       </Helmet>
       <MDBBreadcrumb>
         <MDBBreadcrumbItem>{t('NAVBAR.VOTE.VOTE')}</MDBBreadcrumbItem>
-        <MDBBreadcrumbItem><Link to={routes.vote.questions}>{t('NAVBAR.VOTE.QUESTIONS')}</Link></MDBBreadcrumbItem>
+        <MDBBreadcrumbItem>{t('NAVBAR.VOTE.PACKAGES')}</MDBBreadcrumbItem>
+        <MDBBreadcrumbItem>{t('NAVBAR.VOTE.QUESTIONS')}</MDBBreadcrumbItem>
         <MDBBreadcrumbItem active>{!!itemId ? t("VOTE.ADD_QUESTION.MODIFY_QUESTION") : t("VOTE.ADD_QUESTION.ADD_QUESTION")}</MDBBreadcrumbItem>
       </MDBBreadcrumb>
       {!!loading && <Loading/>}
@@ -128,24 +132,13 @@ export default ({}) => {
               <h3 className="dark-grey-text mt-3 mb-0">
                 <strong>{!!itemId ? t("VOTE.ADD_QUESTION.MODIFY_QUESTION") : t("VOTE.ADD_QUESTION.ADD_QUESTION")}</strong>
               </h3>
+              <p className="text-left"><span className="font-weight-bold">{t("VOTE.PACKAGE")}: </span>{packageName}</p>
             </div>
             <MDBRow>
               <MDBCol md={12}>
-                <MDBInput label={t("VOTE.QUESTION")} type="textarea" rows={TEXTAREA_ROWS0} outline autoFocus value={question} onChange={e => setQuestion(e.target.value)} onBlur={e => setTouched(Object.assign({}, touched, {question: true}))}>
+                <MDBInput label={t("VOTE.QUESTION")} type="textarea" rows={TEXTAREA_ROWS1} maxLength={DESCRIPTION_LENGTH_BREAKPOINT2} outline autoFocus value={question} onChange={e => setQuestion(e.target.value)} onBlur={e => setTouched(Object.assign({}, touched, {question: true}))}>
                   {touched.question && question.length === 0 && <div className="invalid-field">{t("COMMON.VALIDATION.REQUIRED", {field: t("VOTE.QUESTION")})}</div>}
                 </MDBInput>
-              </MDBCol>
-            </MDBRow>
-            <MDBRow>
-              <MDBCol md={6}>
-                <MDBDatePicker format={DATE_FORMAT_ISO}  autoOk /*locale={moment.locale(t("CODE"))}*/ className="date-picker" value={startDate} getValue={val => setStartDate(val)}
-                />
-                <label className="date-picker-label">{t("VOTE.START_DATE")}</label>
-              </MDBCol>
-              <MDBCol md={6}>
-                <MDBDatePicker format={DATE_FORMAT_ISO}  autoOk /*locale={moment.locale(t("CODE"))}*/ className="date-picker" value={endDate} getValue={val => setEndDate(val)}
-                />
-                <label className="date-picker-label">{t("VOTE.END_DATE")}</label>
               </MDBCol>
             </MDBRow>
             <CSSTransition in={alert.show} classNames="fade-transition" timeout={TRANSITION_TIME} unmountOnExit appear>

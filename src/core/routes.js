@@ -34,8 +34,10 @@ export const routes = {
   },
   vote: {
     root: `${ROUTE_BASE}/vote`,
-    questions: `${ROUTE_BASE}/vote`,
-    addQuestion: `${ROUTE_BASE}/vote/add`,
+    packages: `${ROUTE_BASE}/vote`,
+    addPackage: `${ROUTE_BASE}/vote/add`,
+    questions: `${ROUTE_BASE}/vote/questions`,
+    addQuestion: `${ROUTE_BASE}/vote/questions/add`,
     answers: `${ROUTE_BASE}/vote/answers`,
     addAnswer: `${ROUTE_BASE}/vote/answers/add`,
     result: `${ROUTE_BASE}/vote/result`,

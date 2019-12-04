@@ -24,11 +24,11 @@ import {ALERT_DANGER, DATE_FORMAT_ISO, SUCCESS, TEXTAREA_ROWS0, TRANSITION_TIME}
 import Loading from "components/Loading"
 import VoteService from "services/VoteService";
 
-import "./NewAnswerPage.scss";
+import "./NewQuestionPage.scss";
 
 
 export default ({}) => {
-  const {questionId, id} = useParams();
+  const {id, page} = useParams();
   const {t} = useTranslation();
   const history = useHistory();
   const {auth} = useSelector(state => state);
@@ -38,8 +38,9 @@ export default ({}) => {
   const [modal, setModal] = useState({});
   const [touched, setTouched] = useState({});
   const [itemId, setItemId] = useState();
-  const [question, setQuestion] = useState("");
-  const [answer, setAnswer] = useState("");
+  const [name, setName] = useState("");
+  const [startDate, setStartDate] = useState();
+  const [endDate, setEndDate] = useState();
 
   useEffect(e => {
     scroll.scrollToTop({
@@ -48,30 +49,15 @@ export default ({}) => {
     setItemId(id);
     !id && setLoading(false);
     !id && setItemId(undefined);
-    !id && setAnswer("");
-    !!questionId && VoteService.getQuestion({id: questionId})
+    !id && setName("");
+    !id && setStartDate(new Date());
+    !id && setEndDate(new Date());
+    !!id && VoteService.getPackage({id})
       .then(res => {
         if (res.result === SUCCESS) {
-          setQuestion(res.data.question);
-        } else {
-          setAlert({
-            show: true,
-            color: ALERT_DANGER,
-            message: res.message,
-          });
-        }
-      })
-      .catch(err => {
-        setAlert({
-          show: true,
-          color: ALERT_DANGER,
-          message: t('COMMON.ERROR.UNKNOWN_SERVER_ERROR'),
-        });
-      });
-    !!id && VoteService.getAnswer({id})
-      .then(res => {
-        if (res.result === SUCCESS) {
-          setAnswer(res.data.answer);
+          setName(res.data.name);
+          setStartDate(res.data.startDate);
+          setEndDate(res.data.endDate);
         } else {
           setAlert({
             show: true,
@@ -96,7 +82,7 @@ export default ({}) => {
     e.preventDefault();
 
     try {
-      let res = await VoteService.saveAnswer({id: itemId, userId: auth.user.id, questionId, answer});
+      let res = await VoteService.savePackage({id: itemId, userId: auth.user.id, name, startDate: dateformat(startDate, "yyyy-mm-dd"), endDate: dateformat(endDate, "yyyy-mm-dd")});
       !itemId && setItemId(res.data.insertId);
       setAlert({
         show: true,
@@ -116,16 +102,19 @@ export default ({}) => {
     history.goBack();
   };
 
+  const handleDelete = (id, title) => {
+    setModal(Object.assign({}, modal, {show: true, title: t("COMMON.BUTTON.DELETE"), message: t("COMMON.QUESTION.DELETE", {item: title}), deleteId: id}));
+  };
+
   return (
     <div>
       <Helmet>
-        <title>{!!itemId ? t("VOTE.ADD_ANSWER.MODIFY_ANSWER") : t("VOTE.ADD_ANSWER.ADD_ANSWER")} - {t("SITE_NAME")}</title>
+        <title>{!!itemId ? t("VOTE.ADD_PACKAGE.MODIFY_PACKAGE") : t("VOTE.ADD_PACKAGE.ADD_PACKAGE")} - {t("SITE_NAME")}</title>
       </Helmet>
       <MDBBreadcrumb>
         <MDBBreadcrumbItem>{t('NAVBAR.VOTE.VOTE')}</MDBBreadcrumbItem>
-        <MDBBreadcrumbItem><Link to={routes.vote.questions}>{t('NAVBAR.VOTE.QUESTIONS')}</Link></MDBBreadcrumbItem>
-        <MDBBreadcrumbItem>{t('VOTE.ANSWERS.ANSWERS')}</MDBBreadcrumbItem>
-        <MDBBreadcrumbItem active>{!!itemId ? t("VOTE.ADD_ANSWER.MODIFY_ANSWER") : t("VOTE.ADD_ANSWER.ADD_ANSWER")}</MDBBreadcrumbItem>
+        <MDBBreadcrumbItem><Link to={`${routes.vote.packages}/${page || 1}`}>{t('NAVBAR.VOTE.PACKAGES')}</Link></MDBBreadcrumbItem>
+        <MDBBreadcrumbItem active>{!!itemId ? t("VOTE.ADD_PACKAGE.MODIFY_PACKAGE") : t("VOTE.ADD_PACKAGE.ADD_PACKAGE")}</MDBBreadcrumbItem>
       </MDBBreadcrumb>
       {!!loading && <Loading/>}
       <MDBCard>
@@ -133,22 +122,33 @@ export default ({}) => {
           <form onSubmit={handleSubmit}>
             <div className="text-center">
               <h3 className="dark-grey-text mt-3 mb-0">
-                <strong>{!!itemId ? t("VOTE.ADD_ANSWER.MODIFY_ANSWER") : t("VOTE.ADD_ANSWER.ADD_ANSWER")}</strong>
+                <strong>{!!itemId ? t("VOTE.ADD_PACKAGE.MODIFY_PACKAGE") : t("VOTE.ADD_PACKAGE.ADD_PACKAGE")}</strong>
               </h3>
-              <p className="text-left"><span className="font-weight-bold">{t("VOTE.QUESTION")}: </span>{question}</p>
             </div>
             <MDBRow>
               <MDBCol md={12}>
-                <MDBInput label={t("VOTE.ANSWERS.ANSWER")} outline autoFocus value={answer} onChange={e => setAnswer(e.target.value)} onBlur={e => setTouched(Object.assign({}, touched, {answer: true}))}>
-                  {touched.answer && answer.length === 0 && <div className="invalid-field">{t("COMMON.VALIDATION.REQUIRED", {field: t("VOTE.ANSWERS.ANSWER")})}</div>}
+                <MDBInput label={t("VOTE.PACKAGE")} outline autoFocus value={name} onChange={e => setName(e.target.value)} onBlur={e => setTouched(Object.assign({}, touched, {name: true}))}>
+                  {touched.name && name.length === 0 && <div className="invalid-field">{t("COMMON.VALIDATION.REQUIRED", {field: t("VOTE.PACKAGE")})}</div>}
                 </MDBInput>
+              </MDBCol>
+            </MDBRow>
+            <MDBRow>
+              <MDBCol md={6}>
+                <MDBDatePicker format={DATE_FORMAT_ISO}  autoOk /*locale={moment.locale(t("CODE"))}*/ className="date-picker" value={startDate} getValue={val => setStartDate(val)}
+                />
+                <label className="date-picker-label">{t("VOTE.START_DATE")}</label>
+              </MDBCol>
+              <MDBCol md={6}>
+                <MDBDatePicker format={DATE_FORMAT_ISO}  autoOk /*locale={moment.locale(t("CODE"))}*/ className="date-picker" value={endDate} getValue={val => setEndDate(val)}
+                />
+                <label className="date-picker-label">{t("VOTE.END_DATE")}</label>
               </MDBCol>
             </MDBRow>
             <CSSTransition in={alert.show} classNames="fade-transition" timeout={TRANSITION_TIME} unmountOnExit appear>
               <MDBAlert color={alert.color} dismiss onClosed={() => setAlert({})}>{alert.message}</MDBAlert>
             </CSSTransition>
             <Fragment>
-              <MDBBtn type="submit" color="indigo" size="sm" disabled={!answer || !answer.length}>{!!itemId ? t("COMMON.BUTTON.MODIFY") : t("COMMON.BUTTON.ADD")}</MDBBtn>
+              <MDBBtn type="submit" color="indigo" size="sm" disabled={!name || !name.length}>{!!itemId ? t("COMMON.BUTTON.MODIFY") : t("COMMON.BUTTON.ADD")}</MDBBtn>
               <MDBBtn flat size="sm" onClick={handleGoBack}>{t("COMMON.BUTTON.BACK")}</MDBBtn>
             </Fragment>
           </form>

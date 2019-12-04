@@ -90,6 +90,8 @@ export default {
     },
     VOTE: {
       VOTE: "Vote",
+      PACKAGES: "Packages",
+      ADD_PACKAGE: "Add Package",
       QUESTIONS: "Questions",
       ADD_QUESTION: "Add Question",
       RESULT: "Result",
@@ -173,9 +175,17 @@ export default {
     },
   },
   VOTE: {
+    PACKAGE: "Package",
     QUESTION: "Question",
     START_DATE: "Start Date",
     END_DATE: "End Date",
+    ADD_PACKAGE: {
+      ADD_PACKAGE: "Add Package",
+      MODIFY_PACKAGE: "Modify Package",
+    },
+    QUESTIONS: {
+      QUESTIONS: "Questions",
+    },
     ADD_QUESTION: {
       ADD_QUESTION: "Add Question",
       MODIFY_QUESTION: "Modify Question",

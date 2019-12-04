@@ -27,7 +27,9 @@ export const PASSWORD_MIN_LENGTH = 6;
 export const PAGINATION_WIDTH = 10;
 export const PAGINATION_WIDTH_MOBILE = 6;
 
+export const TABLE_TEXT_MAX_LENGTH = 200;
 export const DESCRIPTION_LENGTH_BREAKPOINT = 400;
+export const DESCRIPTION_LENGTH_BREAKPOINT2 = 800;
 
 export const TEXTAREA_ROWS0 = 3;
 export const TEXTAREA_ROWS1 = 10;

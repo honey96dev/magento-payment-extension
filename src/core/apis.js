@@ -32,6 +32,10 @@ export default {
     get: "video/get",
   },
   vote: {
+    packages: "vote/packages",
+    savePackage: "vote/save-package",
+    deletePackage: "vote/delete-package",
+    getPackage: "vote/get-package",
     questions: "vote/questions",
     saveQuestion: "vote/save-question",
     deleteQuestion: "vote/delete-question",
