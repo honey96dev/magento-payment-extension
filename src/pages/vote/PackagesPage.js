@@ -65,6 +65,11 @@ export default () => {
       sort: "asc"
     },
     {
+      label: t("VOTE.RELEASED_DATE"),
+      field: 'endDate',
+      sort: "asc"
+    },
+    {
       label: "",
       field: "button",
       sort: "asc"
@@ -105,8 +110,9 @@ export default () => {
   const makeButtons = (id, number) => {
     return (
       <Fragment>
-        <Link to={`${routes.vote.addPackage}/${id}/1/${page || 1}`}><MDBBtn tag="a" size="sm" color="indigo" floating><MDBIcon icon="edit"/></MDBBtn></Link>
+        <Link to={`${routes.vote.addPackage}/${id}/${page || 1}`}><MDBBtn tag="a" size="sm" color="indigo" floating><MDBIcon icon="edit"/></MDBBtn></Link>
         <Link to={`${routes.vote.questions}/${id}/1/${page || 1}`}><MDBBtn tag="a" size="sm" color="primary" className="mx-2" floating><MDBIcon icon="list"/></MDBBtn></Link>
+        <Link to={`${routes.vote.result}/${id}/1/${page || 1}`}><MDBBtn tag="a" size="sm" color="indigo" className="mr-2" floating><MDBIcon icon="eye"/></MDBBtn></Link>
         <MDBBtn tag="a" size="sm" color="danger" floating onClick={e => handleDelete(id, "#" + number)}><MDBIcon icon="trash"/></MDBBtn>
       </Fragment>
     );
@@ -210,7 +216,8 @@ export default () => {
                   <td>{item.name}</td>
                   <td className="date-col">{item.startDate}</td>
                   <td className="date-col">{item.endDate}</td>
-                  <td className="p-2 edit-col">{item.button}</td>
+                  <td className="date-col2">{item.releasedDate}</td>
+                  <td className="p-2 edit-col2">{item.button}</td>
                 </tr>
               ))}
             </MDBTableBody>

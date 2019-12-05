@@ -144,5 +144,16 @@ export default {
           reject(err);
         });
     });
-  }
+  },
+
+  publish: (params) => {
+    return new Promise((resolve, reject) => {
+      fetch(POST, apis.vote.publish, params)
+        .then(res => {
+          resolve(res);
+        }, err => {
+          reject(err);
+        });
+    });
+  },
 };

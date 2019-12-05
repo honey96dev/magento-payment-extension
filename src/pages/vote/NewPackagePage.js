@@ -134,12 +134,12 @@ export default ({}) => {
             </MDBRow>
             <MDBRow>
               <MDBCol md={6}>
-                <MDBDatePicker format={DATE_FORMAT_ISO}  autoOk /*locale={moment.locale(t("CODE"))}*/ className="date-picker" value={startDate} getValue={val => setStartDate(val)}
+                <MDBDatePicker format={DATE_FORMAT_ISO} autoOk /*locale={moment.locale(t("CODE"))}*/ className="date-picker" value={startDate} getValue={val => setStartDate(val)}
                 />
                 <label className="date-picker-label">{t("VOTE.START_DATE")}</label>
               </MDBCol>
               <MDBCol md={6}>
-                <MDBDatePicker format={DATE_FORMAT_ISO}  autoOk /*locale={moment.locale(t("CODE"))}*/ className="date-picker" value={endDate} getValue={val => setEndDate(val)}
+                <MDBDatePicker format={DATE_FORMAT_ISO} autoOk /*locale={moment.locale(t("CODE"))}*/ className="date-picker" value={endDate} getValue={val => setEndDate(val)}
                 />
                 <label className="date-picker-label">{t("VOTE.END_DATE")}</label>
               </MDBCol>

@@ -45,5 +45,6 @@ export default {
     deleteAnswer: "vote/delete-answer",
     getAnswer: "vote/get-answer",
     result: "vote/result",
+    publish: "vote/publish",
   },
 };

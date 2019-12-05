@@ -28,6 +28,9 @@ export default {
       MODIFY: "تعديل",
       ALLOW: "السماح",
       DENY: "أنكر",
+      PUBLISH: "نشر",
+      UNPUBLISH: "Unpublish",
+      NOT_FINISHED: "Not Finished",
     },
     VALIDATION: {
       REQUIRED: "{{field}} مطلوب",
@@ -179,6 +182,7 @@ export default {
     QUESTION: "سؤال",
     START_DATE: "تاريخ البدء",
     END_DATE: "تاريخ الانتهاء",
+    RELEASED_DATE: "تاريخ النشر",
     ADD_PACKAGE: {
       ADD_PACKAGE: "إضافة حزمة",
       MODIFY_PACKAGE: "تعديل الحزمة",
@@ -197,6 +201,9 @@ export default {
     ADD_ANSWER: {
       ADD_ANSWER: "أضف إجابة",
       MODIFY_ANSWER: "تعديل الجواب",
+    },
+    RESULT: {
+      RESULT: "نتيجة التصويت",
     },
   },
 };

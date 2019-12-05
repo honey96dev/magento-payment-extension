@@ -28,6 +28,9 @@ export default {
       MODIFY: "Modify",
       ALLOW: "Allow",
       DENY: "Deny",
+      PUBLISH: "Publish",
+      UNPUBLISH: "Unpublish",
+      NOT_FINISHED: "Not Finished",
     },
     VALIDATION: {
       REQUIRED: "{{field}} is required",
@@ -179,6 +182,7 @@ export default {
     QUESTION: "Question",
     START_DATE: "Start Date",
     END_DATE: "End Date",
+    RELEASED_DATE: "Published Date",
     ADD_PACKAGE: {
       ADD_PACKAGE: "Add Package",
       MODIFY_PACKAGE: "Modify Package",
@@ -197,6 +201,9 @@ export default {
     ADD_ANSWER: {
       ADD_ANSWER: "Add Answer",
       MODIFY_ANSWER: "Modify Answer",
+    },
+    RESULT: {
+      RESULT: "Vote Result",
     },
   },
 };

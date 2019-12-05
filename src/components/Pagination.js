@@ -42,7 +42,7 @@ export default ({circle, current, pageCount, width, onChange}) => {
           </MDBPageNav>
         </MDBPageItem>
         {pages.map((page, index) => (
-          <MDBPageItem key={page} active={page === current} onClick={() => onChange(page)}>
+          <MDBPageItem key={page} active={page === current} onClick={() => current !== page && onChange(page)}>
             <MDBPageNav className="page-link">{page}</MDBPageNav>
           </MDBPageItem>
         ))}

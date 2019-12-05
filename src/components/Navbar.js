@@ -86,8 +86,8 @@ export default ({thresholdY}) => {
                 <span className="mr-2">{t("NAVBAR.NEWS.NEWS")}</span>
               </MDBDropdownToggle>
               <MDBDropdownMenu className="text-left">
-                <MDBDropdownItem onClick={() => history.push(routes.news.add)}>{t("NAVBAR.NEWS.ADD")}</MDBDropdownItem>
                 <MDBDropdownItem onClick={() => history.push(routes.news.all)}>{t("NAVBAR.NEWS.ALL")}</MDBDropdownItem>
+                <MDBDropdownItem onClick={() => history.push(routes.news.add)}>{t("NAVBAR.NEWS.ADD")}</MDBDropdownItem>
               </MDBDropdownMenu>
             </MDBDropdown>
           </MDBNavItem>
@@ -97,8 +97,8 @@ export default ({thresholdY}) => {
                 <span className="mr-2">{t("NAVBAR.VIDEO.VIDEO")}</span>
               </MDBDropdownToggle>
               <MDBDropdownMenu className="text-left">
-                <MDBDropdownItem onClick={() => history.push(routes.video.add)}>{t("NAVBAR.VIDEO.ADD")}</MDBDropdownItem>
                 <MDBDropdownItem onClick={() => history.push(routes.video.all)}>{t("NAVBAR.VIDEO.ALL")}</MDBDropdownItem>
+                <MDBDropdownItem onClick={() => history.push(routes.video.add)}>{t("NAVBAR.VIDEO.ADD")}</MDBDropdownItem>
               </MDBDropdownMenu>
             </MDBDropdown>
           </MDBNavItem>

@@ -22,7 +22,7 @@ export default () => {
       <Navbar/>
       <MDBContainer className={"section"}>
         <Switch>
-          <Route path={`${routes.vote.result}/:packageId/:page?`} exact component={ResultPage}/>
+          <Route path={`${routes.vote.result}/:packageId/:page?/:page2?`} exact component={ResultPage}/>
           {/*<Route path={`${routes.vote.result}/:packageId`} exact component={ResultPage}/>*/}
           <Route path={`${routes.vote.addAnswer}/:questionId/:id?`} exact component={NewAnswerPage}/>
           {/*<Route path={`${routes.vote.addAnswer}/:questionId`} exact component={NewAnswerPage}/>*/}

@@ -8,6 +8,10 @@
   width: $date-col-width;
 }
 
-.edit-col {
-  width: calc(#{$edit-col-width} + 50px);
+.date-col2 {
+  width: calc(#{$date-col-width} + 25px);
+}
+
+.edit-col2 {
+  width: calc(#{$edit-col-width} + 100px);
 }
