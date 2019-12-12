@@ -2,7 +2,7 @@ import React, {Fragment, useEffect, useState} from "react";
 import {MDBProgress} from "mdbreact";
 import {useTranslation} from "react-i18next";
 
-import "./EndedVote.scss";
+import "./Result.scss";
 
 export default ({data}) => {
   const {t} = useTranslation();
@@ -23,7 +23,6 @@ export default ({data}) => {
 
   return (
     <div className="text-left">
-      <h4 className="text-primary font-weight-bold mb-3 p-0">{data.question}</h4>
       {data.answers.map((item, index) => (
         <Fragment key={index}>
           <p className="mb-1">{item.answer}</p>

@@ -46,4 +46,15 @@ export default {
         });
     });
   },
+
+  count: (params) => {
+    return new Promise((resolve, reject) => {
+      fetch(POST, apis.video.count, params)
+        .then(res => {
+          resolve(res);
+        }, err => {
+          reject(err);
+        });
+    });
+  },
 };

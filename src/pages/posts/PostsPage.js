@@ -5,11 +5,12 @@ import {MDBContainer} from "mdbreact";
 import Navbar from "components/Navbar";
 import Footer from "components/Footer";
 import BackToTop from "components/BackToTop";
+import Error404 from "components/Error404";
+import routes from "core/routes";
 import AllPostsPage from "./AllPostsPage";
 import AllowedPostsPage from "./AllowedPostsPage";
 import DeniedPostsPage from "./DeniedPostsPage";
 import PostDetailPage from "./PostDetailPage";
-import routes from "core/routes";
 
 import "./PostsPage.scss";
 
@@ -26,6 +27,7 @@ export default () => {
           <Route path={routes.posts.all} exact component={AllPostsPage}/>
           <Route path={`${routes.posts.all}/:page`} exact component={AllPostsPage}/>
           <Route path={`${routes.posts.detail}/:id`} component={PostDetailPage}/>
+          <Route component={Error404}/>
         </Switch>
       </MDBContainer>
       <Footer/>

@@ -20,8 +20,11 @@ import useWindowScrollPosition from "@rehooks/window-scroll-position";
 
 import {changeLanguage} from "core/i18n";
 import routes from "core/routes";
+import images from "core/images";
 import authActions from "actions/auth";
-import UserService from "../services/UserService";
+import AuthService from "services/AuthService";
+
+import "./Navbar.scss";
 
 export default ({thresholdY}) => {
   const {t} = useTranslation();
@@ -52,14 +55,15 @@ export default ({thresholdY}) => {
   // };
 
   const handleSignOut = e => {
-    UserService.signOut();
+    AuthService.signOut();
     dispatch(authActions.signOut());
   };
 
   return (
     <MDBNavbar color={flag ? "mdb-color" : "white"} light={!flag} dark={flag} expand="md" scrolling fixed="top">
       <MDBNavbarBrand href={routes.root}>
-        <strong>{t("SITE_NAME")}</strong>
+        {/*<strong>{t("SITE_NAME")}</strong>*/}
+        <strong><img className="navbar-logo-icon" src={images.logo}/></strong>
       </MDBNavbarBrand>
       <MDBNavbarToggler onClick={toggleCollapse}/>
       <MDBCollapse isOpen={collapse} navbar className="text-left">
@@ -102,6 +106,20 @@ export default ({thresholdY}) => {
               </MDBDropdownMenu>
             </MDBDropdown>
           </MDBNavItem>
+          <MDBNavItem active={pathname.startsWith(routes.questionnaire.root)}>
+            <MDBDropdown>
+              <MDBDropdownToggle nav caret>
+                <span className="mr-2">{t("NAVBAR.QUESTIONNAIRE.QUESTIONNAIRE")}</span>
+              </MDBDropdownToggle>
+              <MDBDropdownMenu className="text-left">
+                <MDBDropdownItem onClick={() => history.push(routes.questionnaire.packages)}>{t("NAVBAR.QUESTIONNAIRE.PACKAGES")}</MDBDropdownItem>
+                <MDBDropdownItem onClick={() => history.push(routes.questionnaire.addPackage)}>{t("NAVBAR.QUESTIONNAIRE.ADD_PACKAGE")}</MDBDropdownItem>
+                {/*<MDBDropdownItem onClick={() => history.push(routes.vote.questions)}>{t("NAVBAR.VOTE.QUESTIONS")}</MDBDropdownItem>*/}
+                {/*<MDBDropdownItem onClick={() => history.push(routes.vote.addQuestion)}>{t("NAVBAR.VOTE.ADD_QUESTION")}</MDBDropdownItem>*/}
+                {/*<MDBDropdownItem onClick={() => history.push(routes.vote.result)}>{t("NAVBAR.VOTE.RESULT")}</MDBDropdownItem>*/}
+              </MDBDropdownMenu>
+            </MDBDropdown>
+          </MDBNavItem>
           <MDBNavItem active={pathname.startsWith(routes.vote.root)}>
             <MDBDropdown>
               <MDBDropdownToggle nav caret>
@@ -113,6 +131,17 @@ export default ({thresholdY}) => {
                 {/*<MDBDropdownItem onClick={() => history.push(routes.vote.questions)}>{t("NAVBAR.VOTE.QUESTIONS")}</MDBDropdownItem>*/}
                 {/*<MDBDropdownItem onClick={() => history.push(routes.vote.addQuestion)}>{t("NAVBAR.VOTE.ADD_QUESTION")}</MDBDropdownItem>*/}
                 {/*<MDBDropdownItem onClick={() => history.push(routes.vote.result)}>{t("NAVBAR.VOTE.RESULT")}</MDBDropdownItem>*/}
+              </MDBDropdownMenu>
+            </MDBDropdown>
+          </MDBNavItem>
+          <MDBNavItem active={pathname.startsWith(routes.users.root)}>
+            <MDBDropdown>
+              <MDBDropdownToggle nav caret>
+                <span className="mr-2">{t("NAVBAR.USERS.USERS")}</span>
+              </MDBDropdownToggle>
+              <MDBDropdownMenu className="text-left">
+                <MDBDropdownItem onClick={() => history.push(routes.users.allList)}>{t("NAVBAR.USERS.LIST")}</MDBDropdownItem>
+                <MDBDropdownItem onClick={() => history.push(routes.users.newList)}>{t("NAVBAR.USERS.NEW_LIST")}</MDBDropdownItem>
               </MDBDropdownMenu>
             </MDBDropdown>
           </MDBNavItem>

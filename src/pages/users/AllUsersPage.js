@@ -1,7 +1,7 @@
 import React, {Fragment, useEffect, useState} from "react";
 import {Link, useHistory, useParams} from "react-router-dom";
 import {
-  MDBAlert,
+  MDBAlert, MDBBadge,
   MDBBreadcrumb,
   MDBBreadcrumbItem,
   MDBBtn,
@@ -23,14 +23,14 @@ import {CSSTransition} from "react-transition-group";
 import Loading from "components/Loading";
 import ErrorNoData from "components/ErrorNoData";
 import Pagination from "components/Pagination";
-import VoteService from "services/VoteService";
+import Service from "services/UsersService";
 import {ALERT_DANGER, SUCCESS, TRANSITION_TIME} from "core/globals";
 import routes from "core/routes";
 
-import "./PackagesPage.scss";
+import "./AllUsersPage.scss";
 
 export default () => {
-  const {page} = useParams();
+  const {scope, page} = useParams();
   const {t} = useTranslation();
   const history = useHistory();
 
@@ -50,24 +50,34 @@ export default () => {
       sort: "asc",
     },
     {
-      label: t("VOTE.PACKAGE"),
-      field: "question",
+      label: t("USERS.EMAIL"),
+      field: "email",
       sort: "asc",
     },
     {
-      label: t("VOTE.START_DATE"),
-      field: 'startDate',
+      label: t("USERS.USERNAME"),
+      field: 'username',
       sort: "asc",
     },
     {
-      label: t("VOTE.END_DATE"),
-      field: 'endDate',
-      sort: "asc"
+      label: t("USERS.FIRST_NAME"),
+      field: 'firstName',
+      sort: "asc",
     },
     {
-      label: t("VOTE.RELEASED_DATE"),
-      field: 'endDate',
-      sort: "asc"
+      label: t("USERS.LAST_NAME"),
+      field: 'lastName',
+      sort: "asc",
+    },
+    {
+      label: t("USERS.GENDER"),
+      field: 'gender',
+      sort: "asc",
+    },
+    {
+      label: t("USERS.PHONE"),
+      field: 'phone',
+      sort: "asc",
     },
     {
       label: "",
@@ -80,11 +90,11 @@ export default () => {
     scroll.scrollToTop({
       duration: TRANSITION_TIME,
     });
-    VoteService.packages({page})
+    Service.list({page, scope})
       .then(res => {
         if (res.result === SUCCESS) {
           for (let row of res.data) {
-            row["button"] = makeButtons(row.id, row.number);
+            row["button"] = makeButtons(row.id, row.number, row.allowedDate);
           }
           setPageCount(res.pageCount);
           setItems(res.data);
@@ -105,14 +115,13 @@ export default () => {
         });
         setLoading(false);
       });
-  }, [page, t]);
+  }, [scope, page, t]);
 
-  const makeButtons = (id, number) => {
+  const makeButtons = (id, number, allowedDate) => {
     return (
       <Fragment>
-        <Link to={`${routes.vote.addPackage}/${id}/${page || 1}`}><MDBBtn tag="a" size="sm" color="indigo" floating><MDBIcon icon="edit"/></MDBBtn></Link>
-        <Link to={`${routes.vote.questions}/${id}/1/${page || 1}`}><MDBBtn tag="a" size="sm" color="primary" className="mx-2" floating><MDBIcon icon="list"/></MDBBtn></Link>
-        <Link to={`${routes.vote.result}/${id}/1/${page || 1}`}><MDBBtn tag="a" size="sm" color="indigo" className="mr-2" floating><MDBIcon icon="eye"/></MDBBtn></Link>
+        <Link to={`${routes.users.edit}/${id}/${scope}/${page || 1}`}><MDBBtn tag="a" size="sm" color="indigo" floating><MDBIcon icon="edit"/></MDBBtn></Link>
+        <MDBBtn tag="a" size="sm" color={!!allowedDate.length ? "warning" : "primary"} className="mx-2" floating onClick={e => handleAllow(id, "#" + number, allowedDate)}><MDBIcon icon={!!allowedDate.length ? "times" : "check"}/></MDBBtn>
         <MDBBtn tag="a" size="sm" color="danger" floating onClick={e => handleDelete(id, "#" + number)}><MDBIcon icon="trash"/></MDBBtn>
       </Fragment>
     );
@@ -122,12 +131,48 @@ export default () => {
     setModal(Object.assign({}, modal, {show: !modal.show}));
   };
 
-  const deleteItem = id => {
-    VoteService.deletePackage({id: modal.deleteId, page})
+  const allowItem = id => {
+    Service.allow({id: modal.itemId, allow: modal.allowItem, page, scope})
       .then(res => {
         if (res.result === SUCCESS) {
           for (let row of res.data) {
-            row["button"] = makeButtons(row.id, row.number);
+            row["button"] = makeButtons(row.id, row.number, row.allowedDate);
+          }
+          setPageCount(res.pageCount);
+          setItems(res.data);
+        } else {
+          setAlert({
+            show: true,
+            color: ALERT_DANGER,
+            message: res.message,
+          });
+          scroll.scrollToTop({
+            duration: TRANSITION_TIME,
+          });
+        }
+        setLoading(false);
+        toggleModal();
+      })
+      .catch(err => {
+        setAlert({
+          show: true,
+          color: ALERT_DANGER,
+          message: t('COMMON.ERROR.UNKNOWN_SERVER_ERROR'),
+        });
+        scroll.scrollToTop({
+          duration: TRANSITION_TIME,
+        });
+        setLoading(false);
+        toggleModal();
+      });
+  };
+
+  const deleteItem = id => {
+    Service.delete({id: modal.itemId, page, scope})
+      .then(res => {
+        if (res.result === SUCCESS) {
+          for (let row of res.data) {
+            row["button"] = makeButtons(row.id, row.number, row.allowedDate);
           }
           setPageCount(res.pageCount);
           setItems(res.data);
@@ -159,27 +204,32 @@ export default () => {
   };
 
   const handlePageChange = page => {
-    history.push(`${routes.vote.packages}/${page}`);
+    history.push(`${routes.users.list}/${scope}/${page}`);
+  };
+
+  const handleAllow = (id, title, allowedDate) => {
+    const allow = !allowedDate.length;
+    setModal(Object.assign({}, modal, {show: true, title: !!allow ? t("COMMON.BUTTON.ALLOW") : t("COMMON.BUTTON.DENY"), message: t(!!allow ? "COMMON.QUESTION.ALLOW" : "COMMON.QUESTION.DENY", {item: title}), itemId: id, allowItem: !!allow ? 1 : 0, proc: "allow", yesButtonColor: !!allow ? "primary" : "warning", yesButtonString: !!allow ? t("COMMON.BUTTON.ALLOW") : t("COMMON.BUTTON.DENY")}));
   };
 
   const handleDelete = (id, title) => {
-    setModal(Object.assign({}, modal, {show: true, title: t("COMMON.BUTTON.DELETE"), message: t("COMMON.QUESTION.DELETE", {item: title}), deleteId: id}));
+    setModal(Object.assign({}, modal, {show: true, title: t("COMMON.BUTTON.DELETE"), message: t("COMMON.QUESTION.DELETE", {item: title}), itemId: id, proc: "delete", yesButtonColor: "danger", yesButtonString: t("COMMON.BUTTON.DELETE")}));
   };
   
   return (
     <Fragment>
       <Helmet>
-        <title>{t("NAVBAR.VOTE.PACKAGES")} - {t("SITE_NAME")}</title>
+        <title>{t("NAVBAR.USERS.USERS")} - {t("SITE_NAME")}</title>
       </Helmet>
       <MDBBreadcrumb>
-        <MDBBreadcrumbItem>{t('NAVBAR.VOTE.VOTE')}</MDBBreadcrumbItem>
-        <MDBBreadcrumbItem active>{t('NAVBAR.VOTE.PACKAGES')}</MDBBreadcrumbItem>
+        <MDBBreadcrumbItem>{t('NAVBAR.USERS.USERS')}</MDBBreadcrumbItem>
+        <MDBBreadcrumbItem active>{scope === "all" ? t('NAVBAR.USERS.LIST') : t("NAVBAR.USERS.NEW_LIST")}</MDBBreadcrumbItem>
       </MDBBreadcrumb>
       {!!loading && <Loading/>}
       {!loading && !items.length && <ErrorNoData/>}
       {!loading && !!items.length && <MDBRow>
         <MDBCol md={12}>
-          <h3 className="mt-4 font-weight-bold text-center">{t("NAVBAR.VOTE.PACKAGES")}</h3>
+          <h3 className="mt-4 font-weight-bold text-center">{scope === "all" ? t('NAVBAR.USERS.LIST') : t("NAVBAR.USERS.NEW_LIST")}</h3>
         </MDBCol>
         <MDBCol md={12}>
           <CSSTransition in={alert.show} classNames="fade-transition" timeout={TRANSITION_TIME} unmountOnExit appear>
@@ -213,10 +263,12 @@ export default () => {
               {items.map((item, index) => (
                 <tr key={index} className="text-left">
                   <td>{item.number}</td>
-                  <td>{item.name} {!!item.ended && !item.releasedDate.length && <MDBIcon className="text-danger" icon="exclamation-circle"/>}</td>
-                  <td className="date-col">{item.startDate}</td>
-                  <td className="date-col">{item.endDate}</td>
-                  <td className="date-col2">{item.releasedDate}</td>
+                  <td>{item.email} {!item.allowedDate && <MDBIcon className="text-danger" icon="exclamation-circle"/>}</td>
+                  <td>{item.username}</td>
+                  <td>{item.firstName}</td>
+                  <td>{item.lastName}</td>
+                  <td>{item.gender}</td>
+                  <td>{item.phone}</td>
                   <td className="p-2 edit-col2">{item.button}</td>
                 </tr>
               ))}
@@ -233,7 +285,7 @@ export default () => {
         <MDBModalHeader toggle={toggleModal}>{modal.title}</MDBModalHeader>
         <MDBModalBody className="text-left">{modal.message}</MDBModalBody>
         <MDBModalFooter>
-          <MDBBtn type="button" color="danger" onClick={deleteItem}>{t("COMMON.BUTTON.DELETE")}</MDBBtn>
+          <MDBBtn type="button" color={modal.yesButtonColor} onClick={modal.proc === "allow" ? allowItem : deleteItem}>{modal.yesButtonString}</MDBBtn>
           <MDBBtn type="button" color="secondary" onClick={toggleModal}>{t("COMMON.BUTTON.CANCEL")}</MDBBtn>
         </MDBModalFooter>
       </MDBModal>

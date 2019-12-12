@@ -6,6 +6,7 @@ import routes from "core/routes";
 import Navbar from "components/Navbar";
 import Footer from "components/Footer";
 import BackToTop from "components/BackToTop";
+import Error404 from "components/Error404";
 import SignInPage from "./SignInPage";
 
 import "./AuthPage.scss";
@@ -21,6 +22,7 @@ export default () => {
             <Switch>
               <Route path={routes.auth.signIn} exact component={SignInPage}/>
               {/*<Route path={routes.auth.signUp} component={SignUpPage}/>*/}
+              <Route component={Error404}/>
             </Switch>
           </MDBCol>
           <MDBCol lg="3" md="0"/>

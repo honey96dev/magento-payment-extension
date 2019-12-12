@@ -5,7 +5,7 @@ import apis from "core/apis";
 export default {
   packages: (params) => {
     return new Promise((resolve, reject) => {
-      fetch(POST, apis.vote.packages, params)
+      fetch(POST, apis.questionnaire.packages, params)
         .then(res => {
           resolve(res);
         }, err => {
@@ -16,7 +16,7 @@ export default {
 
   savePackage: (params) => {
     return new Promise((resolve, reject) => {
-      fetch(POST, apis.vote.savePackage, params)
+      fetch(POST, apis.questionnaire.savePackage, params)
         .then(res => {
           resolve(res);
         }, err => {
@@ -27,7 +27,7 @@ export default {
 
   deletePackage: (params) => {
     return new Promise((resolve, reject) => {
-      fetch(POST, apis.vote.deletePackage, params)
+      fetch(POST, apis.questionnaire.deletePackage, params)
         .then(res => {
           resolve(res);
         }, err => {
@@ -38,7 +38,7 @@ export default {
 
   getPackage: (params) => {
     return new Promise((resolve, reject) => {
-      fetch(POST, apis.vote.getPackage, params)
+      fetch(POST, apis.questionnaire.getPackage, params)
         .then(res => {
           resolve(res);
         }, err => {
@@ -49,7 +49,7 @@ export default {
 
   questions: (params) => {
     return new Promise((resolve, reject) => {
-      fetch(POST, apis.vote.questions, params)
+      fetch(POST, apis.questionnaire.questions, params)
         .then(res => {
           resolve(res);
         }, err => {
@@ -60,7 +60,7 @@ export default {
 
   saveQuestion: (params) => {
     return new Promise((resolve, reject) => {
-      fetch(POST, apis.vote.saveQuestion, params)
+      fetch(POST, apis.questionnaire.saveQuestion, params)
         .then(res => {
           resolve(res);
         }, err => {
@@ -71,7 +71,7 @@ export default {
 
   deleteQuestion: (params) => {
     return new Promise((resolve, reject) => {
-      fetch(POST, apis.vote.deleteQuestion, params)
+      fetch(POST, apis.questionnaire.deleteQuestion, params)
         .then(res => {
           resolve(res);
         }, err => {
@@ -82,7 +82,7 @@ export default {
 
   getQuestion: (params) => {
     return new Promise((resolve, reject) => {
-      fetch(POST, apis.vote.getQuestion, params)
+      fetch(POST, apis.questionnaire.getQuestion, params)
         .then(res => {
           resolve(res);
         }, err => {
@@ -93,7 +93,7 @@ export default {
 
   answers: (params) => {
     return new Promise((resolve, reject) => {
-      fetch(POST, apis.vote.answers, params)
+      fetch(POST, apis.questionnaire.answers, params)
         .then(res => {
           resolve(res);
         }, err => {
@@ -104,7 +104,7 @@ export default {
 
   saveAnswer: (params) => {
     return new Promise((resolve, reject) => {
-      fetch(POST, apis.vote.saveAnswer, params)
+      fetch(POST, apis.questionnaire.saveAnswer, params)
         .then(res => {
           resolve(res);
         }, err => {
@@ -115,7 +115,7 @@ export default {
 
   deleteAnswer: (params) => {
     return new Promise((resolve, reject) => {
-      fetch(POST, apis.vote.deleteAnswer, params)
+      fetch(POST, apis.questionnaire.deleteAnswer, params)
         .then(res => {
           resolve(res);
         }, err => {
@@ -126,7 +126,7 @@ export default {
 
   getAnswer: (params) => {
     return new Promise((resolve, reject) => {
-      fetch(POST, apis.vote.getAnswer, params)
+      fetch(POST, apis.questionnaire.getAnswer, params)
         .then(res => {
           resolve(res);
         }, err => {
@@ -137,7 +137,7 @@ export default {
 
   result: (params) => {
     return new Promise((resolve, reject) => {
-      fetch(POST, apis.vote.result, params)
+      fetch(POST, apis.questionnaire.result, params)
         .then(res => {
           resolve(res);
         }, err => {
@@ -148,7 +148,7 @@ export default {
 
   publish: (params) => {
     return new Promise((resolve, reject) => {
-      fetch(POST, apis.vote.publish, params)
+      fetch(POST, apis.questionnaire.publish, params)
         .then(res => {
           resolve(res);
         }, err => {
@@ -159,7 +159,7 @@ export default {
 
   count: (params) => {
     return new Promise((resolve, reject) => {
-      fetch(POST, apis.vote.count, params)
+      fetch(POST, apis.questionnaire.count, params)
         .then(res => {
           resolve(res);
         }, err => {

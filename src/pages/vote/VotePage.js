@@ -5,6 +5,8 @@ import {MDBContainer} from "mdbreact";
 import Navbar from "components/Navbar";
 import Footer from "components/Footer";
 import BackToTop from "components/BackToTop";
+import Error404 from "components/Error404";
+import routes from "core/routes";
 import PackagesPage from "./PackagesPage";
 import NewPackagePage from "./NewPackagePage";
 import QuestionsPage from "./QuestionsPage";
@@ -12,7 +14,6 @@ import NewQuestionPage from "./NewQuestionPage";
 import AnswersPage from "./AnswersPage";
 import NewAnswerPage from "./NewAnswerPage";
 import ResultPage from "./ResultPage";
-import routes from "core/routes";
 
 import "./VotePage.scss";
 
@@ -38,6 +39,7 @@ export default () => {
           {/*<Route path={routes.vote.addPackage} exact component={NewPackagePage}/>*/}
           <Route path={`${routes.vote.packages}/:page?`} exact component={PackagesPage}/>
           {/*<Route path={routes.vote.packages} exact component={PackagesPage}/>*/}
+          <Route path={Error404}/>
         </Switch>
       </MDBContainer>
       <Footer/>

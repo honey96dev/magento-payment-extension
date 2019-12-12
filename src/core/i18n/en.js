@@ -2,7 +2,7 @@ export default {
   NAME: "English",
   CODE: "en",
   DIRECTION: "ltr",
-  SITE_NAME: 'SITE_NAME',
+  SITE_NAME: 'Admin for Knowledge gate',
   COMMON: {
     BUTTON: {
       HOME: "Home",
@@ -29,7 +29,7 @@ export default {
       ALLOW: "Allow",
       DENY: "Deny",
       PUBLISH: "Publish",
-      UNPUBLISH: "Unpublish",
+      UNPUBLISH: "Retract Publish",
       NOT_FINISHED: "Not Finished",
     },
     VALIDATION: {
@@ -91,13 +91,26 @@ export default {
       ALL: "All Video",
       ADD: "Add Video",
     },
+    QUESTIONNAIRE: {
+      QUESTIONNAIRE: "Questionnaire",
+      PACKAGES: "Questionnaire Packages",
+      ADD_PACKAGE: "Add Questionnaire Package",
+      QUESTIONS: "Questionnaire Questions",
+      ADD_QUESTION: "Add Questionnaire Question",
+      RESULT: "Questionnaire Result",
+    },
     VOTE: {
       VOTE: "Vote",
-      PACKAGES: "Packages",
-      ADD_PACKAGE: "Add Package",
-      QUESTIONS: "Questions",
-      ADD_QUESTION: "Add Question",
-      RESULT: "Result",
+      PACKAGES: "Vote Packages",
+      ADD_PACKAGE: "Add Vote Package",
+      QUESTIONS: "Vote Questions",
+      ADD_QUESTION: "Add Vote Question",
+      RESULT: "Vote Result",
+    },
+    USERS: {
+      USERS: "Users",
+      LIST: "All Users",
+      NEW_LIST: "Users Awaiting Activation",
     },
   },
   AUTH: {
@@ -144,6 +157,8 @@ export default {
     TEXT: "Text",
     DESCRIPTION: "Description",
     MEDIA: "Image",
+    POSTS: "Posts",
+    POSTS_AWAITING_ACTIVATION: "Posts Awaiting Activation",
     ADD: {
 
     },
@@ -159,6 +174,7 @@ export default {
     },
   },
   NEWS: {
+    NEWS: "News",
     TITLE: "Title",
     TEXT: "Text",
     DESCRIPTION: "Description",
@@ -169,6 +185,7 @@ export default {
     },
   },
   VIDEO: {
+    VIDEOS: "Videos",
     TITLE: "Title",
     URL: "URL",
     IS_FILE: "Video File?",
@@ -177,33 +194,81 @@ export default {
       MODIFY_VIDEO: "Modify Video",
     },
   },
-  VOTE: {
+  QUESTIONNAIRE: {
+    QUESTIONNAIRES: "Questionnaires",
+    QUESTIONNAIRES_AWAITING_RELEASE: "Questionnaires Awaiting Publish",
     PACKAGE: "Package",
     QUESTION: "Question",
     START_DATE: "Start Date",
     END_DATE: "End Date",
     RELEASED_DATE: "Published Date",
     ADD_PACKAGE: {
-      ADD_PACKAGE: "Add Package",
-      MODIFY_PACKAGE: "Modify Package",
+      ADD_PACKAGE: "Add Questionnaire Package",
+      MODIFY_PACKAGE: "Modify Questionnaire Package",
     },
     QUESTIONS: {
-      QUESTIONS: "Questions",
+      QUESTIONS: "Questionnaire Questions",
     },
     ADD_QUESTION: {
-      ADD_QUESTION: "Add Question",
-      MODIFY_QUESTION: "Modify Question",
+      ADD_QUESTION: "Add Questionnaire Question",
+      MODIFY_QUESTION: "Modify Questionnaire Question",
     },
     ANSWERS: {
-      ANSWERS: "Answers",
-      ANSWER: "Answer",
+      ANSWERS: "Questionnaire Answers",
+      ANSWER: "Questionnaire Answer",
     },
     ADD_ANSWER: {
-      ADD_ANSWER: "Add Answer",
-      MODIFY_ANSWER: "Modify Answer",
+      ADD_ANSWER: "Add Questionnaire Answer",
+      MODIFY_ANSWER: "Modify Questionnaire Answer",
+    },
+    RESULT: {
+      RESULT: "Questionnaire Result",
+    },
+  },
+  VOTE: {
+    VOTES: "Votes",
+    VOTES_AWAITING_RELEASE: "Votes Awaiting Publish",
+    PACKAGE: "Package",
+    QUESTION: "Question",
+    START_DATE: "Start Date",
+    END_DATE: "End Date",
+    RELEASED_DATE: "Published Date",
+    ADD_PACKAGE: {
+      ADD_PACKAGE: "Add Vote Package",
+      MODIFY_PACKAGE: "Modify Vote Package",
+    },
+    QUESTIONS: {
+      QUESTIONS: "Vote Questions",
+    },
+    ADD_QUESTION: {
+      ADD_QUESTION: "Add Vote Question",
+      MODIFY_QUESTION: "Modify Vote Question",
+    },
+    ANSWERS: {
+      ANSWERS: "Vote Answers",
+      ANSWER: "Vote Answer",
+    },
+    ADD_ANSWER: {
+      ADD_ANSWER: "Add Vote Answer",
+      MODIFY_ANSWER: "Modify Vote Answer",
     },
     RESULT: {
       RESULT: "Vote Result",
+    },
+  },
+  USERS: {
+    USERS: "Users",
+    USERS_AWAITING_ACTIVATION: "Users Awaiting Activation",
+    STATISTICS_OF_USERS: "Statistics of Users",
+    STATISTICS_OF_SIGN_IN: "Statistics of Sign in",
+    EMAIL: "Email",
+    USERNAME: "Username",
+    FIRST_NAME: "First Name",
+    LAST_NAME: "Last Name",
+    GENDER: "Gender",
+    PHONE: "Phone",
+    EDIT: {
+      EDIT: "Edit User",
     },
   },
 };

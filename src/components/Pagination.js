@@ -13,9 +13,11 @@ export default ({circle, current, pageCount, width, onChange}) => {
   const dir2 = t("DIRECTION") === "ltr" ? "right" : "left";
 
   useEffect(e => {
-    const half = Math.ceil((width || (isMobile ? PAGINATION_WIDTH_MOBILE : PAGINATION_WIDTH)) / 2);
+    !width && (width = isMobile ? PAGINATION_WIDTH_MOBILE : PAGINATION_WIDTH);
+    const half = Math.ceil(width / 2);
     let begin = (current - half) < 1 ? 1 : (current - half);
     let end = (current + half - 1) > pageCount ? pageCount : (current + half - 1);
+
     if ((end - begin) < width) {
       begin === 1 && (end = pageCount < width ? pageCount : width);
       end === pageCount && (begin = (pageCount - width + 1) < 1 ? 1 : (pageCount - width + 1));
@@ -27,7 +29,6 @@ export default ({circle, current, pageCount, width, onChange}) => {
     }
     setPages(pages);
   }, [current, pageCount, width]);
-
   return (
     <Fragment>
       {pageCount > 0 && <MDBPagination circle={circle}>

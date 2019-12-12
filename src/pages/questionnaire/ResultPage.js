@@ -8,7 +8,7 @@ import {CSSTransition} from "react-transition-group";
 
 import Loading from "components/Loading";
 import Pagination from "components/Pagination";
-import VoteService from "services/VoteService";
+import Service from "services/QuestionnaireService";
 import {ALERT_DANGER, SUCCESS, TRANSITION_TIME} from "core/globals";
 import routes from "core/routes";
 import Result from "./partial/Result";
@@ -38,7 +38,7 @@ export default () => {
   }, [page, t]);
 
   const loadData = e => {
-    VoteService.getPackage({id: packageId})
+    Service.getPackage({id: packageId})
       .then(res => {
         if (res.result === SUCCESS) {
           setPackageData(res.data);
@@ -58,7 +58,7 @@ export default () => {
           message: t('COMMON.ERROR.UNKNOWN_SERVER_ERROR'),
         });
       });
-    VoteService.result({packageId, page})
+    Service.result({packageId, page})
       .then(res => {
         if (res.result === SUCCESS) {
           setPageCount(res.pageCount);
@@ -87,11 +87,11 @@ export default () => {
   };
 
   const handlePageChange = page => {
-    history.push(`${routes.vote.result}/${packageId}/${page}/${page2}`);
+    history.push(`${routes.questionnaire.result}/${packageId}/${page}/${page2}`);
   };
 
   const handleRelease = e => {
-    VoteService.publish({id: packageId, page, release: !releasedDate.length})
+    Service.publish({id: packageId, page, release: !releasedDate.length})
       .then(res => {
         if (res.result === SUCCESS) {
           setReleasedDate(res.data.releasedDate);
@@ -119,18 +119,18 @@ export default () => {
   return (
     <Fragment>
       <Helmet>
-        <title>{t("VOTE.RESULT.RESULT")} - {t("SITE_NAME")}</title>
+        <title>{t("QUESTIONNAIRE.RESULT.RESULT")} - {t("SITE_NAME")}</title>
       </Helmet>
       <MDBBreadcrumb>
-        <MDBBreadcrumbItem>{t('NAVBAR.VOTE.VOTE')}</MDBBreadcrumbItem>
-        <MDBBreadcrumbItem><Link to={`${routes.vote.packages}/${page2 || 1}`}>{t('NAVBAR.VOTE.PACKAGES')}</Link></MDBBreadcrumbItem>
-        <MDBBreadcrumbItem active>{t('VOTE.RESULT.RESULT')}</MDBBreadcrumbItem>
+        <MDBBreadcrumbItem>{t('NAVBAR.QUESTIONNAIRE.QUESTIONNAIRE')}</MDBBreadcrumbItem>
+        <MDBBreadcrumbItem><Link to={`${routes.questionnaire.packages}/${page2 || 1}`}>{t('NAVBAR.QUESTIONNAIRE.PACKAGES')}</Link></MDBBreadcrumbItem>
+        <MDBBreadcrumbItem active>{t('QUESTIONNAIRE.RESULT.RESULT')}</MDBBreadcrumbItem>
       </MDBBreadcrumb>
       {!!loading && <Loading/>}
       {!loading && <MDBRow>
         <MDBCol md={12}>
-          <h3 className="mt-4 font-weight-bold text-center">{t("VOTE.RESULT.RESULT")}</h3>
-          <p className="text-left"><span className="font-weight-bold">{t("VOTE.PACKAGE")}: </span>{packageData.name}</p>
+          <h3 className="mt-4 font-weight-bold text-center">{t("QUESTIONNAIRE.RESULT.RESULT")}</h3>
+          <p className="text-left"><span className="font-weight-bold">{t("QUESTIONNAIRE.PACKAGE")}: </span>{packageData.name}</p>
         </MDBCol>
         <MDBCol md={12}>
           <CSSTransition in={alert.show} classNames="fade-transition" timeout={TRANSITION_TIME} unmountOnExit appear>

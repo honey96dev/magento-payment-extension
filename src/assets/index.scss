@@ -199,6 +199,10 @@ textarea.form-control {
   top: 5px;
 }
 
+.mt-10 {
+  margin-top: 6rem;
+}
+
 .fade-transition-enter {
   opacity: 0.01;
 }
@@ -452,6 +456,10 @@ textarea.form-control {
 
   .form-check-input[type="radio"] + label:after, .form-check-input[type="radio"] + label:before, label.btn input[type="radio"] + label:after, label.btn input[type="radio"] + label:before {
     left: unset;
+    right: 0;
+  }
+
+  canvas.canvasjs-chart-canvas {
     right: 0;
   }
 }

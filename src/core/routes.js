@@ -32,6 +32,16 @@ export const routes = {
     all: `${ROUTE_BASE}/video`,
     add: `${ROUTE_BASE}/video/add`,
   },
+  questionnaire: {
+    root: `${ROUTE_BASE}/questionnaire`,
+    packages: `${ROUTE_BASE}/questionnaire`,
+    addPackage: `${ROUTE_BASE}/questionnaire/add`,
+    questions: `${ROUTE_BASE}/questionnaire/questions`,
+    addQuestion: `${ROUTE_BASE}/questionnaire/questions/add`,
+    answers: `${ROUTE_BASE}/questionnaire/answers`,
+    addAnswer: `${ROUTE_BASE}/questionnaire/answers/add`,
+    result: `${ROUTE_BASE}/questionnaire/result`,
+  },
   vote: {
     root: `${ROUTE_BASE}/vote`,
     packages: `${ROUTE_BASE}/vote`,
@@ -41,6 +51,13 @@ export const routes = {
     answers: `${ROUTE_BASE}/vote/answers`,
     addAnswer: `${ROUTE_BASE}/vote/answers/add`,
     result: `${ROUTE_BASE}/vote/result`,
+  },
+  users: {
+    root: `${ROUTE_BASE}/users`,
+    list: `${ROUTE_BASE}/users/list`,
+    allList: `${ROUTE_BASE}/users/list/all`,
+    newList: `${ROUTE_BASE}/users/list/new`,
+    edit: `${ROUTE_BASE}/users/edit`,
   },
 };
 

@@ -2,10 +2,10 @@ import React, {Fragment} from "react";
 import {Helmet} from "react-helmet";
 import {useTranslation} from "react-i18next";
 import {MDBContainer} from "mdbreact";
-
-import Loading from "components/Loading";
 import Navbar from "components/Navbar";
 import Footer from "components/Footer";
+import Overview from "./partial/Overview";
+import Statistics from "./partial/Statistics";
 
 import "./FrontPage.scss";
 
@@ -15,11 +15,12 @@ export default () => {
   return (
     <Fragment>
       <Helmet>
-        <title>{t("NAVBAR.HOME")}</title>
+        <title>{t("NAVBAR.HOME")} - {t("SITE_NAME")}</title>
       </Helmet>
       <Navbar/>
       <MDBContainer className="section">
-        <Loading />
+        <Overview/>
+        <Statistics/>
       </MDBContainer>
       <Footer/>
       {/*<Loader />*/}

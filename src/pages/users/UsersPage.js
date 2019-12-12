@@ -7,10 +7,10 @@ import Footer from "components/Footer";
 import BackToTop from "components/BackToTop";
 import Error404 from "components/Error404";
 import routes from "core/routes";
-import AllNewsPage from "./AllNewsPage";
-import NewNewsPage from "./NewNewsPage";
+import AllUsersPage from "./AllUsersPage";
+import EditPage from "./EditPage";
 
-import "./NewsPage.scss";
+import "./UsersPage.scss";
 
 export default () => {
   return (
@@ -18,10 +18,8 @@ export default () => {
       <Navbar/>
       <MDBContainer className={"section"}>
         <Switch>
-          <Route path={`${routes.news.add}/:id`} component={NewNewsPage}/>
-          <Route path={routes.news.add} component={NewNewsPage}/>
-          <Route path={routes.news.all} exact component={AllNewsPage}/>
-          <Route path={`${routes.news.all}/:page`} exact component={AllNewsPage}/>
+          <Route path={`${routes.users.list}/:scope/:page?`} component={AllUsersPage}/>
+          <Route path={`${routes.users.edit}/:id/:scope/:page?`} component={EditPage}/>
           <Route component={Error404}/>
         </Switch>
       </MDBContainer>

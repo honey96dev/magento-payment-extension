@@ -69,4 +69,15 @@ export default {
         });
     });
   },
+
+  count: (params) => {
+    return new Promise((resolve, reject) => {
+      fetch(POST, apis.posts.count, params)
+        .then(res => {
+          resolve(res);
+        }, err => {
+          reject(err);
+        });
+    });
+  },
 };

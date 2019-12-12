@@ -2,7 +2,7 @@ import React, {Fragment, useEffect, useState} from "react";
 import {MDBProgress} from "mdbreact";
 import {useTranslation} from "react-i18next";
 
-import "./VoteResult.scss";
+import "./Result.scss";
 
 export default ({data}) => {
   const {t} = useTranslation();

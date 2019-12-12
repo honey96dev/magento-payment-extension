@@ -151,7 +151,7 @@ export default () => {
   };
 
   const handlePageChange = page => {
-    history.push(`${routes.posts.all}/${page}`);
+    history.push(`${routes.posts.allowed}/${page}`);
   };
 
   const handleAllow = (id, title, allow) => {

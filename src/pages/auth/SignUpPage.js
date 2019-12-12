@@ -47,7 +47,7 @@ import {
 } from "core/globals";
 import routes from "core/routes";
 import validators from "core/validators";
-import UserService from "services/UserService";
+import AuthService from "services/AuthService";
 import auth from "actions/auth";
 
 import "./SignUpPage.scss";
@@ -90,7 +90,7 @@ export default (props) => {
       const birthdayStr = birthday.toISOString().substr(0, 10);
       const params = {email, username, firstName, lastName, gender, birthday: birthdayStr, jobTitle, sector, company, city, phone, password};
       dispatch(auth.requestSignUp(params));
-      let res = await UserService.signUp(params);
+      let res = await AuthService.signUp(params);
       if (res.result === SUCCESS) {
         dispatch(auth.successSignUp(res.data));
       } else {

@@ -23,7 +23,7 @@ import {CSSTransition} from "react-transition-group";
 import Loading from "components/Loading";
 import ErrorNoData from "components/ErrorNoData";
 import Pagination from "components/Pagination";
-import VoteService from "services/VoteService";
+import Service from "services/QuestionnaireService";
 import {ALERT_DANGER, SUCCESS, TRANSITION_TIME} from "core/globals";
 import routes from "core/routes";
 
@@ -50,22 +50,22 @@ export default () => {
       sort: "asc",
     },
     {
-      label: t("VOTE.PACKAGE"),
+      label: t("QUESTIONNAIRE.PACKAGE"),
       field: "question",
       sort: "asc",
     },
     {
-      label: t("VOTE.START_DATE"),
+      label: t("QUESTIONNAIRE.START_DATE"),
       field: 'startDate',
       sort: "asc",
     },
     {
-      label: t("VOTE.END_DATE"),
+      label: t("QUESTIONNAIRE.END_DATE"),
       field: 'endDate',
       sort: "asc"
     },
     {
-      label: t("VOTE.RELEASED_DATE"),
+      label: t("QUESTIONNAIRE.RELEASED_DATE"),
       field: 'endDate',
       sort: "asc"
     },
@@ -80,7 +80,7 @@ export default () => {
     scroll.scrollToTop({
       duration: TRANSITION_TIME,
     });
-    VoteService.packages({page})
+    Service.packages({page})
       .then(res => {
         if (res.result === SUCCESS) {
           for (let row of res.data) {
@@ -110,9 +110,9 @@ export default () => {
   const makeButtons = (id, number) => {
     return (
       <Fragment>
-        <Link to={`${routes.vote.addPackage}/${id}/${page || 1}`}><MDBBtn tag="a" size="sm" color="indigo" floating><MDBIcon icon="edit"/></MDBBtn></Link>
-        <Link to={`${routes.vote.questions}/${id}/1/${page || 1}`}><MDBBtn tag="a" size="sm" color="primary" className="mx-2" floating><MDBIcon icon="list"/></MDBBtn></Link>
-        <Link to={`${routes.vote.result}/${id}/1/${page || 1}`}><MDBBtn tag="a" size="sm" color="indigo" className="mr-2" floating><MDBIcon icon="eye"/></MDBBtn></Link>
+        <Link to={`${routes.questionnaire.addPackage}/${id}/${page || 1}`}><MDBBtn tag="a" size="sm" color="indigo" floating><MDBIcon icon="edit"/></MDBBtn></Link>
+        <Link to={`${routes.questionnaire.questions}/${id}/1/${page || 1}`}><MDBBtn tag="a" size="sm" color="primary" className="mx-2" floating><MDBIcon icon="list"/></MDBBtn></Link>
+        <Link to={`${routes.questionnaire.result}/${id}/1/${page || 1}`}><MDBBtn tag="a" size="sm" color="indigo" className="mr-2" floating><MDBIcon icon="eye"/></MDBBtn></Link>
         <MDBBtn tag="a" size="sm" color="danger" floating onClick={e => handleDelete(id, "#" + number)}><MDBIcon icon="trash"/></MDBBtn>
       </Fragment>
     );
@@ -123,7 +123,7 @@ export default () => {
   };
 
   const deleteItem = id => {
-    VoteService.deletePackage({id: modal.deleteId, page})
+    Service.deletePackage({id: modal.deleteId, page})
       .then(res => {
         if (res.result === SUCCESS) {
           for (let row of res.data) {
@@ -159,7 +159,7 @@ export default () => {
   };
 
   const handlePageChange = page => {
-    history.push(`${routes.vote.packages}/${page}`);
+    history.push(`${routes.questionnaire.packages}/${page}`);
   };
 
   const handleDelete = (id, title) => {
@@ -169,17 +169,17 @@ export default () => {
   return (
     <Fragment>
       <Helmet>
-        <title>{t("NAVBAR.VOTE.PACKAGES")} - {t("SITE_NAME")}</title>
+        <title>{t("NAVBAR.QUESTIONNAIRE.PACKAGES")} - {t("SITE_NAME")}</title>
       </Helmet>
       <MDBBreadcrumb>
-        <MDBBreadcrumbItem>{t('NAVBAR.VOTE.VOTE')}</MDBBreadcrumbItem>
-        <MDBBreadcrumbItem active>{t('NAVBAR.VOTE.PACKAGES')}</MDBBreadcrumbItem>
+        <MDBBreadcrumbItem>{t('NAVBAR.QUESTIONNAIRE.QUESTIONNAIRE')}</MDBBreadcrumbItem>
+        <MDBBreadcrumbItem active>{t('NAVBAR.QUESTIONNAIRE.PACKAGES')}</MDBBreadcrumbItem>
       </MDBBreadcrumb>
       {!!loading && <Loading/>}
       {!loading && !items.length && <ErrorNoData/>}
       {!loading && !!items.length && <MDBRow>
         <MDBCol md={12}>
-          <h3 className="mt-4 font-weight-bold text-center">{t("NAVBAR.VOTE.PACKAGES")}</h3>
+          <h3 className="mt-4 font-weight-bold text-center">{t("NAVBAR.QUESTIONNAIRE.PACKAGES")}</h3>
         </MDBCol>
         <MDBCol md={12}>
           <CSSTransition in={alert.show} classNames="fade-transition" timeout={TRANSITION_TIME} unmountOnExit appear>
@@ -193,9 +193,9 @@ export default () => {
         </MDBCol>
         <MDBCol md={12} className="text-left mt-3">
           <div className="full-width">
-            <Link to={routes.vote.addPackage}>
+            <Link to={routes.questionnaire.addPackage}>
               <MDBBtn size="sm" color="primary">
-                {t("NAVBAR.VOTE.ADD_PACKAGE")}
+                {t("NAVBAR.QUESTIONNAIRE.ADD_PACKAGE")}
               </MDBBtn>
             </Link>
           </div>

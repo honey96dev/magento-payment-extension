@@ -5,9 +5,10 @@ import {MDBContainer} from "mdbreact";
 import Navbar from "components/Navbar";
 import Footer from "components/Footer";
 import BackToTop from "components/BackToTop";
+import Error404 from "components/Error404";
+import routes from "core/routes";
 import AllVideoPage from "./AllVideoPage";
 import NewVideoPage from "./NewVideoPage";
-import routes from "core/routes";
 
 import "./VideoPage.scss";
 
@@ -21,6 +22,7 @@ export default () => {
           <Route path={routes.video.add} component={NewVideoPage}/>
           <Route path={routes.video.all} exact component={AllVideoPage}/>
           <Route path={`${routes.video.all}/:page`} exact component={AllVideoPage}/>
+          <Route path={Error404}/>
         </Switch>
       </MDBContainer>
       <Footer/>

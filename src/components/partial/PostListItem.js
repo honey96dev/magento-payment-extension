@@ -28,7 +28,7 @@ export default ({data, detailLabel, detailLink, handleAllow, handleDelete}) => {
       <MDBCol lg="7" xl="8">
         <h3 className="font-weight-bold mb-3 p-0">
           <Link to={`${detailLink}/${data.id}`}>
-            <strong>{data.title}</strong>
+            <strong>{data.title} {!data.allowedDate && <MDBIcon className="text-danger" icon="exclamation-circle"/>}</strong>
           </Link>
         </h3>
         <div className="infor-section">

@@ -2,7 +2,7 @@ export default {
   NAME: "عربى",
   CODE: "ar",
   DIRECTION: "rtl",
-  SITE_NAME: 'SITE_NAME',
+  SITE_NAME: 'المسؤول عن بوابة المعرفة',
   COMMON: {
     BUTTON: {
       HOME: "الصفحة الرئيسية",
@@ -29,8 +29,8 @@ export default {
       ALLOW: "السماح",
       DENY: "أنكر",
       PUBLISH: "نشر",
-      UNPUBLISH: "Unpublish",
-      NOT_FINISHED: "Not Finished",
+      UNPUBLISH: "سحب النشر",
+      NOT_FINISHED: "لم تنته",
     },
     VALIDATION: {
       REQUIRED: "{{field}} مطلوب",
@@ -91,13 +91,26 @@ export default {
       ALL: "كل الفيديو",
       ADD: "أضف فيديو",
     },
+    QUESTIONNAIRE: {
+      QUESTIONNAIRE: "الإستفتاء",
+      PACKAGES: "حزم الاستبيان",
+      ADD_PACKAGE: "إضافة حزمة الاستبيان",
+      QUESTIONS: "أسئلة الاستبيان",
+      ADD_QUESTION: "إضافة سؤال الاستبيان",
+      RESULT: "نتيجة الاستبيان",
+    },
     VOTE: {
       VOTE: "تصويت",
-      PACKAGES: "رزمة",
-      ADD_PACKAGE: "إضافة حزمة",
-      QUESTIONS: "الأسئلة",
-      ADD_QUESTION: "أضف سؤال",
-      RESULT: "نتيجة",
+      PACKAGES: "حزم التصويت",
+      ADD_PACKAGE: "إضافة حزمة التصويت",
+      QUESTIONS: "أسئلة التصويت",
+      ADD_QUESTION: "أضف سؤال التصويت",
+      RESULT: "نتيجة التصويت",
+    },
+    USERS: {
+      USERS: "المستخدمين",
+      LIST: "جميع المستخدمين",
+      NEW_LIST: "المستخدمين الذين ينتظرون التنشيط",
     },
   },
   AUTH: {
@@ -144,6 +157,8 @@ export default {
     TEXT: "نص",
     DESCRIPTION: "وصف",
     MEDIA: "صورة",
+    POSTS: "المشاركات",
+    POSTS_AWAITING_ACTIVATION: "المشاركات التي تنتظر التنشيط",
     ADD: {
 
     },
@@ -159,6 +174,7 @@ export default {
     },
   },
   NEWS: {
+    NEWS: "أخبار",
     TITLE: "عنوان",
     TEXT: "نص",
     DESCRIPTION: "وصف",
@@ -169,6 +185,7 @@ export default {
     },
   },
   VIDEO: {
+    VIDEOS: "أشرطة فيديو",
     TITLE: "عنوان",
     URL: "URL",
     IS_FILE: "ملف فيديو؟",
@@ -177,7 +194,40 @@ export default {
       MODIFY_VIDEO: "تعديل الفيديو",
     },
   },
+  QUESTIONNAIRE: {
+    QUESTIONNAIRES: "الإستفتاء",
+    QUESTIONNAIRES_AWAITING_RELEASE: "استبيانات في انتظار النشر",
+    PACKAGE: "صفقة",
+    QUESTION: "سؤال",
+    START_DATE: "تاريخ البدء",
+    END_DATE: "تاريخ الانتهاء",
+    RELEASED_DATE: "تاريخ النشر",
+    ADD_PACKAGE: {
+      ADD_PACKAGE: "إضافة حزمة",
+      MODIFY_PACKAGE: "تعديل الحزمة",
+    },
+    QUESTIONS: {
+      QUESTIONS: "الأسئلة",
+    },
+    ADD_QUESTION: {
+      ADD_QUESTION: "أضف سؤال",
+      MODIFY_QUESTION: "تعديل السؤال",
+    },
+    ANSWERS: {
+      ANSWERS: "الأجوبة",
+      ANSWER: "إجابة",
+    },
+    ADD_ANSWER: {
+      ADD_ANSWER: "أضف إجابة",
+      MODIFY_ANSWER: "تعديل الجواب",
+    },
+    RESULT: {
+      RESULT: "نتيجة الاستبيان",
+    },
+  },
   VOTE: {
+    VOTES: "الأصوات",
+    VOTES_AWAITING_RELEASE: "أصوات تنتظر النشر",
     PACKAGE: "صفقة",
     QUESTION: "سؤال",
     START_DATE: "تاريخ البدء",
@@ -204,6 +254,21 @@ export default {
     },
     RESULT: {
       RESULT: "نتيجة التصويت",
+    },
+  },
+  USERS: {
+    USERS: "المستخدمين",
+    USERS_AWAITING_ACTIVATION: "المستخدمين الذين ينتظرون التنشيط",
+    STATISTICS_OF_USERS: "إحصائيات المستخدمين",
+    STATISTICS_OF_SIGN_IN: "إحصائيات تسجيل الدخول",
+    EMAIL: "البريد الإلكتروني",
+    USERNAME: "اسم المستخدم",
+    FIRST_NAME: "الاسم الاول",
+    LAST_NAME: "الكنية",
+    GENDER: "جنس",
+    PHONE: "هاتف",
+    EDIT: {
+      EDIT: "تحرير العضو",
     },
   },
 };

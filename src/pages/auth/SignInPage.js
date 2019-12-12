@@ -8,7 +8,7 @@ import {animateScroll as scroll} from "react-scroll";
 import {Helmet} from "react-helmet";
 
 import auth from "actions/auth";
-import UserService from "services/UserService";
+import AuthService from "services/AuthService";
 import {
   ALERT_DANGER,
   DEFAULT_EMAIL,
@@ -49,7 +49,7 @@ export default (props) => {
       const params = {email, password};
       dispatch(auth.requestSignIn({user: params}));
       setLoading(true);
-      let res = await UserService.signIn(params);
+      let res = await AuthService.signIn(params);
       setLoading(false);
       if (res.result === SUCCESS) {
         dispatch(auth.successSignIn(res.data));
