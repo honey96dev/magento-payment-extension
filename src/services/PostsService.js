@@ -59,6 +59,17 @@ export default {
     });
   },
 
+  post2Topics: (params) => {
+    return new Promise((resolve, reject) => {
+      fetch(POST, apis.posts.post2Topics, params)
+        .then(res => {
+          resolve(res);
+        }, err => {
+          reject(err);
+        });
+    });
+  },
+
   allow: (params) => {
     return new Promise((resolve, reject) => {
       fetch(POST, apis.posts.allow, params)
@@ -73,6 +84,50 @@ export default {
   count: (params) => {
     return new Promise((resolve, reject) => {
       fetch(POST, apis.posts.count, params)
+        .then(res => {
+          resolve(res);
+        }, err => {
+          reject(err);
+        });
+    });
+  },
+
+  topics: (params) => {
+    return new Promise((resolve, reject) => {
+      fetch(POST, apis.posts.topics, params)
+        .then(res => {
+          resolve(res);
+        }, err => {
+          reject(err);
+        });
+    });
+  },
+
+  saveTopic: (params) => {
+    return new Promise((resolve, reject) => {
+      fetch(POST, apis.posts.saveTopic, params)
+        .then(res => {
+          resolve(res);
+        }, err => {
+          reject(err);
+        });
+    });
+  },
+
+  deleteTopic: (params) => {
+    return new Promise((resolve, reject) => {
+      fetch(POST, apis.posts.deleteTopic, params)
+        .then(res => {
+          resolve(res);
+        }, err => {
+          reject(err);
+        });
+    });
+  },
+
+  getTopic: (params) => {
+    return new Promise((resolve, reject) => {
+      fetch(POST, apis.posts.getTopic, params)
         .then(res => {
           resolve(res);
         }, err => {

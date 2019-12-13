@@ -76,10 +76,11 @@ export default {
   NAVBAR: {
     HOME: "Home",
     POSTS: {
-      POSTS: "Posts",
-      ALL: "All Posts",
-      ALLOWED: "Allowed Posts",
-      DENIED: "Denied Posts",
+      POSTS: "Articles",
+      ALL: "All Articles",
+      ALLOWED: "Allowed Articles",
+      DENIED: "Denied Articles",
+      TOPICS: "Topics",
     },
     NEWS: {
       NEWS: "News",
@@ -139,7 +140,7 @@ export default {
   PROFILE: {
     PROFILE: "Profile",
     MY_POSTS: {
-      MY_POSTS: "My Posts",
+      MY_POSTS: "My Articles",
       DETAIL: "Detail",
     },
     MAIN: {
@@ -157,13 +158,13 @@ export default {
     TEXT: "Text",
     DESCRIPTION: "Description",
     MEDIA: "Image",
-    POSTS: "Posts",
-    POSTS_AWAITING_ACTIVATION: "Posts Awaiting Activation",
+    POSTS: "Articles",
+    POSTS_AWAITING_ACTIVATION: "Articles Awaiting Activation",
     ADD: {
 
     },
     DETAIL: {
-      POST_DETAIL: "Post Detail",
+      POST_DETAIL: "Article Detail",
       WRITE_COMMENT: "Write a <span className=\"primary-color\">{{comment}}</span>",
       WRITE: "Write a",
       COMMENT: "Comment",
@@ -171,6 +172,13 @@ export default {
       ALREADY_WROTE_COMMENT: "You have already written a comment on this post",
       COMMENTS: "Comments",
       NO_COMMENT: "There is no comment yet",
+    },
+    TOPICS: {
+      TOPICS: "Topics",
+      RELATED_TOPICS: "Related Topics",
+      TOPIC: "Topic",
+      ADD_TOPIC: "Add Topic",
+      EDIT_TOPIC: "Edit Topic",
     },
   },
   NEWS: {

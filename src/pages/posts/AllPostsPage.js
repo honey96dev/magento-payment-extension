@@ -1,4 +1,4 @@
-import React, {Fragment, useEffect, useState} from "react";
+import React, {Fragment, useCallback, useEffect, useState} from "react";
 import {useHistory, useParams} from "react-router-dom";
 import {
   MDBAlert,
@@ -22,6 +22,7 @@ import Posts from "components/Posts";
 import Loading from "components/Loading";
 import ErrorNoData from "components/ErrorNoData";
 import Pagination from "components/Pagination";
+import TopicsList from "components/TopicsList";
 import PostsService from "services/PostsService";
 import {ALERT_DANGER, SUCCESS, TRANSITION_TIME} from "core/globals";
 import routes from "core/routes";
@@ -30,7 +31,7 @@ import apis from "core/apis";
 import "./AllPostsPage.scss";
 
 export default () => {
-  const {page} = useParams();
+  let {scope, page} = useParams();
   const {t} = useTranslation();
   const history = useHistory();
 
@@ -38,16 +39,45 @@ export default () => {
   const [alert, setAlert] = useState({});
   const [modal, setModal] = useState({});
 
+  const [topicList, setTopicList] = useState([]);
+  const [topicChecked, setTopicChecked] = useState([]);
   const [pageCount, setPageCount] = useState(0);
   const [posts, setPosts] = useState([]);
 
   const currentPage = page ? parseInt(page) : 1;
 
+  scope = scope || "all";
+  let pageTitle = t("NAVBAR.POSTS.POSTS");
+  let allowed = undefined;
+  if (scope === "allowed") {
+    pageTitle = t("NAVBAR.POSTS.ALLOWED");
+    allowed = 1;
+  } else if (scope === "denied") {
+    pageTitle = t("NAVBAR.POSTS.DENIED");
+    allowed = 0;
+  }
+
   useEffect(e => {
     scroll.scrollToTop({
       duration: TRANSITION_TIME,
     });
-    PostsService.list({page})
+    setAlert({});
+    PostsService.topics()
+      .then(res => {
+        if (res.result === SUCCESS) {
+          setTopicList(res.data);
+        } else {
+          setTopicList([]);
+        }
+      })
+      .catch(err => {
+        setTopicList([]);
+      });
+    loadItems();
+  }, [scope, page, t, topicChecked]);
+
+  const loadItems = e => {
+    PostsService.list({page, allowed: allowed, topics: topicChecked})
       .then(res => {
         if (res.result === SUCCESS) {
           setPageCount(res.pageCount);
@@ -72,14 +102,14 @@ export default () => {
         });
         setLoading(false);
       });
-  }, [page, t]);
+  };
 
   const toggleModal = e => {
     setModal(Object.assign({}, modal, {show: false}));
   };
 
   const allowItem = id => {
-    PostsService.allow({id: modal.itemId, allow: modal.allowItem, page})
+    PostsService.allow({id: modal.itemId, allow: modal.allowItem, allowed: allowed, page})
       .then(res => {
         if (res.result === SUCCESS) {
           setPageCount(res.pageCount);
@@ -115,7 +145,7 @@ export default () => {
   };
 
   const deleteItem = id => {
-    PostsService.delete({id: modal.itemId, page})
+    PostsService.delete({id: modal.itemId, allowed: allowed, page})
       .then(res => {
         if (res.result === SUCCESS) {
           setPageCount(res.pageCount);
@@ -151,7 +181,7 @@ export default () => {
   };
 
   const handlePageChange = page => {
-    history.push(`${routes.posts.all}/${page}`);
+    history.push(`${routes.posts.root}/${scope}/${page}`);
   };
 
   const handleAllow = (id, title, allow) => {
@@ -162,34 +192,41 @@ export default () => {
     setModal(Object.assign({}, modal, {show: true, title: t("COMMON.BUTTON.DELETE"), message: t("COMMON.QUESTION.DELETE", {item: title}), itemId: id, proc: "delete", yesButtonColor: "danger", yesButtonString: t("COMMON.BUTTON.DELETE")}));
   };
 
+  const handleTopicChange = e => {
+    setTopicChecked(e);
+  };
+
   return (
     <Fragment>
       <Helmet>
-        <title>{t("NAVBAR.POSTS.POSTS")} - {t("SITE_NAME")}</title>
+        <title>{pageTitle} - {t("SITE_NAME")}</title>
       </Helmet>
       <MDBBreadcrumb>
         <MDBBreadcrumbItem>{t('NAVBAR.POSTS.POSTS')}</MDBBreadcrumbItem>
-        <MDBBreadcrumbItem active>{t('NAVBAR.POSTS.ALL')}</MDBBreadcrumbItem>
+        <MDBBreadcrumbItem active>{pageTitle}</MDBBreadcrumbItem>
       </MDBBreadcrumb>
       {!!loading && <Loading/>}
-      {!loading && !posts.length && <ErrorNoData/>}
-      {!loading && !!posts.length && <MDBRow>
+      <MDBRow>
         <MDBCol md={12}>
           <CSSTransition in={alert.show} classNames="fade-transition" timeout={TRANSITION_TIME} unmountOnExit appear>
             <MDBAlert color={alert.color} dismiss onClosed={() => setAlert({})}>{alert.message}</MDBAlert>
           </CSSTransition>
         </MDBCol>
-        <MDBCol md={12} className="text-center">
-          <div className="mt-5">
-            <Pagination circle current={currentPage} pageCount={pageCount} onChange={handlePageChange}/>
-          </div>
+        <MDBCol md={9} className="order-1 order-md-0">
+          {!loading && !posts.length && <ErrorNoData/>}
+          {!loading && !!posts.length && <Fragment>
+            <div className="mt-5 text-center">
+              <Pagination circle current={currentPage} pageCount={pageCount} onChange={handlePageChange}/>
+            </div>
+            <Posts items={posts} detailLabel={t("COMMON.BUTTON.READ_MORE")} detailLink={routes.posts.detail} handleAllow={handleAllow} handleDelete={handleDelete} />
+            <div className="mt-5 text-center">
+              <Pagination circle current={currentPage} pageCount={pageCount} onChange={handlePageChange}/>
+            </div>
+          </Fragment>}
         </MDBCol>
-        <MDBCol md={12}>
-          <Posts items={posts} detailLabel={t("COMMON.BUTTON.READ_MORE")} detailLink={routes.posts.detail} handleAllow={handleAllow} handleDelete={handleDelete} />
-        </MDBCol>
-        <MDBCol md={12} className="text-center">
-          <div className="mt-5">
-            <Pagination circle current={currentPage} pageCount={pageCount} onChange={handlePageChange}/>
+        <MDBCol md={3} className="order-0 order-md-1">
+          <div className="topic-list text-left">
+            <TopicsList topics={topicList} onUpdate={handleTopicChange} />
           </div>
         </MDBCol>
       </MDBRow>}

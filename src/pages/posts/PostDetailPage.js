@@ -24,6 +24,7 @@ import Loading from "components/Loading";
 import Error404 from "components/Error404";
 import PostDetail from "./partial/PostDetail";
 import Comments from "./partial/Comments";
+import Topics from "./partial/Topics";
 import PostsService from "services/PostsService";
 
 import "./PostDetailPage.scss";
@@ -39,8 +40,9 @@ export default ({}) => {
   const [alert, setAlert] = useState({});
   const [modal, setModal] = useState({});
 
-  const [data, setData] = useState();
+  const [data, setData] = useState([]);
   const [comments, setComments] = useState([]);
+  const [topics, setTopics] = useState([]);
 
   useEffect(e => {
     scroll.scrollToTop({
@@ -52,6 +54,7 @@ export default ({}) => {
           res.data["media"] = (res.data["media"].startsWith("http://") || res.data["media"].startsWith("https://")) ? res.data["media"] : sprintf("%s%s", apis.assetsBaseUrl, res.data["media"]);
           setData(res.data);
         } else {
+          setData([]);
           setAlert({
             show: true,
             color: ALERT_DANGER,
@@ -61,7 +64,7 @@ export default ({}) => {
         setLoading(false);
       })
       .catch(err => {
-        console.log(err);
+        setData([]);
         setAlert({
           show: true,
           color: ALERT_DANGER,
@@ -73,11 +76,24 @@ export default ({}) => {
       .then(res => {
         if (res.result === SUCCESS) {
           setComments(res.data);
+        } else {
+          setComments([]);
         }
       })
       .catch(err => {
-
+        setComments([]);
+      });
+    PostsService.post2Topics({postId: id})
+      .then(res => {
+        if (res.result === SUCCESS) {
+          setTopics(res.data);
+        } else {
+          setTopics([]);
+        }
       })
+      .catch(err => {
+        setTopics([]);
+      });
   }, [id]);
 
   const toggleModal = e => {
@@ -152,7 +168,9 @@ export default ({}) => {
           <Comments data={comments} />
         </MDBCol>
         <MDBCol md={3}>
-
+          <div className="text-left mt-10">
+            <Topics topics={topics}/>
+          </div>
         </MDBCol>
       </MDBRow>}
       <MDBModal isOpen={!!modal.show} toggle={toggleModal} centered>

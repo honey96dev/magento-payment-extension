@@ -8,9 +8,9 @@ import BackToTop from "components/BackToTop";
 import Error404 from "components/Error404";
 import routes from "core/routes";
 import AllPostsPage from "./AllPostsPage";
-import AllowedPostsPage from "./AllowedPostsPage";
-import DeniedPostsPage from "./DeniedPostsPage";
 import PostDetailPage from "./PostDetailPage";
+import TopicsPage from "./TopicsPage";
+import NewTopicPage from "./NewTopicPage";
 
 import "./PostsPage.scss";
 
@@ -20,13 +20,10 @@ export default () => {
       <Navbar/>
       <MDBContainer className={"section"}>
         <Switch>
-          <Route path={`${routes.posts.allowed}`} exact component={AllowedPostsPage}/>
-          <Route path={`${routes.posts.allowed}/:page`} exact component={AllowedPostsPage}/>
-          <Route path={`${routes.posts.denied}`} exact component={DeniedPostsPage}/>
-          <Route path={`${routes.posts.denied}/:page`} exact component={DeniedPostsPage}/>
-          <Route path={routes.posts.all} exact component={AllPostsPage}/>
-          <Route path={`${routes.posts.all}/:page`} exact component={AllPostsPage}/>
+          <Route path={`${routes.posts.addTopic}/:id?`} exact component={NewTopicPage}/>
+          <Route path={`${routes.posts.topics}`} exact component={TopicsPage}/>
           <Route path={`${routes.posts.detail}/:id`} component={PostDetailPage}/>
+          <Route path={`${routes.posts.root}/:scope?/:page?`} exact component={AllPostsPage}/>
           <Route component={Error404}/>
         </Switch>
       </MDBContainer>

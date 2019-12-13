@@ -17,8 +17,13 @@ export default {
     delete: "posts/delete",
     get: "posts/get",
     commentList: "posts/comment-list",
+    post2Topics: "posts/post2topics",
     allow: "posts/allow",
     count: "posts/count",
+    topics: "posts/topics",
+    saveTopic: "posts/save-topic",
+    deleteTopic: "posts/delete-topic",
+    getTopic: "posts/get-topic",
   },
   news: {
     list: "news/list",

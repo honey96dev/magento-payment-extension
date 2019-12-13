@@ -81,6 +81,7 @@ export default ({thresholdY}) => {
                 <MDBDropdownItem onClick={() => history.push(routes.posts.all)}>{t("NAVBAR.POSTS.ALL")}</MDBDropdownItem>
                 <MDBDropdownItem onClick={() => history.push(routes.posts.allowed)}>{t("NAVBAR.POSTS.ALLOWED")}</MDBDropdownItem>
                 <MDBDropdownItem onClick={() => history.push(routes.posts.denied)}>{t("NAVBAR.POSTS.DENIED")}</MDBDropdownItem>
+                <MDBDropdownItem onClick={() => history.push(routes.posts.topics)}>{t("NAVBAR.POSTS.TOPICS")}</MDBDropdownItem>
               </MDBDropdownMenu>
             </MDBDropdown>
           </MDBNavItem>

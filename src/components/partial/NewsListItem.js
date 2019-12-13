@@ -48,11 +48,11 @@ export default ({id, date, time, author, comments, media, title, description, de
         {/*  by <a href="#!" className="font-weight-bold">Jessica Clark</a>, 19/04/2018*/}
         {/*</p>*/}
         <Link to={`${detailLink}/${id}`}>
-          <MDBBtn size="sm" color="indigo">
+          <MDBBtn size="sm" rounded color="indigo">
             {detailLabel}
           </MDBBtn>
         </Link>
-        <MDBBtn size="sm" color="danger" onClick={e => !!handleDelete && handleDelete(id, title)}>
+        <MDBBtn size="sm" rounded color="danger" onClick={e => !!handleDelete && handleDelete(id, title)}>
           {t("COMMON.BUTTON.DELETE")}
         </MDBBtn>
       </MDBCol>

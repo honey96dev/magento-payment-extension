@@ -80,6 +80,7 @@ export default {
       ALL: "جميع المشاركات",
       ALLOWED: "المشاركات المسموح بها",
       DENIED: "المشاركات المرفوضة",
+      TOPICS: "المواضيع",
     },
     NEWS: {
       NEWS: "الأخبار",
@@ -171,6 +172,13 @@ export default {
       ALREADY_WROTE_COMMENT: "لقد كتبت بالفعل تعليقًا على هذا المنشور",
       COMMENTS: "تعليقات",
       NO_COMMENT: "لا يوجد أي تعليق حتى الان",
+    },
+    TOPICS: {
+      TOPICS: "المواضيع",
+      RELATED_TOPICS: "مواضيع ذات صلة",
+      TOPIC: "موضوع",
+      ADD_TOPIC: "أضف موضوع",
+      EDIT_TOPIC: "تحرير الموضوع",
     },
   },
   NEWS: {

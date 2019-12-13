@@ -65,11 +65,11 @@ export default ({id, date, time, author, url, title, isFile, detailLabel, detail
         {/*</p>*/}
         <div>
           <Link to={`${detailLink}/${id}`}>
-            <MDBBtn size="sm" color="indigo">
+            <MDBBtn size="sm" rounded color="indigo">
               {detailLabel}
             </MDBBtn>
           </Link>
-          <MDBBtn size="sm" color="danger" onClick={e => !!handleDelete && handleDelete(id, title)}>
+          <MDBBtn size="sm" rounded color="danger" onClick={e => !!handleDelete && handleDelete(id, title)}>
             {t("COMMON.BUTTON.DELETE")}
           </MDBBtn>
         </div>

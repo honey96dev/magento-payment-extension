@@ -53,14 +53,14 @@ export default ({data, detailLabel, detailLink, handleAllow, handleDelete}) => {
         {/*  by <a href="#!" className="font-weight-bold">Jessica Clark</a>, 19/04/2018*/}
         {/*</p>*/}
         <Link to={`${detailLink}/${data.id}`}>
-          <MDBBtn size="sm" color="indigo">
+          <MDBBtn size="sm" flat>
             {detailLabel}
           </MDBBtn>
         </Link>
-        <MDBBtn size="sm" color={!data.allowedDate.length ? "primary" : "warning"} onClick={e => !!handleAllow && handleAllow(data.id, data.title, !data.allowedDate.length)}>
+        <MDBBtn size="sm" rounded color={!data.allowedDate.length ? "primary" : "warning"} onClick={e => !!handleAllow && handleAllow(data.id, data.title, !data.allowedDate.length)}>
           {!data.allowedDate.length ? t("COMMON.BUTTON.ALLOW") : t("COMMON.BUTTON.DENY")}
         </MDBBtn>
-        <MDBBtn size="sm" color="danger" onClick={e => !!handleDelete && handleDelete(data.id, data.title)}>
+        <MDBBtn size="sm" rounded color="danger" onClick={e => !!handleDelete && handleDelete(data.id, data.title)}>
           {t("COMMON.BUTTON.DELETE")}
         </MDBBtn>
       </MDBCol>
