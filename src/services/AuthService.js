@@ -1,7 +1,7 @@
 import fetch, {setHeader} from "apis/fetch";
 import {POST} from "apis/constants";
 import apis from "core/apis";
-import {SUCCESS} from "core/globals";
+import {SUCCESS, PERSIST_KEY} from "core/globals";
 
 export default {
   signIn: (params) => {
@@ -10,6 +10,13 @@ export default {
         .then(res => {
           if (res.result === SUCCESS) {
             setHeader({Authorization: `Bearer ${res.data.token}`});
+            const authData = JSON.stringify({
+              signedIn: true,
+              user: res.data.user,
+              token: res.data.token,
+            });
+            sessionStorage.setItem(PERSIST_KEY, authData);
+            params["rememberMe"] && localStorage.setItem(PERSIST_KEY, authData);
           }
           resolve(res);
         }, err => {
@@ -31,5 +38,7 @@ export default {
 
   signOut: params => {
     setHeader({Authorization: null});
+    sessionStorage.removeItem(PERSIST_KEY);
+    localStorage.removeItem(PERSIST_KEY);
   }
 };
