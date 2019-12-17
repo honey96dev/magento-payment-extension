@@ -100,6 +100,7 @@ export default () => {
   }, [scope, page, t]);
 
   const loadData = e => {
+    setLoading(true);
     Service.list({page, scope, search})
       .then(res => {
         if (res.result === SUCCESS) {
