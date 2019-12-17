@@ -1,12 +1,13 @@
 import React, {Fragment, useEffect, useMemo, useState} from "react";
 import {Link, useHistory, useParams} from "react-router-dom";
 import {
-  MDBAlert, MDBBadge,
+  MDBAlert,
   MDBBreadcrumb,
   MDBBreadcrumbItem,
   MDBBtn,
   MDBCol,
-  MDBIcon, MDBInput,
+  MDBIcon,
+  MDBInput,
   MDBModal,
   MDBModalBody,
   MDBModalFooter,
@@ -22,7 +23,6 @@ import {Helmet} from "react-helmet";
 import {CSSTransition} from "react-transition-group";
 
 import Loading from "components/Loading";
-import ErrorNoData from "components/ErrorNoData";
 import Pagination from "components/Pagination";
 import Service from "services/UsersService";
 import {ALERT_DANGER, SUCCESS, TRANSITION_TIME} from "core/globals";
@@ -30,7 +30,6 @@ import routes from "core/routes";
 import useDebounce from "core/debounce";
 
 import "./AllUsersPage.scss";
-import validators from "../../core/validators";
 
 export default () => {
   const {scope, page} = useParams();

@@ -1,7 +1,6 @@
 import React, {Suspense} from "react";
 import ReactDOM from "react-dom";
 import {Provider} from "react-redux";
-import {PersistGate} from "redux-persist/integration/react";
 import {initStateWithPrevTab} from "redux-state-sync";
 
 import configureStore from "core/store";
