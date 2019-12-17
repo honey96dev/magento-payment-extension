@@ -130,7 +130,7 @@ export default {
     PASSWORD: "كلمه السر",
     PASSWORD2: "تأكيد كلمة المرور",
     SIGN_IN: "تسجيل الدخول",
-    SIGN_UP: "سجل",
+    SIGN_UP: "تسجيل جديد",
     SIGN_OUT: "خروج",
     MY_ACCOUNT: "الحساب",
     FORGOT_PASSWORD: "هل نسيت كلمة المرور؟",

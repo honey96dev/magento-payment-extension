@@ -1,4 +1,4 @@
-import React, {Fragment, useEffect, useState} from "react";
+import React, {Fragment, useEffect, useMemo, useState} from "react";
 import {Link, useHistory, useParams} from "react-router-dom";
 import {
   MDBAlert, MDBBadge,
@@ -6,7 +6,7 @@ import {
   MDBBreadcrumbItem,
   MDBBtn,
   MDBCol,
-  MDBIcon,
+  MDBIcon, MDBInput,
   MDBModal,
   MDBModalBody,
   MDBModalFooter,
@@ -20,14 +20,17 @@ import {useTranslation} from "react-i18next";
 import {animateScroll as scroll} from "react-scroll";
 import {Helmet} from "react-helmet";
 import {CSSTransition} from "react-transition-group";
+
 import Loading from "components/Loading";
 import ErrorNoData from "components/ErrorNoData";
 import Pagination from "components/Pagination";
 import Service from "services/UsersService";
 import {ALERT_DANGER, SUCCESS, TRANSITION_TIME} from "core/globals";
 import routes from "core/routes";
+import useDebounce from "core/debounce";
 
 import "./AllUsersPage.scss";
+import validators from "../../core/validators";
 
 export default () => {
   const {scope, page} = useParams();
@@ -38,8 +41,11 @@ export default () => {
   const [alert, setAlert] = useState({});
   const [modal, setModal] = useState({});
 
+  const [search, setSearch] = useState("");
   const [pageCount, setPageCount] = useState(0);
   const [items, setItems] = useState([]);
+
+  const debouncedSearch = useDebounce(search, 500);
 
   const currentPage = page ? parseInt(page) : 1;
 
@@ -90,7 +96,11 @@ export default () => {
     scroll.scrollToTop({
       duration: TRANSITION_TIME,
     });
-    Service.list({page, scope})
+    // loadData();
+  }, [scope, page, t]);
+
+  const loadData = e => {
+    Service.list({page, scope, search})
       .then(res => {
         if (res.result === SUCCESS) {
           for (let row of res.data) {
@@ -115,6 +125,15 @@ export default () => {
         });
         setLoading(false);
       });
+  };
+
+  useMemo(e => {
+    history.push(`${routes.users.list}/${scope}`);
+    loadData();
+  }, [debouncedSearch]);
+
+  useMemo(e => {
+    loadData();
   }, [scope, page, t]);
 
   const makeButtons = (id, number, allowedDate) => {
@@ -226,8 +245,7 @@ export default () => {
         <MDBBreadcrumbItem active>{scope === "all" ? t('NAVBAR.USERS.LIST') : t("NAVBAR.USERS.NEW_LIST")}</MDBBreadcrumbItem>
       </MDBBreadcrumb>
       {!!loading && <Loading/>}
-      {!loading && !items.length && <ErrorNoData/>}
-      {!loading && !!items.length && <MDBRow>
+      {!loading && <MDBRow>
         <MDBCol md={12}>
           <h3 className="mt-4 font-weight-bold text-center">{scope === "all" ? t('NAVBAR.USERS.LIST') : t("NAVBAR.USERS.NEW_LIST")}</h3>
         </MDBCol>
@@ -236,50 +254,65 @@ export default () => {
             <MDBAlert color={alert.color} dismiss onClosed={() => setAlert({})}>{alert.message}</MDBAlert>
           </CSSTransition>
         </MDBCol>
-        <MDBCol md={12} className="text-center">
-          <div className="mt-5">
-            <Pagination circle current={currentPage} pageCount={pageCount} onChange={handlePageChange}/>
-          </div>
+        <MDBCol md={12} className="mt-5">
+          <MDBRow>
+            <MDBCol md={6}>
+              <MDBInput id="search" name="search" type="text" label={t("COMMON.BUTTON.SEARCH")} outline value={search}
+                        getValue={setSearch}>
+              </MDBInput>
+            </MDBCol>
+            <MDBCol md={6}/>
+          </MDBRow>
         </MDBCol>
-        <MDBCol md={12} className="text-left mt-3">
-          <div className="full-width">
-            <Link to={routes.vote.addPackage}>
-              <MDBBtn size="sm" color="primary">
-                {t("NAVBAR.VOTE.ADD_PACKAGE")}
-              </MDBBtn>
-            </Link>
-          </div>
-        </MDBCol>
-        <MDBCol md={12}>
-          <MDBTable responsive striped>
-            <MDBTableHead>
-              <tr className="text-left">
-                {columns.map((item, index) => (
-                  <th key={index}>{item.label}</th>
-                ))}
-              </tr>
-            </MDBTableHead>
-            <MDBTableBody>
-              {items.map((item, index) => (
-                <tr key={index} className="text-left">
-                  <td>{item.number}</td>
-                  <td>{item.email} {!item.allowedDate && <MDBIcon className="text-danger" icon="exclamation-circle"/>}</td>
-                  <td>{item.username}</td>
-                  <td>{item.firstName}</td>
-                  <td>{item.lastName}</td>
-                  <td>{item.gender}</td>
-                  <td>{item.phone}</td>
-                  <td className="p-2 edit-col2">{item.button}</td>
+        <Fragment>
+          <MDBCol md={12} className="text-center">
+            <div>
+              <Pagination circle current={currentPage} pageCount={pageCount} onChange={handlePageChange}/>
+            </div>
+          </MDBCol>
+          <MDBCol md={12} className="text-left mt-3">
+            <div className="full-width">
+              <Link to={routes.vote.addPackage}>
+                <MDBBtn size="sm" color="primary">
+                  {t("NAVBAR.VOTE.ADD_PACKAGE")}
+                </MDBBtn>
+              </Link>
+            </div>
+          </MDBCol>
+          <MDBCol md={12}>
+            <MDBTable responsive striped>
+              <MDBTableHead>
+                <tr className="text-left">
+                  {columns.map((item, index) => (
+                    <th key={index}>{item.label}</th>
+                  ))}
                 </tr>
-              ))}
-            </MDBTableBody>
-          </MDBTable>
-        </MDBCol>
-        <MDBCol md={12} className="text-center">
-          <div className="mt-5">
-            <Pagination circle current={currentPage} pageCount={pageCount} onChange={handlePageChange}/>
-          </div>
-        </MDBCol>
+              </MDBTableHead>
+              <MDBTableBody>
+                {items.map((item, index) => (
+                  <tr key={index} className="text-left">
+                    <td>{item.number}</td>
+                    <td>{item.email} {!item.allowedDate && <MDBIcon className="text-danger" icon="exclamation-circle"/>}</td>
+                    <td>{item.username}</td>
+                    <td>{item.firstName}</td>
+                    <td>{item.lastName}</td>
+                    <td>{item.gender}</td>
+                    <td>{item.phone}</td>
+                    <td className="p-2 edit-col2">{item.button}</td>
+                  </tr>
+                ))}
+                {!items.length && <tr>
+                  <td className="text-center" colSpan="8">{t("COMMON.ERROR.NO_DATA")}</td>
+                </tr>}
+              </MDBTableBody>
+            </MDBTable>
+          </MDBCol>
+          <MDBCol md={12} className="text-center">
+            <div className="mt-5">
+              <Pagination circle current={currentPage} pageCount={pageCount} onChange={handlePageChange}/>
+            </div>
+          </MDBCol>
+        </Fragment>
       </MDBRow>}
       <MDBModal isOpen={!!modal.show} toggle={toggleModal} centered>
         <MDBModalHeader toggle={toggleModal}>{modal.title}</MDBModalHeader>
