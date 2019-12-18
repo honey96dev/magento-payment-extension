@@ -10,4 +10,5 @@
 
 .edit-col {
   width: calc(#{$edit-col-width} + 50px);
+  min-width: calc(#{$edit-col-width} + 50px);
 }

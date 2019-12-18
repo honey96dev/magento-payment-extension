@@ -41,6 +41,7 @@ export const ALERT_DANGER = "danger";
 export const ALERT_LIFETIME = 5000;
 
 export const TRANSITION_TIME = 500;
+export const IDLE_TIME_LIMIT = 1000 * 60 * 5;
 
 export const FILEUPLOAD_MAXSIZE1 = "5M";
 export const FILEUPLOAD_MAXSIZE2 = "10M";

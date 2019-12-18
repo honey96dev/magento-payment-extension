@@ -44,7 +44,7 @@ export default () => {
   const [pageCount, setPageCount] = useState(0);
   const [items, setItems] = useState([]);
 
-  const debouncedSearch = useDebounce(search, 500);
+  const debouncedSearch = useDebounce(search, TRANSITION_TIME);
 
   const currentPage = page ? parseInt(page) : 1;
 
@@ -268,15 +268,6 @@ export default () => {
           <MDBCol md={12} className="text-center">
             <div>
               <Pagination circle current={currentPage} pageCount={pageCount} onChange={handlePageChange}/>
-            </div>
-          </MDBCol>
-          <MDBCol md={12} className="text-left mt-3">
-            <div className="full-width">
-              <Link to={routes.vote.addPackage}>
-                <MDBBtn size="sm" color="primary">
-                  {t("NAVBAR.VOTE.ADD_PACKAGE")}
-                </MDBBtn>
-              </Link>
             </div>
           </MDBCol>
           <MDBCol md={12}>

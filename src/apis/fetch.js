@@ -1,6 +1,10 @@
+import React from "react";
 import axios from "axios";
-import {DELETE, GET, PATCH, POST, PUT} from "./constants";
-import apis from "../core/apis";
+import {DELETE, GET, PATCH, POST, PUT} from "apis/constants";
+import apis from "core/apis";
+import authActions from "actions/auth";
+import AuthService from "services/AuthService";
+import store from "core/store";
 
 let CancelToken = axios.CancelToken;
 
@@ -22,6 +26,13 @@ const getQueryString = (params) => {
 
 const getJsonBody = (params) => {
   return params;
+};
+
+const signOutOn401 = (err) => {
+  if (!!err && !!err.response && err.response.status === 401) {
+    store.dispatch(authActions.signOut());
+    AuthService.signOut();
+  }
 };
 
 export const setBaseUrl = (value) => {
@@ -53,6 +64,7 @@ export default (requestType, resourceURL, parameters, headers) => {
             resolve(response.data);
           })
           .catch(error => {
+            signOutOn401(error);
             reject(error);
           });
       });
@@ -71,6 +83,7 @@ export default (requestType, resourceURL, parameters, headers) => {
             resolve(response.data);
           })
           .catch(error => {
+            signOutOn401(error);
             reject(error);
           });
       });
@@ -89,6 +102,7 @@ export default (requestType, resourceURL, parameters, headers) => {
             resolve(response.data);
           })
           .catch(error => {
+            signOutOn401(error);
             reject(error);
           });
       });
@@ -107,6 +121,7 @@ export default (requestType, resourceURL, parameters, headers) => {
             resolve(response.data);
           })
           .catch(error => {
+            signOutOn401(error);
             reject(error);
           });
       });
@@ -125,6 +140,7 @@ export default (requestType, resourceURL, parameters, headers) => {
             resolve(response.data);
           })
           .catch(error => {
+            signOutOn401(error);
             reject(error);
           });
       });

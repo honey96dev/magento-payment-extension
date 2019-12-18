@@ -115,7 +115,7 @@ export default () => {
   const makeButtons = (id, number) => {
     return (
       <Fragment>
-        <Link to={`${routes.questionnaire.addAnswer}/${questionId}/${id}`}><MDBBtn tag="a" size="sm" color="indigo" className="mx-2" floating><MDBIcon icon="edit"/></MDBBtn></Link>
+        <Link to={`${routes.questionnaire.addAnswer}/${questionId}/${id}`}><MDBBtn tag="a" size="sm" color="indigo" className="mr-2" floating><MDBIcon icon="edit"/></MDBBtn></Link>
         <MDBBtn tag="a" size="sm" color="danger" floating onClick={e => handleDelete(id, "#" + number)}><MDBIcon icon="trash"/></MDBBtn>
       </Fragment>
     );
@@ -224,7 +224,7 @@ export default () => {
                 <tr key={index} className="text-left">
                   <td>{item.number}</td>
                   <td>{item.answer}</td>
-                  <td className="p-2 edit-col">{item.button}</td>
+                  <td className="p-2 answer-edit-col">{item.button}</td>
                 </tr>
               ))}
             </MDBTableBody>
