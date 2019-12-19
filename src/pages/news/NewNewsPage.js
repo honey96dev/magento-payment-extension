@@ -64,7 +64,7 @@ export default ({}) => {
           setTitle(res.data.title);
           setDescription(res.data.description);
           setUrl(res.data.url);
-          setMedia((res.data["media"].startsWith("http://") || res.data["media"].startsWith("https://")) ? res.data["media"] : sprintf("%s%s", apis.assetsBaseUrl, res.data["media"]));
+          !!res.data["media"].length && setMedia((res.data["media"].startsWith("http://") || res.data["media"].startsWith("https://")) ? res.data["media"] : sprintf("%s%s", apis.assetsBaseUrl, res.data["media"]));
         } else {
           setAlert({
             show: true,

@@ -6,6 +6,7 @@ import {useTranslation} from "react-i18next";
 import {DESCRIPTION_LENGTH_BREAKPOINT} from "core/globals";
 
 import "./NewsListItem.scss";
+import images from "../../core/images";
 
 export default ({id, date, time, author, comments, media, title, description, detailLabel, detailLink, handleDelete}) => {
   const {t} = useTranslation();
@@ -15,11 +16,16 @@ export default ({id, date, time, author, comments, media, title, description, de
     <MDBRow>
       <MDBCol lg="5" xl="4">
         <MDBView hover className="rounded z-depth-1-half mb-lg-0 mb-4">
-          <img
+          {!!media.length && <img
             className="img-fluid post-media"
             src={media}
             alt=""
-          />
+          />}
+          {!media.length && <img
+            className="img-fluid post-media"
+            src={images.newsListitem}
+            alt=""
+          />}
           <Link to={`${detailLink}/${id}`}>
             <MDBMask overlay="white-slight" />
           </Link>

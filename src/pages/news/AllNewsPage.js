@@ -52,7 +52,7 @@ export default () => {
         if (res.result === SUCCESS) {
           setPageCount(res.pageCount);
           for (let item of res.data) {
-            item["media"] = (item["media"].startsWith("http://") || item["media"].startsWith("https://")) ? item["media"] : sprintf("%s%s", apis.assetsBaseUrl, item["media"]);
+            !!item["media"].length && (item["media"] = (item["media"].startsWith("http://") || item["media"].startsWith("https://")) ? item["media"] : sprintf("%s%s", apis.assetsBaseUrl, item["media"]));
           }
           setItems(res.data);
         } else {
@@ -84,7 +84,7 @@ export default () => {
         if (res.result === SUCCESS) {
           setPageCount(res.pageCount);
           for (let item of res.data) {
-            item["media"] = (item["media"].startsWith("http://") || item["media"].startsWith("https://")) ? item["media"] : sprintf("%s%s", apis.assetsBaseUrl, item["media"]);
+            !!item["media"].length && (item["media"] = (item["media"].startsWith("http://") || item["media"].startsWith("https://")) ? item["media"] : sprintf("%s%s", apis.assetsBaseUrl, item["media"]));
           }
           setItems(res.data);
         } else {

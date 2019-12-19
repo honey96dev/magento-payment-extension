@@ -4,6 +4,7 @@ import {Link} from "react-router-dom";
 import {useTranslation} from "react-i18next";
 
 import {DESCRIPTION_LENGTH_BREAKPOINT} from "core/globals";
+import images from "core/images";
 
 import "./PostListItem.scss";
 
@@ -15,11 +16,16 @@ export default ({data, detailLabel, detailLink, handleAllow, handleDelete}) => {
     <MDBRow>
       <MDBCol lg="5" xl="4">
         <MDBView hover className="rounded z-depth-1-half mb-lg-0 mb-4">
-          <img
+          {!!data.media.length && <img
             className="img-fluid post-media"
             src={data.media}
             alt=""
-          />
+          />}
+          {!data.media.length && <img
+            className="img-fluid post-media"
+            src={images.postListitem}
+            alt=""
+          />}
           <Link to={`${detailLink}/${data.id}`}>
             <MDBMask overlay="white-slight" />
           </Link>
