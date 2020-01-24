@@ -17,6 +17,7 @@ export default {
     delete: "posts/delete",
     get: "posts/get",
     commentList: "posts/comment-list",
+    deleteComment: "posts/delete-comment",
     post2Topics: "posts/post2topics",
     allow: "posts/allow",
     count: "posts/count",

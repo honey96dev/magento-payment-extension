@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {Fragment, useEffect, useState} from "react";
 import {
   MDBAlert,
   MDBBreadcrumb,
@@ -100,11 +100,44 @@ export default ({}) => {
     setModal(Object.assign({}, modal, {show: !modal.show}));
   };
 
-  const deletePost = id => {
+  const deletePost = () => {
     PostsService.delete({id: modal.deleteId})
       .then(res => {
         if (res.result === SUCCESS) {
           handleGoBack();
+        } else {
+          setAlert({
+            show: true,
+            color: ALERT_DANGER,
+            message: res.message,
+          });
+          scroll.scrollToTop({
+            duration: TRANSITION_TIME,
+          });
+        }
+        setLoading(false);
+        toggleModal();
+      })
+      .catch(err => {
+        setAlert({
+          show: true,
+          color: ALERT_DANGER,
+          message: t('COMMON.ERROR.UNKNOWN_SERVER_ERROR'),
+        });
+        scroll.scrollToTop({
+          duration: TRANSITION_TIME,
+        });
+        setLoading(false);
+        toggleModal();
+      });
+  };
+
+  const deleteComment = () => {
+    console.log({postId: modal.postId, userId: modal.userId});
+    PostsService.deleteComment({postId: modal.postId, userId: modal.userId})
+      .then(res => {
+        if (res.result === SUCCESS) {
+          setComments(res.data);
         } else {
           setAlert({
             show: true,
@@ -137,7 +170,11 @@ export default ({}) => {
   };
 
   const handleDelete = (id, title) => {
-    setModal(Object.assign({}, modal, {show: true, title: t("COMMON.BUTTON.DELETE"), message: t("COMMON.QUESTION.DELETE", {item: title}), deleteId: id}));
+    setModal(Object.assign({}, modal, {show: true, title: t("COMMON.BUTTON.DELETE"), message: t("COMMON.QUESTION.DELETE", {item: title}), deleteId: id, category: "POST"}));
+  };
+
+  const handleDeleteComment = (postId, userId, fullName) => {
+    setModal(Object.assign({}, modal, {show: true, title: t("COMMON.BUTTON.DELETE"), message: t("COMMON.QUESTION.DELETE2", ), postId, userId, category: "COMMENT"}));
   };
 
   return (
@@ -151,33 +188,35 @@ export default ({}) => {
       </MDBBreadcrumb>
       {!!loading && <Loading/>}
       {!loading && (!data || !data.id) && <Error404 />}
-      {!loading && !!data && !!data.id && <MDBRow>
+      {!loading && !!data && !!data.id && <Fragment>
         <CSSTransition in={alert.show} classNames="fade-transition" timeout={TRANSITION_TIME} unmountOnExit appear>
           <MDBAlert color={alert.color} dismiss onClosed={() => setAlert({})}>{alert.message}</MDBAlert>
         </CSSTransition>
-        <MDBCol md={9}>
-          <div className="full-width text-left">
-            <MDBBtn size="sm" color="warning" onClick={handleGoBack}>
-              {t("COMMON.BUTTON.BACK")}
-            </MDBBtn>
-            <MDBBtn size="sm" color="danger" onClick={e => handleDelete(data.id, data.title)}>
-              {t("COMMON.BUTTON.DELETE")}
-            </MDBBtn>
-          </div>
-          <PostDetail data={data} comments={comments.length}/>
-          <Comments data={comments} />
-        </MDBCol>
-        <MDBCol md={3}>
-          <div className="text-left mt-10">
-            <Topics topics={topics}/>
-          </div>
-        </MDBCol>
-      </MDBRow>}
+        <MDBRow>
+          <MDBCol md={9}>
+            <div className="full-width text-left">
+              <MDBBtn size="sm" color="warning" onClick={handleGoBack}>
+                {t("COMMON.BUTTON.BACK")}
+              </MDBBtn>
+              <MDBBtn size="sm" color="danger" onClick={e => handleDelete(data.id, data.title)}>
+                {t("COMMON.BUTTON.DELETE")}
+              </MDBBtn>
+            </div>
+            <PostDetail data={data} comments={comments.length}/>
+            <Comments data={comments} handleDelete={handleDeleteComment}/>
+          </MDBCol>
+          <MDBCol md={3}>
+            <div className="text-left mt-10">
+              <Topics topics={topics}/>
+            </div>
+          </MDBCol>
+        </MDBRow>
+      </Fragment>}
       <MDBModal isOpen={!!modal.show} toggle={toggleModal} centered>
         <MDBModalHeader toggle={toggleModal}>{modal.title}</MDBModalHeader>
         <MDBModalBody className="text-left">{modal.message}</MDBModalBody>
         <MDBModalFooter>
-          <MDBBtn type="button" color="danger" onClick={deletePost}>{t("COMMON.BUTTON.DELETE")}</MDBBtn>
+          <MDBBtn type="button" color="danger" onClick={() => modal.category === "POST" ? deletePost() : deleteComment()}>{t("COMMON.BUTTON.DELETE")}</MDBBtn>
           <MDBBtn type="button" color="secondary" onClick={toggleModal}>{t("COMMON.BUTTON.CANCEL")}</MDBBtn>
         </MDBModalFooter>
       </MDBModal>

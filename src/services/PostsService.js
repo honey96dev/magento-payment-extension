@@ -59,6 +59,17 @@ export default {
     });
   },
 
+  deleteComment: (params) => {
+    return new Promise((resolve, reject) => {
+      fetch(POST, apis.posts.deleteComment, params)
+        .then(res => {
+          resolve(res);
+        }, err => {
+          reject(err);
+        });
+    });
+  },
+
   post2Topics: (params) => {
     return new Promise((resolve, reject) => {
       fetch(POST, apis.posts.post2Topics, params)

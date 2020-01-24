@@ -11,6 +11,22 @@ export default ({id, date, time, author, url, title, isFile, detailLabel, detail
   const {t} = useTranslation();
   const videoRef = useRef();
 
+  const getId = (url) => {
+    const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
+    const match = url.match(regExp);
+
+    return (match && match[2].length === 11)
+      ? match[2]
+      : null;
+  };
+
+  const makeEmbedUrl = url => {
+    const id = getId(url);
+    const result = `//www.youtube.com/embed/${id}`;
+
+    return result;
+  };
+
   const play = e => {
     videoRef.current.play();
   };
@@ -31,7 +47,7 @@ export default ({id, date, time, author, url, title, isFile, detailLabel, detail
           </Link>
         </MDBView>}
         {!isFile && <MDBView hover className="rounded z-depth-1-half mb-lg-0 mb-4">
-          <iframe className="video-fluid post-media2" src={url} frameborder="0" allow="autoplay; encrypted-media" allowfullscreen/>
+          <iframe className="video-fluid post-media2" src={makeEmbedUrl(url)} frameborder="0" allow="autoplay; encrypted-media" allowfullscreen/>
           <Link to={`${detailLink}/${id}`}>
             <MDBMask overlay="white-slight" />
           </Link>

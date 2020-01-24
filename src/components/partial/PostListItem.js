@@ -46,7 +46,7 @@ export default ({data, detailLabel, detailLink, handleAllow, handleDelete}) => {
           <p>{t("DIRECTION") === "ltr" ? "/" : "\\"}</p>
           <p className="mx-2">
             <span className="mr-2"><MDBIcon icon="user"/></span>
-            {data.author}
+            {`${data.firstName} ${data.lastName}`}
           </p>
           <p>{t("DIRECTION") === "ltr" ? "/" : "\\"}</p>
           <p className="mx-2">

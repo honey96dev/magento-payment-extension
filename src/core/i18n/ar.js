@@ -41,6 +41,7 @@ export default {
     },
     QUESTION: {
       DELETE: "هل تريد حذف '{{item}}'؟",
+      DELETE2: "هل تريد حذف؟",
       ALLOW: "هل تريد السماح ل '{{item}}'؟",
       DENY: "هل تريد إنكار '{{item}}'؟",
     },

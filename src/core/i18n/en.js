@@ -41,6 +41,7 @@ export default {
     },
     QUESTION: {
       DELETE: "Do you want to delete '{{item}}'?",
+      DELETE2: "Do you want to delete?",
       ALLOW: "Do you want to allow '{{item}}'?",
       DENY: "Do you want to deny '{{item}}'?",
     },
