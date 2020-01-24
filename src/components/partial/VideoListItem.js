@@ -11,18 +11,13 @@ export default ({id, date, time, author, url, title, isFile, detailLabel, detail
   const {t} = useTranslation();
   const videoRef = useRef();
 
-  const getId = (url) => {
+  const makeEmbedUrl = url => {
     const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
     const match = url.match(regExp);
 
-    return (match && match[2].length === 11)
-      ? match[2]
-      : null;
-  };
-
-  const makeEmbedUrl = url => {
-    const id = getId(url);
-    const result = `//www.youtube.com/embed/${id}`;
+    const result = (match && match[2].length === 11)
+      ? `//www.youtube.com/embed/${match[2]}`
+      : url;
 
     return result;
   };
