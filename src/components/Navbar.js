@@ -146,6 +146,16 @@ export default ({thresholdY}) => {
               </MDBDropdownMenu>
             </MDBDropdown>
           </MDBNavItem>
+          <MDBNavItem active={pathname.startsWith(routes.about.root)}>
+            <MDBDropdown>
+              <MDBDropdownToggle nav caret>
+                <span className="mr-2">{t("NAVBAR.ABOUT.ABOUT")}</span>
+              </MDBDropdownToggle>
+              <MDBDropdownMenu className="text-left">
+                <MDBDropdownItem onClick={() => history.push(routes.about.us)}>{t("NAVBAR.ABOUT.US")}</MDBDropdownItem>
+              </MDBDropdownMenu>
+            </MDBDropdown>
+          </MDBNavItem>
         </MDBNavbarNav>
         <MDBNavbarNav right>
           <MDBNavItem>

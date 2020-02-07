@@ -8,7 +8,7 @@ import {
   MDBCardBody,
   MDBCol,
   MDBInput,
-  MDBRow
+  MDBRow, MDBSelect, MDBSelectInput, MDBSelectOption, MDBSelectOptions
 } from "mdbreact";
 import {Link, useHistory, useParams} from "react-router-dom";
 import {useTranslation} from "react-i18next";
@@ -18,7 +18,14 @@ import {Helmet} from "react-helmet";
 import {CSSTransition} from "react-transition-group";
 
 import routes from "core/routes";
-import {ALERT_DANGER, DESCRIPTION_LENGTH_BREAKPOINT2, SUCCESS, TEXTAREA_ROWS1, TRANSITION_TIME} from "core/globals";
+import {
+  ALERT_DANGER,
+  DESCRIPTION_LENGTH_BREAKPOINT2, GENDER_FEMALE,
+  GENDER_MALE, PREFIX_CHECKBOX, PREFIX_INPUT,
+  SUCCESS,
+  TEXTAREA_ROWS1,
+  TRANSITION_TIME
+} from "core/globals";
 import Loading from "components/Loading"
 import Service from "services/QuestionnaireService";
 
@@ -37,6 +44,7 @@ export default ({}) => {
   const [itemId, setItemId] = useState();
   const [packageName, setPackageName] = useState("");
   const [question, setQuestion] = useState("");
+  const [type, setType] = useState("");
 
   useEffect(e => {
     scroll.scrollToTop({
@@ -93,7 +101,7 @@ export default ({}) => {
     e.preventDefault();
 
     try {
-      let res = await Service.saveQuestion({id: itemId, userId: auth.user.id, packageId, question});
+      let res = await Service.saveQuestion({id: itemId, userId: auth.user.id, packageId, question, type});
       !itemId && setItemId(res.data.insertId);
       setAlert({
         show: true,
@@ -139,6 +147,20 @@ export default ({}) => {
                 <MDBInput label={t("QUESTIONNAIRE.QUESTION")} type="textarea" rows={TEXTAREA_ROWS1} maxLength={DESCRIPTION_LENGTH_BREAKPOINT2} outline autoFocus value={question} onChange={e => setQuestion(e.target.value)} onBlur={e => setTouched(Object.assign({}, touched, {question: true}))}>
                   {touched.question && question.length === 0 && <div className="invalid-field">{t("COMMON.VALIDATION.REQUIRED", {field: t("QUESTIONNAIRE.QUESTION")})}</div>}
                 </MDBInput>
+              </MDBCol>
+            </MDBRow>
+            <MDBRow className="mb-5">
+              <MDBCol md={4}>
+                <MDBSelect label={t("QUESTIONNAIRE.TYPE")} className="mt-3 mb-0" selected={[type]} getValue={val => setType(val[0])} >
+                  <MDBSelectInput selected={[type]} />
+                  <MDBSelectOptions>
+                    <MDBSelectOption value={PREFIX_CHECKBOX} checked={type === PREFIX_CHECKBOX}>{t("QUESTIONNAIRE.ADD_QUESTION.CHECKBOX")}</MDBSelectOption>
+                    <MDBSelectOption value={PREFIX_INPUT} checked={type === PREFIX_INPUT}>{t("QUESTIONNAIRE.ADD_QUESTION.INPUT")}</MDBSelectOption>
+                  </MDBSelectOptions>
+                </MDBSelect>
+                {!!type && type.length === 0 && <div className="invalid-field">
+                  {t("COMMON.VALIDATION.REQUIRED", {field: t("QUESTIONNAIRE.TYPE")})}
+                </div> }
               </MDBCol>
             </MDBRow>
             <CSSTransition in={alert.show} classNames="fade-transition" timeout={TRANSITION_TIME} unmountOnExit appear>

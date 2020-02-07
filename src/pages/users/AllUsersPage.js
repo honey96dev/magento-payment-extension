@@ -104,7 +104,7 @@ export default () => {
       .then(res => {
         if (res.result === SUCCESS) {
           for (let row of res.data) {
-            row["button"] = makeButtons(row.id, row.number, row.allowedDate);
+            row["button"] = makeButtons({id: row.id, number: row.number, name: `${row.firstName} ${row.lastName}`, allowedDate: row.allowedDate});
           }
           setPageCount(res.pageCount);
           setItems(res.data);
@@ -136,12 +136,12 @@ export default () => {
     loadData();
   }, [scope, page, t]);
 
-  const makeButtons = (id, number, allowedDate) => {
+  const makeButtons = ({id, number, name, allowedDate}) => {
     return (
       <Fragment>
         <Link to={`${routes.users.edit}/${id}/${scope}/${page || 1}`}><MDBBtn tag="a" size="sm" color="indigo" floating><MDBIcon icon="edit"/></MDBBtn></Link>
-        <MDBBtn tag="a" size="sm" color={!!allowedDate.length ? "warning" : "primary"} className="mx-2" floating onClick={e => handleAllow(id, "#" + number, allowedDate)}><MDBIcon icon={!!allowedDate.length ? "times" : "check"}/></MDBBtn>
-        <MDBBtn tag="a" size="sm" color="danger" floating onClick={e => handleDelete(id, "#" + number)}><MDBIcon icon="trash"/></MDBBtn>
+        <MDBBtn tag="a" size="sm" color={!!allowedDate.length ? "warning" : "primary"} className="mx-2" floating onClick={e => handleAllow(id, name, allowedDate)}><MDBIcon icon={!!allowedDate.length ? "times" : "check"}/></MDBBtn>
+        <MDBBtn tag="a" size="sm" color="danger" floating onClick={e => handleDelete(id, name)}><MDBIcon icon="trash"/></MDBBtn>
       </Fragment>
     );
   };
@@ -151,11 +151,11 @@ export default () => {
   };
 
   const allowItem = id => {
-    Service.allow({id: modal.itemId, allow: modal.allowItem, page, scope})
+    Service.allow({id: modal.itemId, allow: modal.allowItem, page, scope, search})
       .then(res => {
         if (res.result === SUCCESS) {
           for (let row of res.data) {
-            row["button"] = makeButtons(row.id, row.number, row.allowedDate);
+            row["button"] = makeButtons({id: row.id, number: row.number, name: `${row.firstName} ${row.lastName}`, allowedDate: row.allowedDate});
           }
           setPageCount(res.pageCount);
           setItems(res.data);
@@ -191,7 +191,7 @@ export default () => {
       .then(res => {
         if (res.result === SUCCESS) {
           for (let row of res.data) {
-            row["button"] = makeButtons(row.id, row.number, row.allowedDate);
+            row["button"] = makeButtons({id: row.id, number: row.number, name: `${row.firstName} ${row.lastName}`, allowedDate: row.allowedDate});
           }
           setPageCount(res.pageCount);
           setItems(res.data);

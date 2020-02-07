@@ -31,6 +31,7 @@ export default {
       PUBLISH: "نشر",
       UNPUBLISH: "سحب النشر",
       NOT_FINISHED: "لم تنته",
+      MAIN_PAGE: "الصفحة الرئيسية",
     },
     VALIDATION: {
       REQUIRED: "{{field}} مطلوب",
@@ -52,8 +53,8 @@ export default {
       ERROR_404: "لم يتم العثور على الصفحة",
     },
     GENDER: {
-      MALE: 'الذكر',
-      FEMALE: 'أنثى',
+      MALE: 'ذكور',
+      FEMALE: 'اناث',
     },
     LANGUAGE: {
       LANGUAGE: 'لغة',
@@ -61,7 +62,7 @@ export default {
       ARABIC: 'عربى',
     },
     FILE_UPLOAD: {
-      DEFAULT: "سحب وإسقاط ملف هنا أو انقر فوق",
+      DEFAULT: "انقر هنا أو اسحب وأسقاط الملف هنا",
       REPLACE: "سحب وإسقاط أو انقر لاستبدال",
       REMOVE: "إزالة",
       ERROR: "عفوًا ، حدث خطأ ما",
@@ -86,33 +87,37 @@ export default {
     NEWS: {
       NEWS: "الأخبار",
       ALL: "جميع الأخبار",
-      ADD: "إضافة الأخبار",
+      ADD: "اضافة خبر جديد",
     },
     VIDEO: {
-      VIDEO: "الفيديوهات",
-      ALL: "كل الفيديو",
-      ADD: "أضف فيديو",
+      VIDEO: "المقاطع التعليمية",
+      ALL: "جميع المقاطع التعليمية",
+      ADD: "أضف مقطع تعليمي",
     },
     QUESTIONNAIRE: {
       QUESTIONNAIRE: "الإستفتاء",
       PACKAGES: "حزم الاستبيان",
-      ADD_PACKAGE: "إضافة حزمة الاستبيان",
+      ADD_PACKAGE: "إضافة استبيان جديد",
       QUESTIONS: "أسئلة الاستبيان",
       ADD_QUESTION: "إضافة سؤال الاستبيان",
       RESULT: "نتيجة الاستبيان",
     },
     VOTE: {
-      VOTE: "تصويت",
+      VOTE: "التصويت",
       PACKAGES: "حزم التصويت",
-      ADD_PACKAGE: "إضافة حزمة التصويت",
-      QUESTIONS: "أسئلة التصويت",
-      ADD_QUESTION: "أضف سؤال التصويت",
-      RESULT: "نتيجة التصويت",
+      ADD_PACKAGE: "إضافة تصويت جديد",
+      QUESTIONS: "مسائل صوتية",
+      ADD_QUESTION: "أضف سؤال المسائل الصوتية",
+      RESULT: "المسائل الصوتية النتيجة",
     },
     USERS: {
       USERS: "المستخدمين",
       LIST: "جميع المستخدمين",
       NEW_LIST: "المستخدمين الذين ينتظرون التنشيط",
+    },
+    ABOUT: {
+      ABOUT: "حول",
+      US: "معلومات عنا",
     },
   },
   AUTH: {
@@ -120,8 +125,8 @@ export default {
     USERNAME: "اسم المستخدم",
     FIRST_NAME: "الاسم الاول",
     LAST_NAME: "اسم العائلة",
-    GENDER: "جنس",
-    BIRTHDAY: "عيد الميلاد",
+    GENDER: "الجنس",
+    BIRTHDAY: "تاريخ الميلاد",
     JOB_TITLE: "المسمى الوظيفي",
     SECTOR: "قطاع",
     COMPANY: "المنشأة",
@@ -183,7 +188,7 @@ export default {
     },
   },
   NEWS: {
-    NEWS: "أخبار",
+    NEWS: "الأخبار",
     TITLE: "عنوان",
     TEXT: "نص",
     DESCRIPTION: "وصف",
@@ -194,7 +199,7 @@ export default {
     },
   },
   VIDEO: {
-    VIDEOS: "أشرطة فيديو",
+    VIDEOS: "المقاطع التعليمية",
     TITLE: "عنوان",
     URL: "URL",
     IS_FILE: "ملف فيديو؟",
@@ -207,7 +212,8 @@ export default {
     QUESTIONNAIRES: "الإستفتاء",
     QUESTIONNAIRES_AWAITING_RELEASE: "استبيانات في انتظار النشر",
     PACKAGE: "صفقة",
-    QUESTION: "سؤال",
+    QUESTION: "عنوان الاستفتاء",
+    TYPE: "نوع الجواب",
     START_DATE: "تاريخ البدء",
     END_DATE: "تاريخ الانتهاء",
     RELEASED_DATE: "تاريخ النشر",
@@ -221,6 +227,8 @@ export default {
     ADD_QUESTION: {
       ADD_QUESTION: "أضف سؤال",
       MODIFY_QUESTION: "تعديل السؤال",
+      CHECKBOX: "Checkbox",
+      INPUT: "Input",
     },
     ANSWERS: {
       ANSWERS: "الأجوبة",
@@ -235,15 +243,15 @@ export default {
     },
   },
   VOTE: {
-    VOTES: "الأصوات",
+    VOTES: "التصويت",
     VOTES_AWAITING_RELEASE: "أصوات تنتظر النشر",
     PACKAGE: "صفقة",
-    QUESTION: "سؤال",
+    QUESTION: "عنوان التصويت",
     START_DATE: "تاريخ البدء",
     END_DATE: "تاريخ الانتهاء",
     RELEASED_DATE: "تاريخ النشر",
     ADD_PACKAGE: {
-      ADD_PACKAGE: "إضافة حزمة",
+      ADD_PACKAGE: "إضافة تصويت جديد",
       MODIFY_PACKAGE: "تعديل الحزمة",
     },
     QUESTIONS: {
@@ -268,16 +276,24 @@ export default {
   USERS: {
     USERS: "المستخدمين",
     USERS_AWAITING_ACTIVATION: "المستخدمين الذين ينتظرون التنشيط",
-    STATISTICS_OF_USERS: "إحصائيات المستخدمين",
-    STATISTICS_OF_SIGN_IN: "إحصائيات تسجيل الدخول",
+    STATISTICS_OF_USERS: "احصائيات المستخدمين",
+    STATISTICS_OF_SIGN_IN: "احصائيات تسجيل الدخول",
     EMAIL: "البريد الإلكتروني",
     USERNAME: "اسم المستخدم",
     FIRST_NAME: "الاسم الاول",
     LAST_NAME: "الكنية",
-    GENDER: "جنس",
-    PHONE: "هاتف",
+    GENDER: "الجنس",
+    PHONE: "الهاتف",
     EDIT: {
       EDIT: "تحرير العضو",
+    },
+  },
+  ABOUT: {
+    US: {
+      ORIGIN_BROCHURE: "الكتيب الحالي",
+      ORIGIN_VIDEO: "الفيديو الحالي",
+      BROCHURE: "كراسة",
+      VIDEO: "فيديو",
     },
   },
 };

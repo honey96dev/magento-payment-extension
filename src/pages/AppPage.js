@@ -8,7 +8,7 @@ import Router from "components/Router";
 import {setBaseUrl, setHeader} from "apis/fetch";
 import apis from "core/apis";
 import i18n from "core/i18n";
-import {IDLE_TIME_LIMIT, PERSIST_KEY, TRANSITION_TIME} from "core/globals";
+import {IDLE_TIME_LIMIT, IDLE_TIME_LIMIT2, isDev, PERSIST_KEY, TRANSITION_TIME} from "core/globals";
 import authAction from "actions/auth";
 
 setBaseUrl(apis.baseUrl);
@@ -52,7 +52,7 @@ export default () => {
         onIdle={onIdle}
         onAction={onAction}
         debounce={TRANSITION_TIME}
-        timeout={IDLE_TIME_LIMIT} />
+        timeout={isDev ? IDLE_TIME_LIMIT2 : IDLE_TIME_LIMIT}/>
       <BrowserRouter>
         <div dir={direction} className={direction === "rtl" ? "rtl-content" : ""}>
           <Router/>

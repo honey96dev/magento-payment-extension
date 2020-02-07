@@ -7,7 +7,7 @@ import Footer from "components/Footer";
 import Overview from "./partial/Overview";
 import Statistics from "./partial/Statistics";
 
-import "./FrontPage.scss";
+import "./RootPage.scss";
 
 export default () => {
   const {t} = useTranslation();

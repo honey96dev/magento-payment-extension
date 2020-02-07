@@ -90,7 +90,7 @@ export default ({}) => {
       <MDBRow className="text-left">
         <MDBCol lg={3} md={6} className="mb-4">
           <MDBCard className="info-color">
-            <Link to={routes.users.list}>
+            <Link to={routes.users.allList}>
             <MDBCardBody className="text-white">
               <h1>{numeral(userCount.count || 0).format("0,0")}</h1>
               <h6>{t("USERS.USERS")}</h6>

@@ -84,4 +84,10 @@ export default {
     countPerGender: "users/count-per-gender",
     singInHistory: "users/sign-in-history",
   },
+  about: {
+    loadAboutUs: "about/load-aboutus",
+    saveAboutUs: "about/save-aboutus",
+    saveAboutUsBrochure: "about/save-aboutus-brochure",
+    saveAboutUsVideo: "about/save-aboutus-video",
+  },
 };

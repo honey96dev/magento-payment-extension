@@ -23,7 +23,7 @@ import {CSSTransition} from "react-transition-group";
 import Loading from "components/Loading";
 import Pagination from "components/Pagination";
 import Service from "services/QuestionnaireService";
-import {ALERT_DANGER, SUCCESS, TABLE_TEXT_MAX_LENGTH, TRANSITION_TIME} from "core/globals";
+import {ALERT_DANGER, PREFIX_INPUT, SUCCESS, TABLE_TEXT_MAX_LENGTH, TRANSITION_TIME} from "core/globals";
 import routes from "core/routes";
 
 import "./QuestionsPage.scss";
@@ -55,6 +55,11 @@ export default () => {
       sort: "asc",
     },
     {
+      label: t("QUESTIONNAIRE.TYPE"),
+      field: "type",
+      sort: "asc",
+    },
+    {
       label: "",
       field: "button",
       sort: "asc"
@@ -65,6 +70,11 @@ export default () => {
     scroll.scrollToTop({
       duration: TRANSITION_TIME,
     });
+
+    loadData();
+  }, [page, t]);
+
+  const loadData = () => {
     Service.getPackage({id: packageId})
       .then(res => {
         if (res.result === SUCCESS) {
@@ -89,7 +99,7 @@ export default () => {
         if (res.result === SUCCESS) {
           for (let row of res.data) {
             row["question"] = row["question"].length > TABLE_TEXT_MAX_LENGTH ? row["question"].substring(0, TABLE_TEXT_MAX_LENGTH) + "..." : row["question"];
-            row["button"] = makeButtons(row.id, row.number);
+            row["button"] = makeButtons(row);
           }
           setPageCount(res.pageCount);
           setItems(res.data);
@@ -110,13 +120,14 @@ export default () => {
         });
         setLoading(false);
       });
-  }, [page, t]);
+  }
 
-  const makeButtons = (id, number) => {
+  const makeButtons = ({id, number, type}) => {
+    const disabled = type === PREFIX_INPUT;
     return (
       <Fragment>
         <Link to={`${routes.questionnaire.addQuestion}/${packageId}/${id}`}><MDBBtn tag="a" size="sm" color="indigo" floating><MDBIcon icon="edit"/></MDBBtn></Link>
-        <Link to={`${routes.questionnaire.answers}/${id}/${packageId}/1/${page || 1}/${page2 || 1}`}><MDBBtn tag="a" size="sm" color="primary" className="mx-2" floating><MDBIcon icon="comments"/></MDBBtn></Link>
+        <Link to={!disabled && `${routes.questionnaire.answers}/${id}/${packageId}/1/${page || 1}/${page2 || 1}`}><MDBBtn tag="a" size="sm" color={!!disabled ? "mdb-color" : "primary"} className="mx-2" floating disabled={disabled}><MDBIcon icon="comments"/></MDBBtn></Link>
         <MDBBtn tag="a" size="sm" color="danger" floating onClick={e => handleDelete(id, "#" + number)}><MDBIcon icon="trash"/></MDBBtn>
       </Fragment>
     );
@@ -229,6 +240,7 @@ export default () => {
                 <tr key={index} className="text-left">
                   <td>{item.number}</td>
                   <td>{item.question}</td>
+                  <td>{item.type2}</td>
                   <td className="p-2 edit-col">{item.button}</td>
                 </tr>
               ))}

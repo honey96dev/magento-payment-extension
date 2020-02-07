@@ -31,6 +31,7 @@ export default {
       PUBLISH: "Publish",
       UNPUBLISH: "Retract Publish",
       NOT_FINISHED: "Not Finished",
+      MAIN_PAGE: "Main Page",
     },
     VALIDATION: {
       REQUIRED: "{{field}} is required",
@@ -102,17 +103,21 @@ export default {
       RESULT: "Questionnaire Result",
     },
     VOTE: {
-      VOTE: "Vote",
-      PACKAGES: "Vote Packages",
-      ADD_PACKAGE: "Add Vote Package",
-      QUESTIONS: "Vote Questions",
-      ADD_QUESTION: "Add Vote Question",
-      RESULT: "Vote Result",
+      VOTE: "Voice Matters",
+      PACKAGES: "Voice Matters Packages",
+      ADD_PACKAGE: "Add Voice Matters Package",
+      QUESTIONS: "Voice Matters Questions",
+      ADD_QUESTION: "Add Voice Matters Question",
+      RESULT: "Voice Matters Result",
     },
     USERS: {
       USERS: "Users",
       LIST: "All Users",
       NEW_LIST: "Users Awaiting Activation",
+    },
+    ABOUT: {
+      ABOUT: "About",
+      US: "About Us",
     },
   },
   AUTH: {
@@ -208,6 +213,7 @@ export default {
     QUESTIONNAIRES_AWAITING_RELEASE: "Questionnaires Awaiting Publish",
     PACKAGE: "Package",
     QUESTION: "Question",
+    TYPE: "Answer Type",
     START_DATE: "Start Date",
     END_DATE: "End Date",
     RELEASED_DATE: "Published Date",
@@ -221,6 +227,8 @@ export default {
     ADD_QUESTION: {
       ADD_QUESTION: "Add Questionnaire Question",
       MODIFY_QUESTION: "Modify Questionnaire Question",
+      CHECKBOX: "Checkbox",
+      INPUT: "Input",
     },
     ANSWERS: {
       ANSWERS: "Questionnaire Answers",
@@ -278,6 +286,14 @@ export default {
     PHONE: "Phone",
     EDIT: {
       EDIT: "Edit User",
+    },
+  },
+  ABOUT: {
+    US: {
+      ORIGIN_BROCHURE: "Current Brochure",
+      ORIGIN_VIDEO: "Current Video",
+      BROCHURE: "Brochure",
+      VIDEO: "Video",
     },
   },
 };

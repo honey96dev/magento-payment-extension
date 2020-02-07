@@ -3,6 +3,7 @@ export const isDev = !process.env.NODE_ENV || process.env.NODE_ENV === "developm
 // export const ROUTE_BASE = process.env.PUBLIC_URL;
 export const ROUTE_BASE = "";
 // export const ROUTE_BASE = isDev ? "" : process.env.PUBLIC_URL;
+export const PROJECT_SCOPE = "knowledge";
 export const PERSIST_KEY = "knowledge:admin";
 
 export const SUCCESS = "success";
@@ -42,9 +43,14 @@ export const ALERT_LIFETIME = 5000;
 
 export const TRANSITION_TIME = 500;
 export const IDLE_TIME_LIMIT = 1000 * 60 * 5;
+export const IDLE_TIME_LIMIT2 = 1000 * 60 * 30;
 
 export const FILEUPLOAD_MAXSIZE1 = "5M";
 export const FILEUPLOAD_MAXSIZE2 = "10M";
+
+export const PREFIX_CHECKBOX = 'C';
+export const PREFIX_INPUT = 'I';
+export const PREFIX_RADIO = 'R';
 
 export const DEFAULT_EMAIL = "honey96dev@gmail.com";
 export const DEFAULT_USERNAME = "honey96dev";

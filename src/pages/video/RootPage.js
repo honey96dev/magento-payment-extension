@@ -10,7 +10,7 @@ import routes from "core/routes";
 import AllVideoPage from "./AllVideoPage";
 import NewVideoPage from "./NewVideoPage";
 
-import "./VideoPage.scss";
+import "./RootPage.scss";
 
 export default () => {
   return (

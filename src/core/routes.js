@@ -2,6 +2,7 @@ import {ROUTE_BASE} from "core/globals";
 
 export const routes = {
   root: `${ROUTE_BASE}/`,
+  mainPage: "//knowledge.hrgulf.org",
   auth: {
     root: `${ROUTE_BASE}/auth`,
     signIn: `${ROUTE_BASE}/auth/sign-in`,
@@ -60,6 +61,10 @@ export const routes = {
     allList: `${ROUTE_BASE}/users/list/all`,
     newList: `${ROUTE_BASE}/users/list/new`,
     edit: `${ROUTE_BASE}/users/edit`,
+  },
+  about: {
+    root: `${ROUTE_BASE}/about`,
+    us: `${ROUTE_BASE}/about/us`,
   },
 };
 

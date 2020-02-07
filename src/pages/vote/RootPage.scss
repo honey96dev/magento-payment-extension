@@ -1,7 +1,8 @@
 @import "../../assets/consts.scss";
 
 .section {
-  margin-top: $form-margin-top;
+  margin-top: $page-margin-top;
+  margin-bottom: $page-margin-top;
 }
 
 .back-to-top-container {

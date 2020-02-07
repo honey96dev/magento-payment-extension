@@ -159,7 +159,7 @@ export default (props) => {
               </MDBRow>
               <MDBRow>
                 <MDBCol md={6}>
-                  <MDBSelect label={t('AUTH.GENDER')} className="mt-3 mb-0" selected={[gender]} getValue={val => setGender(val[0])} >
+                  <MDBSelect label={t("AUTH.GENDER")} className="mt-3 mb-0" selected={[gender]} getValue={val => setGender(val[0])} >
                     <MDBSelectInput selected={[gender]} />
                     <MDBSelectOptions>
                       <MDBSelectOption value={GENDER_MALE} checked={gender === GENDER_MALE}>{t("COMMON.GENDER.MALE")}</MDBSelectOption>

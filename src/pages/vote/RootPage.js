@@ -15,7 +15,7 @@ import AnswersPage from "./AnswersPage";
 import NewAnswerPage from "./NewAnswerPage";
 import ResultPage from "./ResultPage";
 
-import "./VotePage.scss";
+import "./RootPage.scss";
 
 export default () => {
   return (
