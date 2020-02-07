@@ -47,6 +47,7 @@ export const IDLE_TIME_LIMIT2 = 1000 * 60 * 30;
 
 export const FILEUPLOAD_MAXSIZE1 = "5M";
 export const FILEUPLOAD_MAXSIZE2 = "10M";
+export const FILEUPLOAD_MAXSIZE3 = "50M";
 
 export const PREFIX_CHECKBOX = 'C';
 export const PREFIX_INPUT = 'I';

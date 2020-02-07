@@ -9,7 +9,7 @@ import {Helmet} from "react-helmet";
 import {CSSTransition} from "react-transition-group";
 import {sprintf} from "sprintf-js";
 import apis from "core/apis";
-import {ALERT_DANGER, FILEUPLOAD_MAXSIZE1, PROJECT_SCOPE, SUCCESS, TRANSITION_TIME} from "core/globals";
+import {ALERT_DANGER, FILEUPLOAD_MAXSIZE3, PROJECT_SCOPE, SUCCESS, TRANSITION_TIME} from "core/globals";
 import Loading from "components/Loading";
 import Service from "services/AboutService";
 
@@ -157,10 +157,10 @@ export default ({}) => {
           <MDBRow>
             <MDBCol md={6}>
               <div className="md-form mt-2">
-                <MDBFileupload ref={brochureRef} defaultFileSrc={brochureName} getValue={setBrochure} showRemove={false} maxFileSize={FILEUPLOAD_MAXSIZE1} allowedFileExtensions={brochureExts}
+                <MDBFileupload ref={brochureRef} defaultFileSrc={brochureName} getValue={setBrochure} showRemove={false} maxFileSize={FILEUPLOAD_MAXSIZE3} allowedFileExtensions={brochureExts}
                                messageDefault={t("COMMON.FILE_UPLOAD.DEFAULT")} messageReplace={t("COMMON.FILE_UPLOAD.REPLACE")}
                                messageRemove={t("COMMON.FILE_UPLOAD.REMOVE")} messageError={t("COMMON.FILE_UPLOAD.ERROR")}
-                               errorFileSize={t("COMMON.FILE_UPLOAD.ERROR_FILESIZE", {max: FILEUPLOAD_MAXSIZE1})}
+                               errorFileSize={t("COMMON.FILE_UPLOAD.ERROR_FILESIZE", {max: FILEUPLOAD_MAXSIZE3})}
                                errorFileExtension={t("COMMON.FILE_UPLOAD.ERROR_FILEEXTENSION", {extensions: brochureExts.join(", ")})} />
               </div>
               <Fragment>
@@ -169,10 +169,10 @@ export default ({}) => {
             </MDBCol>
             <MDBCol md={6}>
               <div className="md-form mt-2">
-                <MDBFileupload ref={videoRef} defaultFileSrc={videoName} getValue={setVideo} showRemove={false} maxFileSize={FILEUPLOAD_MAXSIZE1} allowedFileExtensions={videoExts}
+                <MDBFileupload ref={videoRef} defaultFileSrc={videoName} getValue={setVideo} showRemove={false} maxFileSize={FILEUPLOAD_MAXSIZE3} allowedFileExtensions={videoExts}
                                messageDefault={t("COMMON.FILE_UPLOAD.DEFAULT")} messageReplace={t("COMMON.FILE_UPLOAD.REPLACE")}
                                messageRemove={t("COMMON.FILE_UPLOAD.REMOVE")} messageError={t("COMMON.FILE_UPLOAD.ERROR")}
-                               errorFileSize={t("COMMON.FILE_UPLOAD.ERROR_FILESIZE", {max: FILEUPLOAD_MAXSIZE1})}
+                               errorFileSize={t("COMMON.FILE_UPLOAD.ERROR_FILESIZE", {max: FILEUPLOAD_MAXSIZE3})}
                                errorFileExtension={t("COMMON.FILE_UPLOAD.ERROR_FILEEXTENSION", {extensions: videoExts.join(", ")})} />
               </div>
               <Fragment>
