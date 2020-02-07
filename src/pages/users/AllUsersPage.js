@@ -288,7 +288,7 @@ export default () => {
                     <td>{item.firstName}</td>
                     <td>{item.lastName}</td>
                     <td>{item.gender}</td>
-                    <td>{item.phone}</td>
+                    <td>{`${item.countryCode}${item.phone}`}</td>
                     <td className="p-2 edit-col2">{item.button}</td>
                   </tr>
                 ))}

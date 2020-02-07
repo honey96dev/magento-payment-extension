@@ -74,6 +74,14 @@ export default {
       ERROR_MAXWIDTH: "عرض الصورة أكبر من اللازم ({{max}} بكسل كحد أقصى)",
       ERROR_MINWIDTH: "عرض الصورة صغير جدًا ({{min}} بكسل)",
     },
+    GCC_COUNTRIES: {
+      BAHRAIN: "البحرين",
+      KUWAIT: "الكويت",
+      OMAN: "سلطنة عمان",
+      QATAR: "دولة قطر",
+      SAUDI_ARABIA: "المملكة العربية السعودية",
+      UAE: "الإمارات العربية المتحدة",
+    },
   },
   NAVBAR: {
     HOME: "البداية",
@@ -132,6 +140,7 @@ export default {
     COMPANY: "المنشأة",
     COUNTRY: "البلد",
     CITY: "المدينة",
+    COUNTRY_CODE: "الرقم الدولي",
     PHONE: "الهاتف النقال",
     PASSWORD: "كلمه السر",
     PASSWORD2: "تأكيد كلمة المرور",

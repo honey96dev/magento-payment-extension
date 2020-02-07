@@ -7,9 +7,7 @@ import {
   MDBBtn,
   MDBCol,
   MDBDatePicker,
-  MDBIcon,
   MDBInput,
-  MDBInputGroup,
   MDBRow,
   MDBSelect,
   MDBSelectInput,
@@ -26,7 +24,11 @@ import {
   DATE_FORMAT_ISO,
   GENDER_FEMALE,
   GENDER_MALE,
-  SAUDI_PHONE_PREFIX,
+  PHONE_PREFIX_BAHRAIN,
+  PHONE_PREFIX_KUWAIT,
+  PHONE_PREFIX_OMAN,
+  PHONE_PREFIX_SAUDI_ARABIA,
+  PHONE_PREFIX_UAE,
   SUCCESS,
   TRANSITION_TIME,
   USERNAME_MAX_LENGTH
@@ -58,6 +60,7 @@ export default () => {
   const [company, setCompany] = useState("");
   // const [country, setCountry] = useState("");
   const [city, setCity] = useState("");
+  const [countryCode, setCountryCode] = useState("");
   const [phone, setPhone] = useState("");
 
   useEffect(e => {
@@ -74,6 +77,7 @@ export default () => {
           setSector(res.data.sector);
           setCompany(res.data.company);
           setCity(res.data.city);
+          setCountryCode(res.data.countryCode);
           setPhone(res.data.phone);
 
           setAlert({
@@ -109,7 +113,21 @@ export default () => {
       ...alert,
       show: false,
     });
-    const params = {id, email, username, firstName, lastName, gender, birthday: birthday1, jobTitle, sector, company, city, phone};
+    const params = {
+      id,
+      email,
+      username,
+      firstName,
+      lastName,
+      gender,
+      birthday: birthday1,
+      jobTitle,
+      sector,
+      company,
+      city,
+      countryCode,
+      phone
+    };
     Service.save(params)
       .then(res => {
         setAlert({
@@ -152,7 +170,7 @@ export default () => {
               <MDBInput id="email" name="email" type="email" label={t("AUTH.EMAIL")} outline containerClass="mb-0"
                         value={email} getValue={setEmail}
                         onBlur={() => setTouched(Object.assign({}, touched, {email: true}))}>
-                {touched.email && !validators.isEmail(email) && <div className="invalid-field">
+                {touched.email && !validators.isEmail(email) && <div className="text-left invalid-field">
                   {email.length === 0 ? t("COMMON.VALIDATION.REQUIRED", {field: t("AUTH.EMAIL")}) : !validators.isEmail(email) ? t("COMMON.VALIDATION.INVALID", {field: t("AUTH.EMAIL")}) : ""}
                 </div>}
               </MDBInput>
@@ -161,7 +179,7 @@ export default () => {
               <MDBInput id="username" name="username" type="text" label={t("AUTH.USERNAME")} outline
                         containerClass="mb-0" value={username} getValue={setUsername}
                         onBlur={() => setTouched(Object.assign({}, touched, {username: true}))}>
-                {touched.username && !validators.isUsername(username) && <div className="invalid-field">
+                {touched.username && !validators.isUsername(username) && <div className="text-left invalid-field">
                   {username.length === 0 ? t("COMMON.VALIDATION.REQUIRED", {field: t("AUTH.USERNAME")}) : username.length > USERNAME_MAX_LENGTH ? t('COMMON.VALIDATION.MAX_LENGTH', {
                     field: t('AUTH.USERNAME'),
                     length: USERNAME_MAX_LENGTH
@@ -175,7 +193,7 @@ export default () => {
               <MDBInput id="firstName" name="firstName" type="text" label={t("AUTH.FIRST_NAME")} outline
                         containerClass="mt-3 mb-0" value={firstName} getValue={setFirstName}
                         onBlur={() => setTouched(Object.assign({}, touched, {firstName: true}))}>
-                {touched.firstName && firstName.length === 0 && <div className="invalid-field">
+                {touched.firstName && firstName.length === 0 && <div className="text-left invalid-field">
                   {t("COMMON.VALIDATION.REQUIRED", {field: t("AUTH.FIRST_NAME")})}
                 </div>}
               </MDBInput>
@@ -184,7 +202,7 @@ export default () => {
               <MDBInput id="lastName" name="lastName" type="text" label={t("AUTH.LAST_NAME")} outline
                         containerClass="mt-3 mb-0" value={lastName} getValue={setLastName}
                         onBlur={() => setTouched(Object.assign({}, touched, {lastName: true}))}>
-                {touched.lastName && lastName.length === 0 && <div className="invalid-field">
+                {touched.lastName && lastName.length === 0 && <div className="text-left invalid-field">
                   {t("COMMON.VALIDATION.REQUIRED", {field: t("AUTH.LAST_NAME")})}
                 </div>}
               </MDBInput>
@@ -192,20 +210,23 @@ export default () => {
           </MDBRow>
           <MDBRow>
             <MDBCol md={6}>
-              <MDBSelect label={t('AUTH.GENDER')} className="mt-3 mb-0" selected={[gender]} getValue={val => setGender(val[0])}>
+              {!!gender.length && <MDBSelect label={t('AUTH.GENDER')} className="mt-3 mb-0" selected={[gender]}
+                         getValue={val => setGender(val[0])}>
                 <MDBSelectInput selected={[gender]}/>
                 <MDBSelectOptions>
-                  <MDBSelectOption value={GENDER_MALE} checked={gender === GENDER_MALE}>{t("COMMON.GENDER.MALE")}</MDBSelectOption>
-                  <MDBSelectOption value={GENDER_FEMALE} checked={gender === GENDER_FEMALE}>{t("COMMON.GENDER.FEMALE")}</MDBSelectOption>
+                  <MDBSelectOption value={GENDER_MALE}
+                                   checked={gender === GENDER_MALE}>{t("COMMON.GENDER.MALE")}</MDBSelectOption>
+                  <MDBSelectOption value={GENDER_FEMALE}
+                                   checked={gender === GENDER_FEMALE}>{t("COMMON.GENDER.FEMALE")}</MDBSelectOption>
                 </MDBSelectOptions>
-              </MDBSelect>
-              {!!gender && gender.length === 0 && <div className="invalid-field">
+              </MDBSelect>}
+              {!!gender && gender.length === 0 && <div className="text-left invalid-field">
                 {t("COMMON.VALIDATION.REQUIRED", {field: t("AUTH.GENDER")})}
               </div>}
             </MDBCol>
             <MDBCol md={6}>
               <Fragment>
-                <MDBDatePicker format={DATE_FORMAT_ISO} autoOk className="date-picker" value={birthday}
+                <MDBDatePicker format={DATE_FORMAT_ISO} autoOk keyboard className="date-picker" value={birthday}
                                getValue={val => setBirthday(val)}/>
                 <label className="date-picker-label">{t("AUTH.BIRTHDAY")}</label>
               </Fragment>
@@ -216,7 +237,7 @@ export default () => {
               <MDBInput id="jobTitle" name="jobTitle" type="text" label={t("AUTH.JOB_TITLE")} outline
                         containerClass="mt-3 mb-0" value={jobTitle} getValue={setJobTitle}
                         onBlur={() => setTouched(Object.assign({}, touched, {jobTitle: true}))}>
-                {touched.jobTitle && jobTitle.length === 0 && <div className="invalid-field">
+                {touched.jobTitle && jobTitle.length === 0 && <div className="text-left invalid-field">
                   {t("COMMON.VALIDATION.REQUIRED", {field: t("AUTH.JOB_TITLE")})}
                 </div>}
               </MDBInput>
@@ -225,7 +246,7 @@ export default () => {
               <MDBInput id="sector" name="sector" type="text" label={t("AUTH.SECTOR")} outline
                         containerClass="mt-3 mb-0" value={sector} getValue={setSector}
                         onBlur={() => setTouched(Object.assign({}, touched, {sector: true}))}>
-                {touched.sector && sector.length === 0 && <div className="invalid-field">
+                {touched.sector && sector.length === 0 && <div className="text-left invalid-field">
                   {t("COMMON.VALIDATION.REQUIRED", {field: t("AUTH.SECTOR")})}
                 </div>}
               </MDBInput>
@@ -236,7 +257,7 @@ export default () => {
               <MDBInput id="company" name="company" type="text" label={t("AUTH.COMPANY")} outline
                         containerClass="mt-3 mb-0" value={company} getValue={setCompany}
                         onBlur={() => setTouched(Object.assign({}, touched, {company: true}))}>
-                {touched.company && company.length === 0 && <div className="invalid-field">
+                {touched.company && company.length === 0 && <div className="text-left invalid-field">
                   {t("COMMON.VALIDATION.REQUIRED", {field: t("AUTH.COMPANY")})}
                 </div>}
               </MDBInput>
@@ -245,32 +266,42 @@ export default () => {
               <MDBInput id="city" name="city" type="text" label={t("AUTH.CITY")} outline containerClass="mt-3 mb-0"
                         value={city} getValue={setCity}
                         onBlur={() => setTouched(Object.assign({}, touched, {city: true}))}>
-                {touched.city && city.length === 0 && <div className="invalid-field">
+                {touched.city && city.length === 0 && <div className="text-left invalid-field">
                   {t("COMMON.VALIDATION.REQUIRED", {field: t("AUTH.CITY")})}
                 </div>}
               </MDBInput>
             </MDBCol>
           </MDBRow>
           <MDBRow>
-            {/*<MDBCol md={6}>{t("AUTH.PHONE")}</MDBCol>*/}
-            <MDBCol md={12}>
-              <MDBInputGroup
-                material
-                type="text"
-                // outline
-
-                prepend={<Fragment><span className="input-group-text md-addon">{t("AUTH.PHONE")}</span><span
-                  className="input-group-text md-addon">{SAUDI_PHONE_PREFIX}</span></Fragment>}
-                // inputs={
-                //   <MDBInput id="phone" name="phone" containerClass="mt-0 mb-0" value={phone} onChange={e => setPhone(e.target.value)} onBlur={() => setTouched(Object.assign({}, touched, {phone: true}))}/>}
-                containerClassName="mt-3 mb-4 ltr-force"
-                className="mt-0 mb-0" value={phone} getValue={setPhone}
-                onBlur={() => setTouched(Object.assign({}, touched, {phone: true}))}>
-                {(phone.length === 0 || !validators.isPhoneNumber(SAUDI_PHONE_PREFIX + phone)) &&
-                <div className="invalid-field">
-                  {(!phone.length) ? t("COMMON.VALIDATION.REQUIRED", {field: t("AUTH.PHONE")}) : t("COMMON.VALIDATION.INVALID", {field: t("AUTH.PHONE")})}
+            <MDBCol md={6}>
+              {!!countryCode.length && <MDBSelect label={t('AUTH.COUNTRY_CODE')} className="mt-3 mb-0" selected={[countryCode]}
+                         getValue={val => setCountryCode(val[0])}>
+                <MDBSelectInput selected={[countryCode]}/>
+                <MDBSelectOptions>
+                  <MDBSelectOption value={PHONE_PREFIX_BAHRAIN}
+                                   checked={countryCode === PHONE_PREFIX_BAHRAIN}>{PHONE_PREFIX_BAHRAIN} - {t("COMMON.GCC_COUNTRIES.BAHRAIN")}</MDBSelectOption>
+                  <MDBSelectOption value={PHONE_PREFIX_KUWAIT}
+                                   checked={countryCode === PHONE_PREFIX_KUWAIT}>{PHONE_PREFIX_KUWAIT} - {t("COMMON.GCC_COUNTRIES.KUWAIT")}</MDBSelectOption>
+                  <MDBSelectOption value={PHONE_PREFIX_OMAN}
+                                   checked={countryCode === PHONE_PREFIX_OMAN}>{PHONE_PREFIX_OMAN} - {t("COMMON.GCC_COUNTRIES.OMAN")}</MDBSelectOption>
+                  <MDBSelectOption value={PHONE_PREFIX_SAUDI_ARABIA}
+                                   checked={countryCode === PHONE_PREFIX_SAUDI_ARABIA}>{PHONE_PREFIX_SAUDI_ARABIA} - {t("COMMON.GCC_COUNTRIES.SAUDI_ARABIA")}</MDBSelectOption>
+                  <MDBSelectOption value={PHONE_PREFIX_UAE}
+                                   checked={countryCode === PHONE_PREFIX_UAE}>{PHONE_PREFIX_UAE} - {t("COMMON.GCC_COUNTRIES.UAWE")}</MDBSelectOption>
+                </MDBSelectOptions>
+              </MDBSelect>}
+              {!!countryCode && countryCode.length === 0 && <div className="text-left invalid-field">
+                {t("COMMON.VALIDATION.REQUIRED", {field: t("AUTH.COUNTRY_CODE")})}
+              </div>}
+            </MDBCol>
+            <MDBCol md={6}>
+              <MDBInput id="phone" name="phone" type="text" label={t("AUTH.PHONE")} outline containerClass="mt-3 mb-0" value={phone} getValue={setPhone}
+                        onBlur={() => setTouched(Object.assign({}, touched, {phone: true}))}>
+                {touched.phone && (phone.length === 0 || !validators.isPhoneNumber(`${countryCode}${phone}`)) &&
+                <div className="text-left invalid-field">
+                  {!phone.length ? t("COMMON.VALIDATION.REQUIRED", {field: t("AUTH.PHONE")}) : t("COMMON.VALIDATION.INVALID", {field: t("AUTH.PHONE")})}
                 </div>}
-              </MDBInputGroup>
+              </MDBInput>
             </MDBCol>
           </MDBRow>
         </div>
@@ -279,7 +310,7 @@ export default () => {
         </CSSTransition>
         <div className="mt-4 mb-3 text-left">
           <MDBBtn type="submit" size="sm" color="indigo" className="z-depth-1a"
-                  disabled={loading || !validators.isEmail(email) || !username.length || username.length > USERNAME_MAX_LENGTH || !validators.isUsername(username) || !firstName.length || !lastName.length || !gender.length || !jobTitle.length || !sector.length || !company.length || !city.length || !phone.length || !validators.isPhoneNumber(SAUDI_PHONE_PREFIX + phone)}>
+                  disabled={loading || !validators.isEmail(email) || !username.length || username.length > USERNAME_MAX_LENGTH || !validators.isUsername(username) || !firstName.length || !lastName.length || !gender.length || !jobTitle.length || !sector.length || !company.length || !city.length || !countryCode.length || !phone.length || !validators.isPhoneNumber(`${countryCode}${phone}`)}>
             {t("COMMON.BUTTON.SAVE")}
           </MDBBtn>
           <MDBBtn type="button" size="sm" color="warning" className="z-depth-1a" onClick={handleGoBack}>

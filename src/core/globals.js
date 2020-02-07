@@ -20,7 +20,11 @@ export const DATE_FORMAT_ISO2 = "YYYY-MM-DD";
 
 export const UNKNOWN_SERVER_ERROR = "unknownServerError";
 
-export const SAUDI_PHONE_PREFIX = "+966";
+export const PHONE_PREFIX_BAHRAIN = "+973";
+export const PHONE_PREFIX_KUWAIT = "+965";
+export const PHONE_PREFIX_OMAN = "+968";
+export const PHONE_PREFIX_SAUDI_ARABIA = "+966";
+export const PHONE_PREFIX_UAE = "+971";
 
 export const USERNAME_MAX_LENGTH = 20;
 export const PASSWORD_MIN_LENGTH = 6;
