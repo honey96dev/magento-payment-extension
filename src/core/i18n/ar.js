@@ -53,8 +53,8 @@ export default {
       ERROR_404: "لم يتم العثور على الصفحة",
     },
     GENDER: {
-      MALE: 'ذكور',
-      FEMALE: 'اناث',
+      MALE: 'ذكر',
+      FEMALE: 'انثى',
     },
     LANGUAGE: {
       LANGUAGE: 'لغة',
@@ -62,7 +62,7 @@ export default {
       ARABIC: 'عربى',
     },
     FILE_UPLOAD: {
-      DEFAULT: "انقر هنا أو اسحب وأسقاط الملف هنا",
+      DEFAULT: "انقر هنا أو اسحب وأسقط الملف هنا",
       REPLACE: "سحب وإسقاط أو انقر لاستبدال",
       REMOVE: "إزالة",
       ERROR: "عفوًا ، حدث خطأ ما",
@@ -132,6 +132,7 @@ export default {
     EMAIL: "البريد الإلكتروني",
     USERNAME: "اسم المستخدم",
     FIRST_NAME: "الاسم الاول",
+    FATHER_NAME: "اسم الأب",
     LAST_NAME: "اسم العائلة",
     GENDER: "الجنس",
     BIRTHDAY: "تاريخ الميلاد",
@@ -290,6 +291,7 @@ export default {
     EMAIL: "البريد الإلكتروني",
     USERNAME: "اسم المستخدم",
     FIRST_NAME: "الاسم الاول",
+    FATHER_NAME: "اسم الأب",
     LAST_NAME: "الكنية",
     GENDER: "الجنس",
     PHONE: "الهاتف",

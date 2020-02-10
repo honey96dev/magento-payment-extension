@@ -10,7 +10,7 @@ import {
   MDBModal,
   MDBModalBody,
   MDBModalFooter,
-  MDBModalHeader,
+  MDBModalHeader, 
   MDBRow,
   MDBTable,
   MDBTableBody,

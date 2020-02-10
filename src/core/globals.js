@@ -23,6 +23,7 @@ export const UNKNOWN_SERVER_ERROR = "unknownServerError";
 export const PHONE_PREFIX_BAHRAIN = "+973";
 export const PHONE_PREFIX_KUWAIT = "+965";
 export const PHONE_PREFIX_OMAN = "+968";
+export const PHONE_PREFIX_QATAR = "+974";
 export const PHONE_PREFIX_SAUDI_ARABIA = "+966";
 export const PHONE_PREFIX_UAE = "+971";
 

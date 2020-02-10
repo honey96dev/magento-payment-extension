@@ -70,6 +70,11 @@ export default () => {
       sort: "asc",
     },
     {
+      label: t("USERS.FATHER_NAME"),
+      field: 'lastName',
+      sort: "asc",
+    },
+    {
       label: t("USERS.LAST_NAME"),
       field: 'lastName',
       sort: "asc",
@@ -286,6 +291,7 @@ export default () => {
                     <td>{item.email} {!item.allowedDate && <MDBIcon className="text-danger" icon="exclamation-circle"/>}</td>
                     <td>{item.username}</td>
                     <td>{item.firstName}</td>
+                    <td>{item.fatherName}</td>
                     <td>{item.lastName}</td>
                     <td>{item.gender}</td>
                     <td>{`${item.countryCode}${item.phone}`}</td>

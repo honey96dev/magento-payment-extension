@@ -26,7 +26,7 @@ import {
   GENDER_MALE,
   PHONE_PREFIX_BAHRAIN,
   PHONE_PREFIX_KUWAIT,
-  PHONE_PREFIX_OMAN,
+  PHONE_PREFIX_OMAN, PHONE_PREFIX_QATAR,
   PHONE_PREFIX_SAUDI_ARABIA,
   PHONE_PREFIX_UAE,
   SUCCESS,
@@ -52,6 +52,7 @@ export default () => {
   const [email, setEmail] = useState();
   const [username, setUsername] = useState("");
   const [firstName, setFirstName] = useState("");
+  const [fatherName, setFatherName] = useState("");
   const [lastName, setLastName] = useState("");
   const [gender, setGender] = useState("");
   const [birthday, setBirthday] = useState();
@@ -64,6 +65,7 @@ export default () => {
   const [phone, setPhone] = useState("");
 
   useEffect(e => {
+    setLoading(true);
     Service.get({id})
       .then(res => {
         if (res.result === SUCCESS) {
@@ -71,6 +73,7 @@ export default () => {
           setUsername(res.data.username);
           setFirstName(res.data.firstName);
           setLastName(res.data.lastName);
+          setFatherName(res.data.fatherName);
           setGender(res.data.gender);
           setBirthday(new Date(res.data.birthday));
           setJobTitle(res.data.jobTitle);
@@ -118,6 +121,7 @@ export default () => {
       email,
       username,
       firstName,
+      fatherName,
       lastName,
       gender,
       birthday: birthday1,
@@ -195,6 +199,15 @@ export default () => {
                         onBlur={() => setTouched(Object.assign({}, touched, {firstName: true}))}>
                 {touched.firstName && firstName.length === 0 && <div className="text-left invalid-field">
                   {t("COMMON.VALIDATION.REQUIRED", {field: t("AUTH.FIRST_NAME")})}
+                </div>}
+              </MDBInput>
+            </MDBCol>
+            <MDBCol md={6}>
+              <MDBInput id="fatherName" name="fatherName" type="text" label={t("AUTH.FATHER_NAME")} outline
+                        containerClass="mt-3 mb-0" value={fatherName} getValue={setFatherName}
+                        onBlur={() => setTouched(Object.assign({}, touched, {fatherName: true}))}>
+                {touched.fatherName && fatherName.length === 0 && <div className="text-left invalid-field">
+                  {t("COMMON.VALIDATION.REQUIRED", {field: t("AUTH.FATHER_NAME")})}
                 </div>}
               </MDBInput>
             </MDBCol>
@@ -284,10 +297,11 @@ export default () => {
                                    checked={countryCode === PHONE_PREFIX_KUWAIT}>{PHONE_PREFIX_KUWAIT} - {t("COMMON.GCC_COUNTRIES.KUWAIT")}</MDBSelectOption>
                   <MDBSelectOption value={PHONE_PREFIX_OMAN}
                                    checked={countryCode === PHONE_PREFIX_OMAN}>{PHONE_PREFIX_OMAN} - {t("COMMON.GCC_COUNTRIES.OMAN")}</MDBSelectOption>
+                  <MDBSelectOption value={PHONE_PREFIX_QATAR} checked={countryCode === PHONE_PREFIX_QATAR}>{PHONE_PREFIX_QATAR} - {t("COMMON.GCC_COUNTRIES.QATAR")}</MDBSelectOption>
                   <MDBSelectOption value={PHONE_PREFIX_SAUDI_ARABIA}
                                    checked={countryCode === PHONE_PREFIX_SAUDI_ARABIA}>{PHONE_PREFIX_SAUDI_ARABIA} - {t("COMMON.GCC_COUNTRIES.SAUDI_ARABIA")}</MDBSelectOption>
                   <MDBSelectOption value={PHONE_PREFIX_UAE}
-                                   checked={countryCode === PHONE_PREFIX_UAE}>{PHONE_PREFIX_UAE} - {t("COMMON.GCC_COUNTRIES.UAWE")}</MDBSelectOption>
+                                   checked={countryCode === PHONE_PREFIX_UAE}>{PHONE_PREFIX_UAE} - {t("COMMON.GCC_COUNTRIES.UAE")}</MDBSelectOption>
                 </MDBSelectOptions>
               </MDBSelect>}
               {!!countryCode && countryCode.length === 0 && <div className="text-left invalid-field">
@@ -297,7 +311,7 @@ export default () => {
             <MDBCol md={6}>
               <MDBInput id="phone" name="phone" type="text" label={t("AUTH.PHONE")} outline containerClass="mt-3 mb-0" value={phone} getValue={setPhone}
                         onBlur={() => setTouched(Object.assign({}, touched, {phone: true}))}>
-                {touched.phone && (phone.length === 0 || !validators.isPhoneNumber(`${countryCode}${phone}`)) &&
+                {(!!countryCode.length || touched.phone) && (phone.length === 0 || !validators.isPhoneNumber(`${countryCode}${phone}`)) &&
                 <div className="text-left invalid-field">
                   {!phone.length ? t("COMMON.VALIDATION.REQUIRED", {field: t("AUTH.PHONE")}) : t("COMMON.VALIDATION.INVALID", {field: t("AUTH.PHONE")})}
                 </div>}
@@ -310,7 +324,7 @@ export default () => {
         </CSSTransition>
         <div className="mt-4 mb-3 text-left">
           <MDBBtn type="submit" size="sm" color="indigo" className="z-depth-1a"
-                  disabled={loading || !validators.isEmail(email) || !username.length || username.length > USERNAME_MAX_LENGTH || !validators.isUsername(username) || !firstName.length || !lastName.length || !gender.length || !jobTitle.length || !sector.length || !company.length || !city.length || !countryCode.length || !phone.length || !validators.isPhoneNumber(`${countryCode}${phone}`)}>
+                  disabled={loading || !validators.isEmail(email) || !username.length || username.length > USERNAME_MAX_LENGTH || !validators.isUsername(username) || !firstName.length || !fatherName.length || !lastName.length || !gender.length || !jobTitle.length || !sector.length || !company.length || !city.length || !countryCode.length || !phone.length || !validators.isPhoneNumber(`${countryCode}${phone}`)}>
             {t("COMMON.BUTTON.SAVE")}
           </MDBBtn>
           <MDBBtn type="button" size="sm" color="warning" className="z-depth-1a" onClick={handleGoBack}>
