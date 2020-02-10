@@ -114,8 +114,8 @@ export default {
       VOTE: "التصويت",
       PACKAGES: "حزم التصويت",
       ADD_PACKAGE: "إضافة تصويت جديد",
-      QUESTIONS: "مسائل صوتية",
-      ADD_QUESTION: "أضف سؤال المسائل الصوتية",
+      QUESTIONS: "التصويت",
+      ADD_QUESTION: "أضف سؤال جديد",
       RESULT: "المسائل الصوتية النتيجة",
     },
     USERS: {
@@ -255,7 +255,7 @@ export default {
   VOTE: {
     VOTES: "التصويت",
     VOTES_AWAITING_RELEASE: "أصوات تنتظر النشر",
-    PACKAGE: "صفقة",
+    PACKAGE: "عنوان التصويت",
     QUESTION: "عنوان التصويت",
     START_DATE: "تاريخ البدء",
     END_DATE: "تاريخ الانتهاء",
@@ -268,7 +268,7 @@ export default {
       QUESTIONS: "الأسئلة",
     },
     ADD_QUESTION: {
-      ADD_QUESTION: "أضف سؤال",
+      ADD_QUESTION: "أضف سؤال جديد",
       MODIFY_QUESTION: "تعديل السؤال",
     },
     ANSWERS: {
