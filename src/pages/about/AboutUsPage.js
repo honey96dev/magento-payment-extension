@@ -48,8 +48,8 @@ export default ({}) => {
           const data = res.data;
           !!data["brochure"].length && setBrochureName((data["brochure"].startsWith("http://") || data["brochure"].startsWith("https://")) ? data["brochure"] : sprintf("%s%s", apis.assetsBaseUrl, data["brochure"]));
           !!data["video"].length && setVideoName((data["video"].startsWith("http://") || data["video"].startsWith("https://")) ? data["video"] : sprintf("%s%s", apis.assetsBaseUrl, data["video"]));
-          setOriginBrochure(data.originBrochure);
-          setOriginVideo(data.originVideo);
+          !!data["originBrochure"].length && setOriginBrochure(data.originBrochure);
+          !!data["originVideo"].length && setOriginVideo(data.originVideo);
         } else {
           setAlert({
             show: true,
