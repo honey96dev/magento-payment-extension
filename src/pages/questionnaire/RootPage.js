@@ -24,13 +24,13 @@ export default () => {
       <MDBContainer className={"section"}>
         <Switch>
           <Route path={`${routes.questionnaire.result}/:packageId/:page?/:page2?`} exact component={ResultPage}/>
-          <Route path={`${routes.questionnaire.addAnswer}/:questionId/:id?`} exact component={NewAnswerPage}/>
+          <Route path={`${routes.questionnaire.addAnswer}/:questionId/:packageId/:page?/:page2?/:page3?/:id?`} exact component={NewAnswerPage}/>
           <Route path={`${routes.questionnaire.answers}/:questionId/:packageId/:page?/:page2?/:page3?`} exact component={AnswersPage}/>
-          <Route path={`${routes.questionnaire.addQuestion}/:packageId/:id?`} exact component={NewQuestionPage}/>
+          <Route path={`${routes.questionnaire.addQuestion}/:packageId/:page?/:page2?/:id?`} exact component={NewQuestionPage}/>
           <Route path={`${routes.questionnaire.questions}/:packageId/:page?/:page2?`} exact component={QuestionsPage}/>
-          <Route path={`${routes.questionnaire.addPackage}/:id?/:page?`} exact component={NewPackagePage}/>
+          <Route path={`${routes.questionnaire.addPackage}/:page?/:id?`} exact component={NewPackagePage}/>
           <Route path={`${routes.questionnaire.packages}/:page?`} exact component={PackagesPage}/>
-          <Route path={Error404}/>
+          <Route component={Error404}/>
         </Switch>
       </MDBContainer>
       <Footer/>

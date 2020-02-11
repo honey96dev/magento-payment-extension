@@ -64,7 +64,7 @@ export default () => {
     scroll.scrollToTop({
       duration: TRANSITION_TIME,
     });
-    Service.topics()
+    Service.topics({page})
       .then(res => {
         if (res.result === SUCCESS) {
           for (let row of res.data) {

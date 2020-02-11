@@ -42,7 +42,7 @@ export default ({id, date, time, author, url, title, isFile, detailLabel, detail
           </Link>
         </MDBView>}
         {!isFile && <MDBView hover className="rounded z-depth-1-half mb-lg-0 mb-4">
-          <iframe className="video-fluid post-media2" src={makeEmbedUrl(url)} frameborder="0" allow="autoplay; encrypted-media" allowfullscreen/>
+          <iframe className="video-fluid post-media2" src={makeEmbedUrl(url)} frameBorder="0" allow="autoplay; encrypted-media" allowFullScreen={true}/>
           <Link to={`${detailLink}/${id}`}>
             <MDBMask overlay="white-slight" />
           </Link>

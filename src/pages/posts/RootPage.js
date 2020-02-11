@@ -21,7 +21,7 @@ export default () => {
       <MDBContainer className={"section"}>
         <Switch>
           <Route path={`${routes.posts.addTopic}/:id?`} exact component={NewTopicPage}/>
-          <Route path={`${routes.posts.topics}`} exact component={TopicsPage}/>
+          <Route path={`${routes.posts.topics}/:page?`} exact component={TopicsPage}/>
           <Route path={`${routes.posts.detail}/:id`} component={PostDetailPage}/>
           <Route path={`${routes.posts.root}/:scope?/:page?`} exact component={AllPostsPage}/>
           <Route component={Error404}/>

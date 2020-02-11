@@ -126,7 +126,7 @@ export default () => {
     const disabled = type === PREFIX_INPUT;
     return (
       <Fragment>
-        <Link to={`${routes.questionnaire.addQuestion}/${packageId}/${id}`}><MDBBtn tag="a" size="sm" color="indigo" floating><MDBIcon icon="edit"/></MDBBtn></Link>
+        <Link to={`${routes.questionnaire.addQuestion}/${packageId}/${page || 1}/${page2 || 1}/${id}`}><MDBBtn tag="a" size="sm" color="indigo" floating><MDBIcon icon="edit"/></MDBBtn></Link>
         <Link to={!disabled && `${routes.questionnaire.answers}/${id}/${packageId}/1/${page || 1}/${page2 || 1}`}><MDBBtn tag="a" size="sm" color={!!disabled ? "mdb-color" : "primary"} className="mx-2" floating disabled={disabled}><MDBIcon icon="comments"/></MDBBtn></Link>
         <MDBBtn tag="a" size="sm" color="danger" floating onClick={e => handleDelete(id, "#" + number)}><MDBIcon icon="trash"/></MDBBtn>
       </Fragment>
@@ -215,7 +215,7 @@ export default () => {
         </MDBCol>
         <MDBCol md={12} className="text-left mt-3">
           <div className="full-width">
-            <Link to={`${routes.questionnaire.addQuestion}/${packageId}`}>
+            <Link to={`${routes.questionnaire.addQuestion}/${packageId}/${page || 1}/${page2 || 1}`}>
               <MDBBtn size="sm" color="primary">
                 {t("NAVBAR.QUESTIONNAIRE.ADD_QUESTION")}
               </MDBBtn>

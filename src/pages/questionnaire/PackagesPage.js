@@ -110,7 +110,7 @@ export default () => {
   const makeButtons = (id, number) => {
     return (
       <Fragment>
-        <Link to={`${routes.questionnaire.addPackage}/${id}/${page || 1}`}><MDBBtn tag="a" size="sm" color="indigo" floating><MDBIcon icon="edit"/></MDBBtn></Link>
+        <Link to={`${routes.questionnaire.addPackage}/${page || 1}/${id}`}><MDBBtn tag="a" size="sm" color="indigo" floating><MDBIcon icon="edit"/></MDBBtn></Link>
         <Link to={`${routes.questionnaire.questions}/${id}/1/${page || 1}`}><MDBBtn tag="a" size="sm" color="primary" className="mx-2" floating><MDBIcon icon="list"/></MDBBtn></Link>
         <Link to={`${routes.questionnaire.result}/${id}/1/${page || 1}`}><MDBBtn tag="a" size="sm" color="indigo" className="mr-2" floating><MDBIcon icon="eye"/></MDBBtn></Link>
         <MDBBtn tag="a" size="sm" color="danger" floating onClick={e => handleDelete(id, "#" + number)}><MDBIcon icon="trash"/></MDBBtn>
@@ -193,7 +193,7 @@ export default () => {
         </MDBCol>
         <MDBCol md={12} className="text-left mt-3">
           <div className="full-width">
-            <Link to={routes.questionnaire.addPackage}>
+            <Link to={`${routes.questionnaire.addPackage}/${page || 1}`}>
               <MDBBtn size="sm" color="primary">
                 {t("NAVBAR.QUESTIONNAIRE.ADD_PACKAGE")}
               </MDBBtn>

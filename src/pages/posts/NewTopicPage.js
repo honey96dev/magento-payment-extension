@@ -90,6 +90,15 @@ export default ({}) => {
     }
   };
 
+  const handleNew = e => {
+    setAlert({});
+    setItemId(undefined);
+    setTopic("");
+    setTouched({});
+
+    history.push(routes.posts.addTopic);
+  };
+
   const handleGoBack = e => {
     history.goBack();
   };
@@ -125,6 +134,8 @@ export default ({}) => {
             </CSSTransition>
             <Fragment>
               <MDBBtn type="submit" color="indigo" size="sm" disabled={!topic || !topic.length}>{!!itemId ? t("COMMON.BUTTON.MODIFY") : t("COMMON.BUTTON.ADD")}</MDBBtn>
+              <MDBBtn type="button" color="primary" size="sm" disabled={!!loading}
+                      onClick={handleNew}>{t("COMMON.BUTTON.NEW")}</MDBBtn>
               <MDBBtn flat size="sm" onClick={handleGoBack}>{t("COMMON.BUTTON.BACK")}</MDBBtn>
             </Fragment>
           </form>

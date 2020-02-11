@@ -101,6 +101,17 @@ export default ({}) => {
     }
   };
 
+  const handleNew = e => {
+    setAlert({});
+    setItemId(undefined);
+    setTitle("");
+    setUrl("");
+    setIsFile(false);
+    setTouched({});
+
+    history.push(routes.video.add);
+  };
+
   const handleGoBack = e => {
     history.goBack();
   };
@@ -145,6 +156,8 @@ export default ({}) => {
             </CSSTransition>
             <Fragment>
               <MDBBtn type="submit" color="indigo" size="sm" disabled={!title || !title.length || !url || !validators.isURL(url)}>{!!itemId ? t("COMMON.BUTTON.MODIFY") : t("COMMON.BUTTON.ADD")}</MDBBtn>
+              <MDBBtn type="button" color="primary" size="sm" disabled={!!loading}
+                      onClick={handleNew}>{t("COMMON.BUTTON.NEW")}</MDBBtn>
               <MDBBtn flat size="sm" onClick={handleGoBack}>{t("COMMON.BUTTON.BACK")}</MDBBtn>
             </Fragment>
           </form>

@@ -21,7 +21,7 @@ import routes from "core/routes";
 import {
   ALERT_DANGER,
   DESCRIPTION_LENGTH_BREAKPOINT2, GENDER_FEMALE,
-  GENDER_MALE, PREFIX_CHECKBOX, PREFIX_INPUT,
+  GENDER_MALE, isDev, PREFIX_CHECKBOX, PREFIX_INPUT,
   SUCCESS,
   TEXTAREA_ROWS1,
   TRANSITION_TIME
@@ -33,7 +33,7 @@ import "./NewQuestionPage.scss";
 
 
 export default ({}) => {
-  const {packageId, id} = useParams();
+  const {packageId, id, page, page2, page3} = useParams();
   const {t} = useTranslation();
   const history = useHistory();
   const {auth} = useSelector(state => state);
@@ -44,7 +44,7 @@ export default ({}) => {
   const [itemId, setItemId] = useState();
   const [packageName, setPackageName] = useState("");
   const [question, setQuestion] = useState("");
-  const [type, setType] = useState("");
+  const [type, setType] = useState(isDev ? PREFIX_CHECKBOX : "");
 
   useEffect(e => {
     scroll.scrollToTop({
@@ -54,6 +54,7 @@ export default ({}) => {
     !id && setLoading(false);
     !id && setItemId(undefined);
     !id && setQuestion("");
+    !id && setType(isDev ? PREFIX_CHECKBOX : "");
     !!packageId && Service.getPackage({id: packageId})
       .then(res => {
         if (res.result === SUCCESS) {
@@ -117,6 +118,17 @@ export default ({}) => {
     }
   };
 
+  const handleNew = e => {
+    setAlert({});
+    setItemId(undefined);
+    setQuestion("");
+    setType(isDev ? PREFIX_CHECKBOX : "");
+    setTouched({});
+
+    // console.log("packageId", packageId)
+    history.push(`${routes.questionnaire.addQuestion}/${packageId}/${page || 1}/${page2 || 1}`);
+  };
+
   const handleGoBack = e => {
     history.goBack();
   };
@@ -128,8 +140,8 @@ export default ({}) => {
       </Helmet>
       <MDBBreadcrumb>
         <MDBBreadcrumbItem>{t("NAVBAR.QUESTIONNAIRE.QUESTIONNAIRE")}</MDBBreadcrumbItem>
-        <MDBBreadcrumbItem>{t("NAVBAR.QUESTIONNAIRE.PACKAGES")}</MDBBreadcrumbItem>
-        <MDBBreadcrumbItem>{t("NAVBAR.QUESTIONNAIRE.QUESTIONS")}</MDBBreadcrumbItem>
+        <MDBBreadcrumbItem><Link to={`${routes.questionnaire.packages}/${page2 || 1}`}>{t("NAVBAR.QUESTIONNAIRE.PACKAGES")}</Link></MDBBreadcrumbItem>
+        <MDBBreadcrumbItem><Link to={`${routes.questionnaire.questions}/${packageId}/${page || 1}/${page2 || 1}`}>{t("NAVBAR.QUESTIONNAIRE.QUESTIONS")}</Link></MDBBreadcrumbItem>
         <MDBBreadcrumbItem active>{!!itemId ? t("QUESTIONNAIRE.ADD_QUESTION.MODIFY_QUESTION") : t("QUESTIONNAIRE.ADD_QUESTION.ADD_QUESTION")}</MDBBreadcrumbItem>
       </MDBBreadcrumb>
       {!!loading && <Loading/>}
@@ -167,7 +179,9 @@ export default ({}) => {
               <MDBAlert color={alert.color} dismiss onClosed={() => setAlert({})}>{alert.message}</MDBAlert>
             </CSSTransition>
             <Fragment>
-              <MDBBtn type="submit" color="indigo" size="sm" disabled={!question || !question.length}>{!!itemId ? t("COMMON.BUTTON.MODIFY") : t("COMMON.BUTTON.ADD")}</MDBBtn>
+              <MDBBtn type="submit" color="indigo" size="sm" disabled={!question || !question.length || !type.length}>{!!itemId ? t("COMMON.BUTTON.MODIFY") : t("COMMON.BUTTON.ADD")}</MDBBtn>
+              <MDBBtn type="button" color="primary" size="sm" disabled={!!loading}
+                      onClick={handleNew}>{t("COMMON.BUTTON.NEW")}</MDBBtn>
               <MDBBtn flat size="sm" onClick={handleGoBack}>{t("COMMON.BUTTON.BACK")}</MDBBtn>
             </Fragment>
           </form>

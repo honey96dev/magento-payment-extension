@@ -1,4 +1,4 @@
-import React, {Fragment, useEffect, useMemo, useState} from "react";
+import React, {Fragment, useEffect, useMemo, useRef, useState} from "react";
 import {
   MDBAlert,
   MDBBreadcrumb,
@@ -47,6 +47,8 @@ export default ({}) => {
   const [media, setMedia] = useState("");
 
   const extensions = ["jpg", "jpeg", "png"];
+
+  const fileRef = useRef(null);
 
   useEffect(e => {
     scroll.scrollToTop({
@@ -116,6 +118,20 @@ export default ({}) => {
     history.goBack();
   };
 
+  const handleNew = e => {
+    setAlert({});
+    setNewsId(undefined);
+    setTitle("");
+    setDescription("");
+    setUrl("");
+    setFile(null);
+    setMedia("");
+    !!fileRef.current && fileRef.current.resetPreview();
+    setTouched({});
+
+    history.push(routes.news.add);
+  };
+
   return (
     <div>
       <Helmet>
@@ -136,23 +152,34 @@ export default ({}) => {
             </div>
             <MDBRow>
               <MDBCol md={8}>
-                <MDBInput label={t("NEWS.TITLE")} outline autoFocus value={title} onChange={e => setTitle(e.target.value)} onBlur={e => setTouched(Object.assign({}, touched, {title: true}))}>
-                  {touched.title && title.length === 0 && <div className="invalid-field">{t("COMMON.VALIDATION.REQUIRED", {field: t("NEWS.TITLE")})}</div>}
+                <MDBInput label={t("NEWS.TITLE")} outline autoFocus value={title}
+                          onChange={e => setTitle(e.target.value)}
+                          onBlur={e => setTouched(Object.assign({}, touched, {title: true}))}>
+                  {touched.title && title.length === 0 &&
+                  <div className="invalid-field">{t("COMMON.VALIDATION.REQUIRED", {field: t("NEWS.TITLE")})}</div>}
                 </MDBInput>
-                <MDBInput label={t("NEWS.DESCRIPTION")} type="textarea" rows={TEXTAREA_ROWS2} outline value={description} onChange={e => setDescription(e.target.value)} onBlur={e => setTouched(Object.assign({}, touched, {description: true}))}>
-                  {touched.description && description.length === 0 && <div className="invalid-field">{t("COMMON.VALIDATION.REQUIRED", {field: t("NEWS.DESCRIPTION")})}</div>}
+                <MDBInput label={t("NEWS.DESCRIPTION")} type="textarea" rows={TEXTAREA_ROWS2} outline
+                          value={description} onChange={e => setDescription(e.target.value)}
+                          onBlur={e => setTouched(Object.assign({}, touched, {description: true}))}>
+                  {touched.description && description.length === 0 && <div
+                    className="invalid-field">{t("COMMON.VALIDATION.REQUIRED", {field: t("NEWS.DESCRIPTION")})}</div>}
                 </MDBInput>
-                <MDBInput label={t("NEWS.URL")} outline value={url} onChange={e => setUrl(e.target.value)} onBlur={e => setTouched(Object.assign({}, touched, {url: true}))}>
-                  {touched.url && !!url.length && !validators.isURL(url) && <div className="invalid-field">{!!url.length ? t("COMMON.VALIDATION.INVALID", {field: t("NEWS.URL")}) : t("COMMON.VALIDATION.REQUIRED", {field: t("NEWS.URL")})}</div>}
+                <MDBInput label={t("NEWS.URL")} outline value={url} onChange={e => setUrl(e.target.value)}
+                          onBlur={e => setTouched(Object.assign({}, touched, {url: true}))}>
+                  {touched.url && !!url.length && !validators.isURL(url) && <div
+                    className="invalid-field">{!!url.length ? t("COMMON.VALIDATION.INVALID", {field: t("NEWS.URL")}) : t("COMMON.VALIDATION.REQUIRED", {field: t("NEWS.URL")})}</div>}
                 </MDBInput>
               </MDBCol>
               <MDBCol md={4}>
                 <div className="md-form">
-                  <MDBFileupload defaultFileSrc={media} getValue={setFile} showRemove={false} maxFileSize={FILEUPLOAD_MAXSIZE1} allowedFileExtensions={extensions}
-                                 messageDefault={t("COMMON.FILE_UPLOAD.DEFAULT")} messageReplace={t("COMMON.FILE_UPLOAD.REPLACE")}
-                                 messageRemove={t("COMMON.FILE_UPLOAD.REMOVE")} messageError={t("COMMON.FILE_UPLOAD.ERROR")}
-                                 errorFileSize={t("COMMON.FILE_UPLOAD.ERROR_FILESIZE", {max: FILEUPLOAD_MAXSIZE1})}
-                                 errorFileExtension={t("COMMON.FILE_UPLOAD.ERROR_FILEEXTENSION", {extensions: extensions.join(", ")})} />
+                  <MDBFileupload
+                    ref={fileRef}
+                    defaultFileSrc={media} getValue={setFile} showRemove={false} maxFileSize={FILEUPLOAD_MAXSIZE1}
+                    allowedFileExtensions={extensions}
+                    messageDefault={t("COMMON.FILE_UPLOAD.DEFAULT")} messageReplace={t("COMMON.FILE_UPLOAD.REPLACE")}
+                    messageRemove={t("COMMON.FILE_UPLOAD.REMOVE")} messageError={t("COMMON.FILE_UPLOAD.ERROR")}
+                    errorFileSize={t("COMMON.FILE_UPLOAD.ERROR_FILESIZE", {max: FILEUPLOAD_MAXSIZE1})}
+                    errorFileExtension={t("COMMON.FILE_UPLOAD.ERROR_FILEEXTENSION", {extensions: extensions.join(", ")})}/>
                 </div>
               </MDBCol>
             </MDBRow>
@@ -160,8 +187,11 @@ export default ({}) => {
               <MDBAlert color={alert.color} dismiss onClosed={() => setAlert({})}>{alert.message}</MDBAlert>
             </CSSTransition>
             <Fragment>
-              <MDBBtn type="submit" color="indigo" size="sm" disabled={!title || !title.length || !description || !description.length || (!!url.length && !validators.isURL(url))}>{!!newsId ? t("COMMON.BUTTON.MODIFY") : t("COMMON.BUTTON.ADD")}</MDBBtn>
-              <MDBBtn flat size="sm" onClick={handleGoBack}>{t("COMMON.BUTTON.BACK")}</MDBBtn>
+              <MDBBtn type="submit" color="indigo" size="sm"
+                      disabled={!!loading || !title || !title.length || !description || !description.length || (!!url.length && !validators.isURL(url))}>{!!newsId ? t("COMMON.BUTTON.MODIFY") : t("COMMON.BUTTON.ADD")}</MDBBtn>
+              <MDBBtn type="button" color="primary" size="sm" disabled={!!loading}
+                      onClick={handleNew}>{t("COMMON.BUTTON.NEW")}</MDBBtn>
+              <MDBBtn flat size="sm" disabled={!!loading} onClick={handleGoBack}>{t("COMMON.BUTTON.BACK")}</MDBBtn>
             </Fragment>
           </form>
         </MDBCardBody>

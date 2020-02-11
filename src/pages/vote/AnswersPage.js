@@ -115,7 +115,7 @@ export default () => {
   const makeButtons = (id, number) => {
     return (
       <Fragment>
-        <Link to={`${routes.vote.addAnswer}/${questionId}/${id}`}><MDBBtn tag="a" size="sm" color="indigo" className="mr-2" floating><MDBIcon icon="edit"/></MDBBtn></Link>
+        <Link to={`${routes.vote.addAnswer}/${questionId}/${packageId}/${page || 1}/${page2 || 1}/${page3 || 1}/${id}`}><MDBBtn tag="a" size="sm" color="indigo" className="mr-2" floating><MDBIcon icon="edit"/></MDBBtn></Link>
         <MDBBtn tag="a" size="sm" color="danger" floating onClick={e => handleDelete(id, "#" + number)}><MDBIcon icon="trash"/></MDBBtn>
       </Fragment>
     );
@@ -162,7 +162,7 @@ export default () => {
   };
 
   const handlePageChange = page => {
-    history.push(`${routes.vote.answers}/${questionId}/${page}/${page2 || 1}/${page3 || 1}`);
+    history.push(`${routes.vote.answers}/${questionId}/${packageId}/${page || 1}/${page2 || 1}/${page3 || 1}`);
   };
 
   const handleDelete = (id, title) => {
@@ -202,7 +202,7 @@ export default () => {
         </MDBCol>}
         <MDBCol md={12} className="text-left mt-3">
           <div className="full-width">
-            <Link to={`${routes.vote.addAnswer}/${questionId}`}>
+            <Link to={`${routes.vote.addAnswer}/${questionId}/${packageId}/${page || 1}/${page2 || 1}/${page3}`}>
               <MDBBtn size="sm" color="primary">
                 {t("VOTE.ADD_ANSWER.ADD_ANSWER")}
               </MDBBtn>

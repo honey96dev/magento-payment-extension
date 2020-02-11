@@ -1,4 +1,4 @@
-import React, {Fragment, useEffect, useState} from "react";
+import React, {createRef, Fragment, useEffect, useState} from "react";
 import {
   MDBAlert,
   MDBBreadcrumb,
@@ -41,6 +41,9 @@ export default ({}) => {
   const [name, setName] = useState("");
   const [startDate, setStartDate] = useState();
   const [endDate, setEndDate] = useState();
+
+  const dateRef1 = createRef(null);
+  const dateRef2 = createRef(null);
 
   useEffect(e => {
     scroll.scrollToTop({
@@ -102,6 +105,20 @@ export default ({}) => {
     history.goBack();
   };
 
+  const handleNew = e => {
+    setAlert({});
+    setItemId(undefined);
+    setName("");
+    // setStartDate(new Date());
+    // setEndDate(new Date());
+    !!dateRef1.current && (dateRef1.current.state.selectedDate = dateformat(new Date(), "yyyy-mm-dd"));
+    !!dateRef2.current && (dateRef2.current.state.selectedDate = dateformat(new Date(), "yyyy-mm-dd"));
+    setTouched({});
+
+    // history.push(`${routes.questionnaire.addPackage}/${page}`);
+    history.push(`${routes.vote.addPackage}`);
+  };
+
   const handleDelete = (id, title) => {
     setModal(Object.assign({}, modal, {show: true, title: t("COMMON.BUTTON.DELETE"), message: t("COMMON.QUESTION.DELETE", {item: title}), deleteId: id}));
   };
@@ -134,12 +151,12 @@ export default ({}) => {
             </MDBRow>
             <MDBRow>
               <MDBCol md={6}>
-                <MDBDatePicker format={DATE_FORMAT_ISO} autoOk /*locale={moment.locale(t("CODE"))}*/ className="date-picker" value={startDate} getValue={val => setStartDate(val)}
+                <MDBDatePicker ref={dateRef1} format={DATE_FORMAT_ISO} autoOk /*locale={moment.locale(t("CODE"))}*/ className="date-picker" value={startDate} getValue={val => setStartDate(val)}
                 />
                 <label className="date-picker-label">{t("VOTE.START_DATE")}</label>
               </MDBCol>
               <MDBCol md={6}>
-                <MDBDatePicker format={DATE_FORMAT_ISO} autoOk /*locale={moment.locale(t("CODE"))}*/ className="date-picker" value={endDate} getValue={val => setEndDate(val)}
+                <MDBDatePicker ref={dateRef2} format={DATE_FORMAT_ISO} autoOk /*locale={moment.locale(t("CODE"))}*/ className="date-picker" value={endDate} getValue={val => setEndDate(val)}
                 />
                 <label className="date-picker-label">{t("VOTE.END_DATE")}</label>
               </MDBCol>
@@ -149,6 +166,8 @@ export default ({}) => {
             </CSSTransition>
             <Fragment>
               <MDBBtn type="submit" color="indigo" size="sm" disabled={!name || !name.length}>{!!itemId ? t("COMMON.BUTTON.MODIFY") : t("COMMON.BUTTON.ADD")}</MDBBtn>
+              <MDBBtn type="button" color="primary" size="sm" disabled={!!loading}
+                      onClick={handleNew}>{t("COMMON.BUTTON.NEW")}</MDBBtn>
               <MDBBtn flat size="sm" onClick={handleGoBack}>{t("COMMON.BUTTON.BACK")}</MDBBtn>
             </Fragment>
           </form>

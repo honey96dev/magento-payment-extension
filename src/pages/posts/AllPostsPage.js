@@ -229,7 +229,7 @@ export default () => {
             <TopicsList topics={topicList} onUpdate={handleTopicChange} />
           </div>
         </MDBCol>
-      </MDBRow>}
+      </MDBRow>
       <MDBModal isOpen={!!modal.show} toggle={toggleModal} centered>
         <MDBModalHeader toggle={toggleModal}>{modal.title}</MDBModalHeader>
         <MDBModalBody className="text-left">{modal.message}</MDBModalBody>

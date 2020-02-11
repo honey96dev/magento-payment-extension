@@ -30,6 +30,7 @@ export default {
       DENY: "أنكر",
       PUBLISH: "نشر",
       UNPUBLISH: "سحب النشر",
+      NEW: "New",
       NOT_FINISHED: "لم تنته",
       MAIN_PAGE: "الصفحة الرئيسية",
     },

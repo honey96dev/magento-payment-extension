@@ -28,7 +28,7 @@ import "./NewAnswerPage.scss";
 
 
 export default ({}) => {
-  const {questionId, id} = useParams();
+  const {questionId, packageId, id, page, page2, page3} = useParams();
   const {t} = useTranslation();
   const history = useHistory();
   const {auth} = useSelector(state => state);
@@ -112,6 +112,15 @@ export default ({}) => {
     }
   };
 
+  const handleNew = e => {
+    setAlert({});
+    setItemId(undefined);
+    setAnswer("");
+    setTouched({});
+
+    history.push(`${routes.questionnaire.addAnswer}/${questionId}/${packageId}/${page || 1}/${page2 || 1}/${page3 || 1}`);
+  };
+
   const handleGoBack = e => {
     history.goBack();
   };
@@ -123,8 +132,9 @@ export default ({}) => {
       </Helmet>
       <MDBBreadcrumb>
         <MDBBreadcrumbItem>{t("NAVBAR.QUESTIONNAIRE.QUESTIONNAIRE")}</MDBBreadcrumbItem>
-        <MDBBreadcrumbItem><Link to={routes.questionnaire.questions}>{t("NAVBAR.QUESTIONNAIRE.QUESTIONS")}</Link></MDBBreadcrumbItem>
-        <MDBBreadcrumbItem>{t("QUESTIONNAIRE.ANSWERS.ANSWERS")}</MDBBreadcrumbItem>
+        <MDBBreadcrumbItem><Link to={`${routes.questionnaire.packages}/${page3 || 1}`}>{t("NAVBAR.QUESTIONNAIRE.PACKAGES")}</Link></MDBBreadcrumbItem>
+        <MDBBreadcrumbItem><Link to={`${routes.questionnaire.questions}/${packageId}/${page2 || 1}/${page3 || 1}`}>{t("NAVBAR.QUESTIONNAIRE.QUESTIONS")}</Link></MDBBreadcrumbItem>
+        <MDBBreadcrumbItem><Link to={`${routes.questionnaire.answers}/${questionId}/${packageId}/${page || 1}/${page2 || 1}/${page3 || 1}`}>{t("QUESTIONNAIRE.ANSWERS.ANSWERS")}</Link></MDBBreadcrumbItem>
         <MDBBreadcrumbItem active>{!!itemId ? t("QUESTIONNAIRE.ADD_ANSWER.MODIFY_ANSWER") : t("QUESTIONNAIRE.ADD_ANSWER.ADD_ANSWER")}</MDBBreadcrumbItem>
       </MDBBreadcrumb>
       {!!loading && <Loading/>}
@@ -149,6 +159,8 @@ export default ({}) => {
             </CSSTransition>
             <Fragment>
               <MDBBtn type="submit" color="indigo" size="sm" disabled={!answer || !answer.length}>{!!itemId ? t("COMMON.BUTTON.MODIFY") : t("COMMON.BUTTON.ADD")}</MDBBtn>
+              <MDBBtn type="button" color="primary" size="sm" disabled={!!loading}
+                      onClick={handleNew}>{t("COMMON.BUTTON.NEW")}</MDBBtn>
               <MDBBtn flat size="sm" onClick={handleGoBack}>{t("COMMON.BUTTON.BACK")}</MDBBtn>
             </Fragment>
           </form>

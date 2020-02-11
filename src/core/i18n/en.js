@@ -30,6 +30,7 @@ export default {
       DENY: "Deny",
       PUBLISH: "Publish",
       UNPUBLISH: "Retract Publish",
+      NEW: "New",
       NOT_FINISHED: "Not Finished",
       MAIN_PAGE: "Main Page",
     },

@@ -24,22 +24,13 @@ export default () => {
       <MDBContainer className={"section"}>
         <Switch>
           <Route path={`${routes.vote.result}/:packageId/:page?/:page2?`} exact component={ResultPage}/>
-          {/*<Route path={`${routes.vote.result}/:packageId`} exact component={ResultPage}/>*/}
-          <Route path={`${routes.vote.addAnswer}/:questionId/:id?`} exact component={NewAnswerPage}/>
-          {/*<Route path={`${routes.vote.addAnswer}/:questionId`} exact component={NewAnswerPage}/>*/}
+          <Route path={`${routes.vote.addAnswer}/:questionId/:packageId/:page?/:page2?/:page3?/:id?`} exact component={NewAnswerPage}/>
           <Route path={`${routes.vote.answers}/:questionId/:packageId/:page?/:page2?/:page3?`} exact component={AnswersPage}/>
-          {/*<Route path={`${routes.vote.answers}/:questionId/:packageId/:page2`} exact component={AnswersPage}/>*/}
-          <Route path={`${routes.vote.addQuestion}/:packageId/:id?`} exact component={NewQuestionPage}/>
-          {/*<Route path={`${routes.vote.addQuestion}/:packageId`} exact component={NewQuestionPage}/>*/}
+          <Route path={`${routes.vote.addQuestion}/:packageId/:page?/:page2?/:id?`} exact component={NewQuestionPage}/>
           <Route path={`${routes.vote.questions}/:packageId/:page?/:page2?`} exact component={QuestionsPage}/>
-          {/*<Route path={`${routes.vote.questions}/:packageId/:page2`} exact component={QuestionsPage}/>*/}
-          {/*<Route path={`${routes.vote.questions}/:packageId`} exact component={QuestionsPage}/>*/}
-          <Route path={`${routes.vote.addPackage}/:id?/:page?`} exact component={NewPackagePage}/>
-          {/*<Route path={`${routes.vote.addPackage}/:id`} exact component={NewPackagePage}/>*/}
-          {/*<Route path={routes.vote.addPackage} exact component={NewPackagePage}/>*/}
+          <Route path={`${routes.vote.addPackage}/:page?/:id?`} exact component={NewPackagePage}/>
           <Route path={`${routes.vote.packages}/:page?`} exact component={PackagesPage}/>
-          {/*<Route path={routes.vote.packages} exact component={PackagesPage}/>*/}
-          <Route path={Error404}/>
+          <Route component={Error404}/>
         </Switch>
       </MDBContainer>
       <Footer/>

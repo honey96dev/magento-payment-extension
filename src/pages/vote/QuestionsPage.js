@@ -115,7 +115,7 @@ export default () => {
   const makeButtons = (id, number) => {
     return (
       <Fragment>
-        <Link to={`${routes.vote.addQuestion}/${packageId}/${id}`}><MDBBtn tag="a" size="sm" color="indigo" floating><MDBIcon icon="edit"/></MDBBtn></Link>
+        <Link to={`${routes.vote.addQuestion}/${packageId}/${page || 1}/${page2 || 1}/${id}`}><MDBBtn tag="a" size="sm" color="indigo" floating><MDBIcon icon="edit"/></MDBBtn></Link>
         <Link to={`${routes.vote.answers}/${id}/${packageId}/1/${page || 1}/${page2 || 1}`}><MDBBtn tag="a" size="sm" color="primary" className="mx-2" floating><MDBIcon icon="comments"/></MDBBtn></Link>
         <MDBBtn tag="a" size="sm" color="danger" floating onClick={e => handleDelete(id, "#" + number)}><MDBIcon icon="trash"/></MDBBtn>
       </Fragment>
@@ -204,7 +204,7 @@ export default () => {
         </MDBCol>
         <MDBCol md={12} className="text-left mt-3">
           <div className="full-width">
-            <Link to={`${routes.vote.addQuestion}/${packageId}`}>
+            <Link to={`${routes.vote.addQuestion}/${packageId}/${page || 1}/${page2 || 1}`}>
               <MDBBtn size="sm" color="primary">
                 {t("NAVBAR.VOTE.ADD_QUESTION")}
               </MDBBtn>

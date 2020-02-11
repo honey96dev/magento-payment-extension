@@ -22,7 +22,7 @@ export default () => {
           <Route path={routes.video.add} component={NewVideoPage}/>
           <Route path={routes.video.all} exact component={AllVideoPage}/>
           <Route path={`${routes.video.all}/:page`} exact component={AllVideoPage}/>
-          <Route path={Error404}/>
+          <Route component={Error404}/>
         </Switch>
       </MDBContainer>
       <Footer/>

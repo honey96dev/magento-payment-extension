@@ -26,7 +26,7 @@ import "./NewQuestionPage.scss";
 
 
 export default ({}) => {
-  const {packageId, id} = useParams();
+  const {packageId, id, page, page2, page3} = useParams();
   const {t} = useTranslation();
   const history = useHistory();
   const {auth} = useSelector(state => state);
@@ -109,6 +109,16 @@ export default ({}) => {
     }
   };
 
+  const handleNew = e => {
+    setAlert({});
+    setItemId(undefined);
+    setQuestion("");
+    setTouched({});
+
+    // console.log("packageId", packageId)
+    history.push(`${routes.vote.addQuestion}/${packageId}/${page || 1}/${page2 || 1}`);
+  };
+
   const handleGoBack = e => {
     history.goBack();
   };
@@ -120,8 +130,8 @@ export default ({}) => {
       </Helmet>
       <MDBBreadcrumb>
         <MDBBreadcrumbItem>{t("NAVBAR.VOTE.VOTE")}</MDBBreadcrumbItem>
-        <MDBBreadcrumbItem>{t("NAVBAR.VOTE.PACKAGES")}</MDBBreadcrumbItem>
-        <MDBBreadcrumbItem>{t("NAVBAR.VOTE.QUESTIONS")}</MDBBreadcrumbItem>
+        <MDBBreadcrumbItem><Link to={`${routes.vote.packages}/${page2 || 1}`}>{t("NAVBAR.VOTE.PACKAGES")}</Link></MDBBreadcrumbItem>
+        <MDBBreadcrumbItem><Link to={`${routes.vote.questions}/${packageId}/${page || 1}/${page2 || 1}`}>{t("NAVBAR.VOTE.QUESTIONS")}</Link></MDBBreadcrumbItem>
         <MDBBreadcrumbItem active>{!!itemId ? t("VOTE.ADD_QUESTION.MODIFY_QUESTION") : t("VOTE.ADD_QUESTION.ADD_QUESTION")}</MDBBreadcrumbItem>
       </MDBBreadcrumb>
       {!!loading && <Loading/>}
@@ -146,6 +156,8 @@ export default ({}) => {
             </CSSTransition>
             <Fragment>
               <MDBBtn type="submit" color="indigo" size="sm" disabled={!question || !question.length}>{!!itemId ? t("COMMON.BUTTON.MODIFY") : t("COMMON.BUTTON.ADD")}</MDBBtn>
+              <MDBBtn type="button" color="primary" size="sm" disabled={!!loading}
+                      onClick={handleNew}>{t("COMMON.BUTTON.NEW")}</MDBBtn>
               <MDBBtn flat size="sm" onClick={handleGoBack}>{t("COMMON.BUTTON.BACK")}</MDBBtn>
             </Fragment>
           </form>
