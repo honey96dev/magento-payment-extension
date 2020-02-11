@@ -2,7 +2,7 @@ export default {
   NAME: "عربى",
   CODE: "ar",
   DIRECTION: "rtl",
-  SITE_NAME: 'المسؤول عن بوابة المعرفة',
+  SITE_NAME: "المسؤول عن بوابة المعرفة",
   COMMON: {
     BUTTON: {
       HOME: "الصفحة الرئيسية",
@@ -53,13 +53,13 @@ export default {
       ERROR_404: "لم يتم العثور على الصفحة",
     },
     GENDER: {
-      MALE: 'ذكر',
-      FEMALE: 'انثى',
+      MALE: "ذكر",
+      FEMALE: "انثى",
     },
     LANGUAGE: {
-      LANGUAGE: 'لغة',
-      ENGLISH: 'English',
-      ARABIC: 'عربى',
+      LANGUAGE: "لغة",
+      ENGLISH: "English",
+      ARABIC: "عربى",
     },
     FILE_UPLOAD: {
       DEFAULT: "انقر هنا أو اسحب وأسقط الملف هنا",
@@ -126,6 +126,10 @@ export default {
     ABOUT: {
       ABOUT: "حول",
       US: "معلومات عنا",
+    },
+    MASS_EMAIL: {
+      MASS_EMAIL: "البريد الإلكتروني الشامل",
+      MAIN: "إرسال البريد الشامل",
     },
   },
   AUTH: {
@@ -305,6 +309,13 @@ export default {
       ORIGIN_VIDEO: "الفيديو الحالي",
       BROCHURE: "كراسة",
       VIDEO: "فيديو",
+    },
+  },
+  MASS_EMAIL: {
+    MAIN: {
+      NAME: "اسمك",
+      SUBJECT: "موضوع",
+      MESSAGE: "رسالتك",
     },
   },
 };

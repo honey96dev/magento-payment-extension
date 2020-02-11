@@ -64,7 +64,7 @@ export default ({}) => {
         setAlert({
           show: true,
           color: ALERT_DANGER,
-          message: t('COMMON.ERROR.UNKNOWN_SERVER_ERROR'),
+          message: t("COMMON.ERROR.UNKNOWN_SERVER_ERROR"),
         });
         setLoading(false);
       });
@@ -89,7 +89,7 @@ export default ({}) => {
       setAlert({
         show: true,
         color: ALERT_DANGER,
-        message: t('COMMON.ERROR.UNKNOWN_SERVER_ERROR'),
+        message: t("COMMON.ERROR.UNKNOWN_SERVER_ERROR"),
       });
     }
   };
@@ -113,7 +113,7 @@ export default ({}) => {
       setAlert({
         show: true,
         color: ALERT_DANGER,
-        message: t('COMMON.ERROR.UNKNOWN_SERVER_ERROR'),
+        message: t("COMMON.ERROR.UNKNOWN_SERVER_ERROR"),
       });
     }
   };
@@ -130,7 +130,7 @@ export default ({}) => {
         <title>{t("NAVBAR.ABOUT.US")} - {t("SITE_NAME")}</title>
       </Helmet>
       <MDBBreadcrumb>
-        <MDBBreadcrumbItem>{t('NAVBAR.ABOUT.ABOUT')}</MDBBreadcrumbItem>
+        <MDBBreadcrumbItem>{t("NAVBAR.ABOUT.ABOUT")}</MDBBreadcrumbItem>
         <MDBBreadcrumbItem active>{t("NAVBAR.ABOUT.US")}</MDBBreadcrumbItem>
       </MDBBreadcrumb>
       {!!loading && <Loading/>}

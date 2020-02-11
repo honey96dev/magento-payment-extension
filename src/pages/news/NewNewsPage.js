@@ -79,7 +79,7 @@ export default ({}) => {
         setAlert({
           show: true,
           color: ALERT_DANGER,
-          message: t('COMMON.ERROR.UNKNOWN_SERVER_ERROR'),
+          message: t("COMMON.ERROR.UNKNOWN_SERVER_ERROR"),
         });
         setLoading(false);
       });
@@ -91,11 +91,11 @@ export default ({}) => {
     try {
       let params = new FormData();
       !!newsId && params.append("id", newsId);
-      params.append('userId', auth.user.id);
-      params.append('title', title);
-      params.append('description', description);
-      params.append('url', url);
-      params.append('file', file);
+      params.append("userId", auth.user.id);
+      params.append("title", title);
+      params.append("description", description);
+      params.append("url", url);
+      params.append("file", file);
       let res = await NewsService.save(params);
       !newsId && setNewsId(res.data.insertId);
       setAlert({
@@ -107,7 +107,7 @@ export default ({}) => {
       setAlert({
         show: true,
         color: ALERT_DANGER,
-        message: t('COMMON.ERROR.UNKNOWN_SERVER_ERROR'),
+        message: t("COMMON.ERROR.UNKNOWN_SERVER_ERROR"),
       });
     }
   };
@@ -122,7 +122,7 @@ export default ({}) => {
         <title>{!!newsId ? t("NEWS.ADD.MODIFY_NEWS") : t("NEWS.ADD.ADD_NEWS")} - {t("SITE_NAME")}</title>
       </Helmet>
       <MDBBreadcrumb>
-        <MDBBreadcrumbItem><Link to={routes.news.all}>{t('NAVBAR.NEWS.NEWS')}</Link></MDBBreadcrumbItem>
+        <MDBBreadcrumbItem><Link to={routes.news.all}>{t("NAVBAR.NEWS.NEWS")}</Link></MDBBreadcrumbItem>
         <MDBBreadcrumbItem active>{!!newsId ? t("NEWS.ADD.MODIFY_NEWS") : t("NEWS.ADD.ADD_NEWS")}</MDBBreadcrumbItem>
       </MDBBreadcrumb>
       {!!loading && <Loading/>}

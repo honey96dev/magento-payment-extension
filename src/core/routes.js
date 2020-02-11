@@ -66,6 +66,10 @@ export const routes = {
     root: `${ROUTE_BASE}/about`,
     us: `${ROUTE_BASE}/about/us`,
   },
+  massEmail: {
+    root: `${ROUTE_BASE}/mass-email`,
+    main: `${ROUTE_BASE}/mass-email/main`,
+  },
 };
 
 export default routes;

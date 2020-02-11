@@ -82,7 +82,7 @@ export default () => {
         setAlert({
           show: true,
           color: ALERT_DANGER,
-          message: t('COMMON.ERROR.UNKNOWN_SERVER_ERROR'),
+          message: t("COMMON.ERROR.UNKNOWN_SERVER_ERROR"),
         });
       });
     VoteService.answers({questionId, page: currentPage})
@@ -106,7 +106,7 @@ export default () => {
         setAlert({
           show: true,
           color: ALERT_DANGER,
-          message: t('COMMON.ERROR.UNKNOWN_SERVER_ERROR'),
+          message: t("COMMON.ERROR.UNKNOWN_SERVER_ERROR"),
         });
         setLoading(false);
       });
@@ -151,7 +151,7 @@ export default () => {
         setAlert({
           show: true,
           color: ALERT_DANGER,
-          message: t('COMMON.ERROR.UNKNOWN_SERVER_ERROR'),
+          message: t("COMMON.ERROR.UNKNOWN_SERVER_ERROR"),
         });
         scroll.scrollToTop({
           duration: TRANSITION_TIME,
@@ -179,10 +179,10 @@ export default () => {
         <title>{t("VOTE.ANSWERS.ANSWERS")} - {t("SITE_NAME")}</title>
       </Helmet>
       <MDBBreadcrumb>
-        <MDBBreadcrumbItem>{t('NAVBAR.VOTE.VOTE')}</MDBBreadcrumbItem>
-        <MDBBreadcrumbItem><Link to={`${routes.vote.packages}/${page3 || 1}`}>{t('NAVBAR.VOTE.PACKAGES')}</Link></MDBBreadcrumbItem>
-        <MDBBreadcrumbItem><Link to={`${routes.vote.questions}/${packageId}/${page2 || 1}/${page3 || 1}`}>{t('NAVBAR.VOTE.QUESTIONS')}</Link></MDBBreadcrumbItem>
-        <MDBBreadcrumbItem active>{t('VOTE.ANSWERS.ANSWERS')}</MDBBreadcrumbItem>
+        <MDBBreadcrumbItem>{t("NAVBAR.VOTE.VOTE")}</MDBBreadcrumbItem>
+        <MDBBreadcrumbItem><Link to={`${routes.vote.packages}/${page3 || 1}`}>{t("NAVBAR.VOTE.PACKAGES")}</Link></MDBBreadcrumbItem>
+        <MDBBreadcrumbItem><Link to={`${routes.vote.questions}/${packageId}/${page2 || 1}/${page3 || 1}`}>{t("NAVBAR.VOTE.QUESTIONS")}</Link></MDBBreadcrumbItem>
+        <MDBBreadcrumbItem active>{t("VOTE.ANSWERS.ANSWERS")}</MDBBreadcrumbItem>
       </MDBBreadcrumb>
       {!!loading && <Loading/>}
       {!loading && <MDBRow>

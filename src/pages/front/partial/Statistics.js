@@ -26,15 +26,15 @@ export default ({}) => {
   };
 
   const signInChartInitData = {
-    // selection: 'one_year',
+    // selection: "one_year",
     options: {
       labels: [t("")],
       xaxis: {
-        type: 'datetime',
+        type: "datetime",
       },
       stroke: {
         show: true,
-        lineCap: 'butt',
+        lineCap: "butt",
         colors: undefined,
         width: 2,
         dashArray: 0,

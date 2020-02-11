@@ -5,8 +5,8 @@ import {useTranslation} from "react-i18next";
 export default (props) => {
   const {t} = useTranslation();
 
-  const dir = t('DIRECTION');
-  const classTextAlignRight = dir === 'rtl' ? 'text-align-right-lg' : "";
+  const dir = t("DIRECTION");
+  const classTextAlignRight = dir === "rtl" ? "text-align-right-lg" : "";
 
   return (<></>);
   return (

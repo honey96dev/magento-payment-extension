@@ -63,7 +63,7 @@ export default () => {
         setAlert({
           show: true,
           color: ALERT_DANGER,
-          message: t('COMMON.ERROR.UNKNOWN_SERVER_ERROR'),
+          message: t("COMMON.ERROR.UNKNOWN_SERVER_ERROR"),
         });
         setLoading(false);
       });
@@ -96,7 +96,7 @@ export default () => {
         setAlert({
           show: true,
           color: ALERT_DANGER,
-          message: t('COMMON.ERROR.UNKNOWN_SERVER_ERROR'),
+          message: t("COMMON.ERROR.UNKNOWN_SERVER_ERROR"),
         });
         scroll.scrollToTop({
           duration: TRANSITION_TIME,
@@ -120,7 +120,7 @@ export default () => {
         <title>{t("NAVBAR.VIDEO.VIDEO")} - {t("SITE_NAME")}</title>
       </Helmet>
       <MDBBreadcrumb>
-        <MDBBreadcrumbItem active>{t('NAVBAR.VIDEO.VIDEO')}</MDBBreadcrumbItem>
+        <MDBBreadcrumbItem active>{t("NAVBAR.VIDEO.VIDEO")}</MDBBreadcrumbItem>
       </MDBBreadcrumb>
       {!!loading && <Loading/>}
       {!loading && !items.length && <ErrorNoData/>}

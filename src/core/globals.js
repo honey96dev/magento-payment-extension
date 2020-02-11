@@ -42,6 +42,11 @@ export const TEXTAREA_ROWS1 = 10;
 export const TEXTAREA_ROWS2 = 18;
 export const TEXTAREA_MAXLENGTH = 4096;
 
+export const ERROR_REQUIRED = "ERROR_REQUIRED";
+export const ERROR_INVALID = "ERROR_INVALID";
+export const ERROR_MIN_LENGTH = "ERROR_MIN_LENGTH";
+export const ERROR_MAX_LENGTH = "ERROR_MAX_LENGTH";
+
 export const ALERT_SUCCESS = "success";
 export const ALERT_DANGER = "danger";
 export const ALERT_LIFETIME = 5000;
@@ -54,9 +59,9 @@ export const FILEUPLOAD_MAXSIZE1 = "5M";
 export const FILEUPLOAD_MAXSIZE2 = "10M";
 export const FILEUPLOAD_MAXSIZE3 = "50M";
 
-export const PREFIX_CHECKBOX = 'C';
-export const PREFIX_INPUT = 'I';
-export const PREFIX_RADIO = 'R';
+export const PREFIX_CHECKBOX = "C";
+export const PREFIX_INPUT = "I";
+export const PREFIX_RADIO = "R";
 
 export const DEFAULT_EMAIL = "honey96dev@gmail.com";
 export const DEFAULT_USERNAME = "honey96dev";

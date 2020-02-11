@@ -55,7 +55,7 @@ export default () => {
         setAlert({
           show: true,
           color: ALERT_DANGER,
-          message: t('COMMON.ERROR.UNKNOWN_SERVER_ERROR'),
+          message: t("COMMON.ERROR.UNKNOWN_SERVER_ERROR"),
         });
       });
     Service.result({packageId, page})
@@ -80,7 +80,7 @@ export default () => {
         setAlert({
           show: true,
           color: ALERT_DANGER,
-          message: t('COMMON.ERROR.UNKNOWN_SERVER_ERROR'),
+          message: t("COMMON.ERROR.UNKNOWN_SERVER_ERROR"),
         });
         setLoading(false);
       });
@@ -107,7 +107,7 @@ export default () => {
         setAlert({
           show: true,
           color: ALERT_DANGER,
-          message: t('COMMON.ERROR.UNKNOWN_SERVER_ERROR'),
+          message: t("COMMON.ERROR.UNKNOWN_SERVER_ERROR"),
         });
       });
   };
@@ -122,9 +122,9 @@ export default () => {
         <title>{t("QUESTIONNAIRE.RESULT.RESULT")} - {t("SITE_NAME")}</title>
       </Helmet>
       <MDBBreadcrumb>
-        <MDBBreadcrumbItem>{t('NAVBAR.QUESTIONNAIRE.QUESTIONNAIRE')}</MDBBreadcrumbItem>
-        <MDBBreadcrumbItem><Link to={`${routes.questionnaire.packages}/${page2 || 1}`}>{t('NAVBAR.QUESTIONNAIRE.PACKAGES')}</Link></MDBBreadcrumbItem>
-        <MDBBreadcrumbItem active>{t('QUESTIONNAIRE.RESULT.RESULT')}</MDBBreadcrumbItem>
+        <MDBBreadcrumbItem>{t("NAVBAR.QUESTIONNAIRE.QUESTIONNAIRE")}</MDBBreadcrumbItem>
+        <MDBBreadcrumbItem><Link to={`${routes.questionnaire.packages}/${page2 || 1}`}>{t("NAVBAR.QUESTIONNAIRE.PACKAGES")}</Link></MDBBreadcrumbItem>
+        <MDBBreadcrumbItem active>{t("QUESTIONNAIRE.RESULT.RESULT")}</MDBBreadcrumbItem>
       </MDBBreadcrumb>
       {!!loading && <Loading/>}
       {!loading && <MDBRow>

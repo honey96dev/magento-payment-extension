@@ -81,7 +81,7 @@ export default () => {
         setAlert({
           show: true,
           color: ALERT_DANGER,
-          message: t('COMMON.ERROR.UNKNOWN_SERVER_ERROR'),
+          message: t("COMMON.ERROR.UNKNOWN_SERVER_ERROR"),
         });
       });
     VoteService.questions({packageId, page})
@@ -106,7 +106,7 @@ export default () => {
         setAlert({
           show: true,
           color: ALERT_DANGER,
-          message: t('COMMON.ERROR.UNKNOWN_SERVER_ERROR'),
+          message: t("COMMON.ERROR.UNKNOWN_SERVER_ERROR"),
         });
         setLoading(false);
       });
@@ -153,7 +153,7 @@ export default () => {
         setAlert({
           show: true,
           color: ALERT_DANGER,
-          message: t('COMMON.ERROR.UNKNOWN_SERVER_ERROR'),
+          message: t("COMMON.ERROR.UNKNOWN_SERVER_ERROR"),
         });
         scroll.scrollToTop({
           duration: TRANSITION_TIME,
@@ -181,9 +181,9 @@ export default () => {
         <title>{t("NAVBAR.VOTE.QUESTIONS")} - {t("SITE_NAME")}</title>
       </Helmet>
       <MDBBreadcrumb>
-        <MDBBreadcrumbItem>{t('NAVBAR.VOTE.VOTE')}</MDBBreadcrumbItem>
-        <MDBBreadcrumbItem><Link to={`${routes.vote.packages}/${page2 || 1}`}>{t('NAVBAR.VOTE.PACKAGES')}</Link></MDBBreadcrumbItem>
-        <MDBBreadcrumbItem active>{t('VOTE.QUESTIONS.QUESTIONS')}</MDBBreadcrumbItem>
+        <MDBBreadcrumbItem>{t("NAVBAR.VOTE.VOTE")}</MDBBreadcrumbItem>
+        <MDBBreadcrumbItem><Link to={`${routes.vote.packages}/${page2 || 1}`}>{t("NAVBAR.VOTE.PACKAGES")}</Link></MDBBreadcrumbItem>
+        <MDBBreadcrumbItem active>{t("VOTE.QUESTIONS.QUESTIONS")}</MDBBreadcrumbItem>
       </MDBBreadcrumb>
       {!!loading && <Loading/>}
       {/*{!loading && !items.length && <ErrorNoData/>}*/}

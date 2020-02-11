@@ -1,4 +1,4 @@
-import libphonenumber from 'google-libphonenumber';
+import libphonenumber from "google-libphonenumber";
 import {USERNAME_MAX_LENGTH} from "./globals";
 
 export default {

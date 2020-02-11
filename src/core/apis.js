@@ -90,4 +90,7 @@ export default {
     saveAboutUsBrochure: "about/save-aboutus-brochure",
     saveAboutUsVideo: "about/save-aboutus-video",
   },
+  massEmail: {
+    send: "mass-email/send",
+  },
 };

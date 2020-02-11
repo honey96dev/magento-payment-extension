@@ -100,7 +100,7 @@ export default () => {
         setAlert({
           show: true,
           color: ALERT_DANGER,
-          message: t('COMMON.ERROR.UNKNOWN_SERVER_ERROR'),
+          message: t("COMMON.ERROR.UNKNOWN_SERVER_ERROR"),
         });
         setLoading(false);
       });
@@ -145,7 +145,7 @@ export default () => {
         setAlert({
           show: true,
           color: ALERT_DANGER,
-          message: t('COMMON.ERROR.UNKNOWN_SERVER_ERROR'),
+          message: t("COMMON.ERROR.UNKNOWN_SERVER_ERROR"),
         });
         setLoading(false);
       });
@@ -161,10 +161,10 @@ export default () => {
         <title>{t("USERS.EDIT.EDIT")} - {t("SITE_NAME")}</title>
       </Helmet>
       <MDBBreadcrumb>
-        <MDBBreadcrumbItem>{t('NAVBAR.USERS.USERS')}</MDBBreadcrumbItem>
+        <MDBBreadcrumbItem>{t("NAVBAR.USERS.USERS")}</MDBBreadcrumbItem>
         <MDBBreadcrumbItem><Link
-          to={`${routes.users.list}/${scope}`}>{scope === "all" ? t('NAVBAR.USERS.LIST') : t("NAVBAR.USERS.NEW_LIST")}</Link></MDBBreadcrumbItem>
-        <MDBBreadcrumbItem active>{t('USERS.EDIT.EDIT')}</MDBBreadcrumbItem>
+          to={`${routes.users.list}/${scope}`}>{scope === "all" ? t("NAVBAR.USERS.LIST") : t("NAVBAR.USERS.NEW_LIST")}</Link></MDBBreadcrumbItem>
+        <MDBBreadcrumbItem active>{t("USERS.EDIT.EDIT")}</MDBBreadcrumbItem>
       </MDBBreadcrumb>
       {!!loading && <Loading/>}
       {!loading && <form onSubmit={handleSubmit}>
@@ -184,8 +184,8 @@ export default () => {
                         containerClass="mb-0" value={username} getValue={setUsername}
                         onBlur={() => setTouched(Object.assign({}, touched, {username: true}))}>
                 {touched.username && !validators.isUsername(username) && <div className="text-left invalid-field">
-                  {username.length === 0 ? t("COMMON.VALIDATION.REQUIRED", {field: t("AUTH.USERNAME")}) : username.length > USERNAME_MAX_LENGTH ? t('COMMON.VALIDATION.MAX_LENGTH', {
-                    field: t('AUTH.USERNAME'),
+                  {username.length === 0 ? t("COMMON.VALIDATION.REQUIRED", {field: t("AUTH.USERNAME")}) : username.length > USERNAME_MAX_LENGTH ? t("COMMON.VALIDATION.MAX_LENGTH", {
+                    field: t("AUTH.USERNAME"),
                     length: USERNAME_MAX_LENGTH
                   }) : !validators.isUsername(username) ? t("COMMON.VALIDATION.INVALID", {field: t("AUTH.USERNAME")}) : ""}
                 </div>}
@@ -223,7 +223,7 @@ export default () => {
           </MDBRow>
           <MDBRow>
             <MDBCol md={6}>
-              {!!gender.length && <MDBSelect label={t('AUTH.GENDER')} className="mt-3 mb-0" selected={[gender]}
+              {!!gender.length && <MDBSelect label={t("AUTH.GENDER")} className="mt-3 mb-0" selected={[gender]}
                          getValue={val => setGender(val[0])}>
                 <MDBSelectInput selected={[gender]}/>
                 <MDBSelectOptions>
@@ -287,7 +287,7 @@ export default () => {
           </MDBRow>
           <MDBRow>
             <MDBCol md={6}>
-              {!!countryCode.length && <MDBSelect label={t('AUTH.COUNTRY_CODE')} className="mt-3 mb-0" selected={[countryCode]}
+              {!!countryCode.length && <MDBSelect label={t("AUTH.COUNTRY_CODE")} className="mt-3 mb-0" selected={[countryCode]}
                          getValue={val => setCountryCode(val[0])}>
                 <MDBSelectInput selected={[countryCode]}/>
                 <MDBSelectOptions>

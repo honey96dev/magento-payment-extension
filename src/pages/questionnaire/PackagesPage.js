@@ -56,17 +56,17 @@ export default () => {
     },
     {
       label: t("QUESTIONNAIRE.START_DATE"),
-      field: 'startDate',
+      field: "startDate",
       sort: "asc",
     },
     {
       label: t("QUESTIONNAIRE.END_DATE"),
-      field: 'endDate',
+      field: "endDate",
       sort: "asc"
     },
     {
       label: t("QUESTIONNAIRE.RELEASED_DATE"),
-      field: 'endDate',
+      field: "endDate",
       sort: "asc"
     },
     {
@@ -101,7 +101,7 @@ export default () => {
         setAlert({
           show: true,
           color: ALERT_DANGER,
-          message: t('COMMON.ERROR.UNKNOWN_SERVER_ERROR'),
+          message: t("COMMON.ERROR.UNKNOWN_SERVER_ERROR"),
         });
         setLoading(false);
       });
@@ -148,7 +148,7 @@ export default () => {
         setAlert({
           show: true,
           color: ALERT_DANGER,
-          message: t('COMMON.ERROR.UNKNOWN_SERVER_ERROR'),
+          message: t("COMMON.ERROR.UNKNOWN_SERVER_ERROR"),
         });
         scroll.scrollToTop({
           duration: TRANSITION_TIME,
@@ -172,8 +172,8 @@ export default () => {
         <title>{t("NAVBAR.QUESTIONNAIRE.PACKAGES")} - {t("SITE_NAME")}</title>
       </Helmet>
       <MDBBreadcrumb>
-        <MDBBreadcrumbItem>{t('NAVBAR.QUESTIONNAIRE.QUESTIONNAIRE')}</MDBBreadcrumbItem>
-        <MDBBreadcrumbItem active>{t('NAVBAR.QUESTIONNAIRE.PACKAGES')}</MDBBreadcrumbItem>
+        <MDBBreadcrumbItem>{t("NAVBAR.QUESTIONNAIRE.QUESTIONNAIRE")}</MDBBreadcrumbItem>
+        <MDBBreadcrumbItem active>{t("NAVBAR.QUESTIONNAIRE.PACKAGES")}</MDBBreadcrumbItem>
       </MDBBreadcrumb>
       {!!loading && <Loading/>}
       {!loading && !items.length && <ErrorNoData/>}

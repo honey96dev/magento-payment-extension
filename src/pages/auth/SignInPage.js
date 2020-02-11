@@ -54,7 +54,7 @@ export default (props) => {
       if (res.result === SUCCESS) {
         dispatch(auth.successSignIn(res.data));
         const params = new URLSearchParams(props.location.search);
-        const redirect = params.get('redirect');
+        const redirect = params.get("redirect");
         history.push(redirect || routes.root);
       } else {
         dispatch(auth.failureSignIn(res.message));
@@ -70,7 +70,7 @@ export default (props) => {
       setAlert({
         show: true,
         color: ALERT_DANGER,
-        message: t('COMMON.ERROR.UNKNOWN_SERVER_ERROR'),
+        message: t("COMMON.ERROR.UNKNOWN_SERVER_ERROR"),
       });
     }
   };

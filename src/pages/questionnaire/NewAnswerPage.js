@@ -65,7 +65,7 @@ export default ({}) => {
         setAlert({
           show: true,
           color: ALERT_DANGER,
-          message: t('COMMON.ERROR.UNKNOWN_SERVER_ERROR'),
+          message: t("COMMON.ERROR.UNKNOWN_SERVER_ERROR"),
         });
       });
     !!id && Service.getAnswer({id})
@@ -86,7 +86,7 @@ export default ({}) => {
         setAlert({
           show: true,
           color: ALERT_DANGER,
-          message: t('COMMON.ERROR.UNKNOWN_SERVER_ERROR'),
+          message: t("COMMON.ERROR.UNKNOWN_SERVER_ERROR"),
         });
         setLoading(false);
       });
@@ -107,7 +107,7 @@ export default ({}) => {
       setAlert({
         show: true,
         color: ALERT_DANGER,
-        message: t('COMMON.ERROR.UNKNOWN_SERVER_ERROR'),
+        message: t("COMMON.ERROR.UNKNOWN_SERVER_ERROR"),
       });
     }
   };
@@ -122,9 +122,9 @@ export default ({}) => {
         <title>{!!itemId ? t("QUESTIONNAIRE.ADD_ANSWER.MODIFY_ANSWER") : t("QUESTIONNAIRE.ADD_ANSWER.ADD_ANSWER")} - {t("SITE_NAME")}</title>
       </Helmet>
       <MDBBreadcrumb>
-        <MDBBreadcrumbItem>{t('NAVBAR.QUESTIONNAIRE.QUESTIONNAIRE')}</MDBBreadcrumbItem>
-        <MDBBreadcrumbItem><Link to={routes.questionnaire.questions}>{t('NAVBAR.QUESTIONNAIRE.QUESTIONS')}</Link></MDBBreadcrumbItem>
-        <MDBBreadcrumbItem>{t('QUESTIONNAIRE.ANSWERS.ANSWERS')}</MDBBreadcrumbItem>
+        <MDBBreadcrumbItem>{t("NAVBAR.QUESTIONNAIRE.QUESTIONNAIRE")}</MDBBreadcrumbItem>
+        <MDBBreadcrumbItem><Link to={routes.questionnaire.questions}>{t("NAVBAR.QUESTIONNAIRE.QUESTIONS")}</Link></MDBBreadcrumbItem>
+        <MDBBreadcrumbItem>{t("QUESTIONNAIRE.ANSWERS.ANSWERS")}</MDBBreadcrumbItem>
         <MDBBreadcrumbItem active>{!!itemId ? t("QUESTIONNAIRE.ADD_ANSWER.MODIFY_ANSWER") : t("QUESTIONNAIRE.ADD_ANSWER.ADD_ANSWER")}</MDBBreadcrumbItem>
       </MDBBreadcrumb>
       {!!loading && <Loading/>}

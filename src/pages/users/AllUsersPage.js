@@ -61,32 +61,32 @@ export default () => {
     },
     {
       label: t("USERS.USERNAME"),
-      field: 'username',
+      field: "username",
       sort: "asc",
     },
     {
       label: t("USERS.FIRST_NAME"),
-      field: 'firstName',
+      field: "firstName",
       sort: "asc",
     },
     {
       label: t("USERS.FATHER_NAME"),
-      field: 'lastName',
+      field: "lastName",
       sort: "asc",
     },
     {
       label: t("USERS.LAST_NAME"),
-      field: 'lastName',
+      field: "lastName",
       sort: "asc",
     },
     {
       label: t("USERS.GENDER"),
-      field: 'gender',
+      field: "gender",
       sort: "asc",
     },
     {
       label: t("USERS.PHONE"),
-      field: 'phone',
+      field: "phone",
       sort: "asc",
     },
     {
@@ -126,7 +126,7 @@ export default () => {
         setAlert({
           show: true,
           color: ALERT_DANGER,
-          message: t('COMMON.ERROR.UNKNOWN_SERVER_ERROR'),
+          message: t("COMMON.ERROR.UNKNOWN_SERVER_ERROR"),
         });
         setLoading(false);
       });
@@ -181,7 +181,7 @@ export default () => {
         setAlert({
           show: true,
           color: ALERT_DANGER,
-          message: t('COMMON.ERROR.UNKNOWN_SERVER_ERROR'),
+          message: t("COMMON.ERROR.UNKNOWN_SERVER_ERROR"),
         });
         scroll.scrollToTop({
           duration: TRANSITION_TIME,
@@ -217,7 +217,7 @@ export default () => {
         setAlert({
           show: true,
           color: ALERT_DANGER,
-          message: t('COMMON.ERROR.UNKNOWN_SERVER_ERROR'),
+          message: t("COMMON.ERROR.UNKNOWN_SERVER_ERROR"),
         });
         scroll.scrollToTop({
           duration: TRANSITION_TIME,
@@ -246,13 +246,13 @@ export default () => {
         <title>{t("NAVBAR.USERS.USERS")} - {t("SITE_NAME")}</title>
       </Helmet>
       <MDBBreadcrumb>
-        <MDBBreadcrumbItem>{t('NAVBAR.USERS.USERS')}</MDBBreadcrumbItem>
-        <MDBBreadcrumbItem active>{scope === "all" ? t('NAVBAR.USERS.LIST') : t("NAVBAR.USERS.NEW_LIST")}</MDBBreadcrumbItem>
+        <MDBBreadcrumbItem>{t("NAVBAR.USERS.USERS")}</MDBBreadcrumbItem>
+        <MDBBreadcrumbItem active>{scope === "all" ? t("NAVBAR.USERS.LIST") : t("NAVBAR.USERS.NEW_LIST")}</MDBBreadcrumbItem>
       </MDBBreadcrumb>
       {!!loading && <Loading/>}
       {!loading && <MDBRow>
         <MDBCol md={12}>
-          <h3 className="mt-4 font-weight-bold text-center">{scope === "all" ? t('NAVBAR.USERS.LIST') : t("NAVBAR.USERS.NEW_LIST")}</h3>
+          <h3 className="mt-4 font-weight-bold text-center">{scope === "all" ? t("NAVBAR.USERS.LIST") : t("NAVBAR.USERS.NEW_LIST")}</h3>
         </MDBCol>
         <MDBCol md={12}>
           <CSSTransition in={alert.show} classNames="fade-transition" timeout={TRANSITION_TIME} unmountOnExit appear>

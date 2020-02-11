@@ -62,7 +62,7 @@ export default ({}) => {
         setAlert({
           show: true,
           color: ALERT_DANGER,
-          message: t('COMMON.ERROR.UNKNOWN_SERVER_ERROR'),
+          message: t("COMMON.ERROR.UNKNOWN_SERVER_ERROR"),
         });
       });
     !!id && VoteService.getQuestion({id})
@@ -83,7 +83,7 @@ export default ({}) => {
         setAlert({
           show: true,
           color: ALERT_DANGER,
-          message: t('COMMON.ERROR.UNKNOWN_SERVER_ERROR'),
+          message: t("COMMON.ERROR.UNKNOWN_SERVER_ERROR"),
         });
         setLoading(false);
       });
@@ -104,7 +104,7 @@ export default ({}) => {
       setAlert({
         show: true,
         color: ALERT_DANGER,
-        message: t('COMMON.ERROR.UNKNOWN_SERVER_ERROR'),
+        message: t("COMMON.ERROR.UNKNOWN_SERVER_ERROR"),
       });
     }
   };
@@ -119,9 +119,9 @@ export default ({}) => {
         <title>{!!itemId ? t("VOTE.ADD_QUESTION.MODIFY_QUESTION") : t("VOTE.ADD_QUESTION.ADD_QUESTION")} - {t("SITE_NAME")}</title>
       </Helmet>
       <MDBBreadcrumb>
-        <MDBBreadcrumbItem>{t('NAVBAR.VOTE.VOTE')}</MDBBreadcrumbItem>
-        <MDBBreadcrumbItem>{t('NAVBAR.VOTE.PACKAGES')}</MDBBreadcrumbItem>
-        <MDBBreadcrumbItem>{t('NAVBAR.VOTE.QUESTIONS')}</MDBBreadcrumbItem>
+        <MDBBreadcrumbItem>{t("NAVBAR.VOTE.VOTE")}</MDBBreadcrumbItem>
+        <MDBBreadcrumbItem>{t("NAVBAR.VOTE.PACKAGES")}</MDBBreadcrumbItem>
+        <MDBBreadcrumbItem>{t("NAVBAR.VOTE.QUESTIONS")}</MDBBreadcrumbItem>
         <MDBBreadcrumbItem active>{!!itemId ? t("VOTE.ADD_QUESTION.MODIFY_QUESTION") : t("VOTE.ADD_QUESTION.ADD_QUESTION")}</MDBBreadcrumbItem>
       </MDBBreadcrumb>
       {!!loading && <Loading/>}

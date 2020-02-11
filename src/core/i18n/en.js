@@ -2,7 +2,7 @@ export default {
   NAME: "English",
   CODE: "en",
   DIRECTION: "ltr",
-  SITE_NAME: 'Admin for Knowledge gate',
+  SITE_NAME: "Admin for Knowledge gate",
   COMMON: {
     BUTTON: {
       HOME: "Home",
@@ -53,13 +53,13 @@ export default {
       ERROR_404: "Ops, Page not found",
     },
     GENDER: {
-      MALE: 'Male',
-      FEMALE: 'Female',
+      MALE: "Male",
+      FEMALE: "Female",
     },
     LANGUAGE: {
-      LANGUAGE: 'Language',
-      ENGLISH: 'English',
-      ARABIC: 'عربى',
+      LANGUAGE: "Language",
+      ENGLISH: "English",
+      ARABIC: "عربى",
     },
     FILE_UPLOAD: {
       DEFAULT: "Drag and drop a file here or click",
@@ -126,6 +126,10 @@ export default {
     ABOUT: {
       ABOUT: "About",
       US: "About Us",
+    },
+    MASS_EMAIL: {
+      MASS_EMAIL: "Mass Email",
+      MAIN: "Send Mass Email",
     },
   },
   AUTH: {
@@ -305,6 +309,13 @@ export default {
       ORIGIN_VIDEO: "Current Video",
       BROCHURE: "Brochure",
       VIDEO: "Video",
+    },
+  },
+  MASS_EMAIL: {
+    MAIN: {
+      NAME: "Name",
+      SUBJECT: "Subject",
+      MESSAGE: "Message",
     },
   },
 };

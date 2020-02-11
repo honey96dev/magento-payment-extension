@@ -82,7 +82,7 @@ export default () => {
         setAlert({
           show: true,
           color: ALERT_DANGER,
-          message: t('COMMON.ERROR.UNKNOWN_SERVER_ERROR'),
+          message: t("COMMON.ERROR.UNKNOWN_SERVER_ERROR"),
         });
       });
     Service.answers({questionId, page: currentPage})
@@ -106,7 +106,7 @@ export default () => {
         setAlert({
           show: true,
           color: ALERT_DANGER,
-          message: t('COMMON.ERROR.UNKNOWN_SERVER_ERROR'),
+          message: t("COMMON.ERROR.UNKNOWN_SERVER_ERROR"),
         });
         setLoading(false);
       });
@@ -151,7 +151,7 @@ export default () => {
         setAlert({
           show: true,
           color: ALERT_DANGER,
-          message: t('COMMON.ERROR.UNKNOWN_SERVER_ERROR'),
+          message: t("COMMON.ERROR.UNKNOWN_SERVER_ERROR"),
         });
         scroll.scrollToTop({
           duration: TRANSITION_TIME,
@@ -179,10 +179,10 @@ export default () => {
         <title>{t("QUESTIONNAIRE.ANSWERS.ANSWERS")} - {t("SITE_NAME")}</title>
       </Helmet>
       <MDBBreadcrumb>
-        <MDBBreadcrumbItem>{t('NAVBAR.QUESTIONNAIRE.QUESTIONNAIRE')}</MDBBreadcrumbItem>
-        <MDBBreadcrumbItem><Link to={`${routes.questionnaire.packages}/${page3 || 1}`}>{t('NAVBAR.QUESTIONNAIRE.PACKAGES')}</Link></MDBBreadcrumbItem>
-        <MDBBreadcrumbItem><Link to={`${routes.questionnaire.questions}/${packageId}/${page2 || 1}/${page3 || 1}`}>{t('NAVBAR.QUESTIONNAIRE.QUESTIONS')}</Link></MDBBreadcrumbItem>
-        <MDBBreadcrumbItem active>{t('QUESTIONNAIRE.ANSWERS.ANSWERS')}</MDBBreadcrumbItem>
+        <MDBBreadcrumbItem>{t("NAVBAR.QUESTIONNAIRE.QUESTIONNAIRE")}</MDBBreadcrumbItem>
+        <MDBBreadcrumbItem><Link to={`${routes.questionnaire.packages}/${page3 || 1}`}>{t("NAVBAR.QUESTIONNAIRE.PACKAGES")}</Link></MDBBreadcrumbItem>
+        <MDBBreadcrumbItem><Link to={`${routes.questionnaire.questions}/${packageId}/${page2 || 1}/${page3 || 1}`}>{t("NAVBAR.QUESTIONNAIRE.QUESTIONS")}</Link></MDBBreadcrumbItem>
+        <MDBBreadcrumbItem active>{t("QUESTIONNAIRE.ANSWERS.ANSWERS")}</MDBBreadcrumbItem>
       </MDBBreadcrumb>
       {!!loading && <Loading/>}
       {!loading && <MDBRow>

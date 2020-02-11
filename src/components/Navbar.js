@@ -156,6 +156,16 @@ export default ({thresholdY}) => {
               </MDBDropdownMenu>
             </MDBDropdown>
           </MDBNavItem>
+          <MDBNavItem active={pathname.startsWith(routes.massEmail.root)}>
+            <MDBDropdown>
+              <MDBDropdownToggle nav caret>
+                <span className="mr-2">{t("NAVBAR.MASS_EMAIL.MASS_EMAIL")}</span>
+              </MDBDropdownToggle>
+              <MDBDropdownMenu className="text-left">
+                <MDBDropdownItem onClick={() => history.push(routes.massEmail.main)}>{t("NAVBAR.MASS_EMAIL.MAIN")}</MDBDropdownItem>
+              </MDBDropdownMenu>
+            </MDBDropdown>
+          </MDBNavItem>
         </MDBNavbarNav>
         <MDBNavbarNav right>
           <MDBNavItem>

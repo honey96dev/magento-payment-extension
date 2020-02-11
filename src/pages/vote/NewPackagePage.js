@@ -72,7 +72,7 @@ export default ({}) => {
         setAlert({
           show: true,
           color: ALERT_DANGER,
-          message: t('COMMON.ERROR.UNKNOWN_SERVER_ERROR'),
+          message: t("COMMON.ERROR.UNKNOWN_SERVER_ERROR"),
         });
         setLoading(false);
       });
@@ -93,7 +93,7 @@ export default ({}) => {
       setAlert({
         show: true,
         color: ALERT_DANGER,
-        message: t('COMMON.ERROR.UNKNOWN_SERVER_ERROR'),
+        message: t("COMMON.ERROR.UNKNOWN_SERVER_ERROR"),
       });
     }
   };
@@ -112,8 +112,8 @@ export default ({}) => {
         <title>{!!itemId ? t("VOTE.ADD_PACKAGE.MODIFY_PACKAGE") : t("VOTE.ADD_PACKAGE.ADD_PACKAGE")} - {t("SITE_NAME")}</title>
       </Helmet>
       <MDBBreadcrumb>
-        <MDBBreadcrumbItem>{t('NAVBAR.VOTE.VOTE')}</MDBBreadcrumbItem>
-        <MDBBreadcrumbItem><Link to={`${routes.vote.packages}/${page || 1}`}>{t('NAVBAR.VOTE.PACKAGES')}</Link></MDBBreadcrumbItem>
+        <MDBBreadcrumbItem>{t("NAVBAR.VOTE.VOTE")}</MDBBreadcrumbItem>
+        <MDBBreadcrumbItem><Link to={`${routes.vote.packages}/${page || 1}`}>{t("NAVBAR.VOTE.PACKAGES")}</Link></MDBBreadcrumbItem>
         <MDBBreadcrumbItem active>{!!itemId ? t("VOTE.ADD_PACKAGE.MODIFY_PACKAGE") : t("VOTE.ADD_PACKAGE.ADD_PACKAGE")}</MDBBreadcrumbItem>
       </MDBBreadcrumb>
       {!!loading && <Loading/>}

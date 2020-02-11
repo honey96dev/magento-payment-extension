@@ -21,17 +21,17 @@ export default () => {
   let idleTimer = useRef();
 
   const onActive = e => {
-    // console.log('user is active', e);
-    // console.log('time remaining', idleTimer.getRemainingTime());
+    // console.log("user is active", e);
+    // console.log("time remaining", idleTimer.getRemainingTime());
   };
 
   const onAction = e => {
-    // console.log('user did something', e);
+    // console.log("user did something", e);
   };
 
   const onIdle = e => {
-    // console.log('user is idle', e);
-    // console.log('last active', idleTimer.getLastActiveTime());
+    // console.log("user is idle", e);
+    // console.log("last active", idleTimer.getLastActiveTime());
     dispatch(authAction.signOut());
   };
 

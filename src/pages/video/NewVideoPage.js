@@ -71,7 +71,7 @@ export default ({}) => {
         setAlert({
           show: true,
           color: ALERT_DANGER,
-          message: t('COMMON.ERROR.UNKNOWN_SERVER_ERROR'),
+          message: t("COMMON.ERROR.UNKNOWN_SERVER_ERROR"),
         });
         setLoading(false);
       });
@@ -96,7 +96,7 @@ export default ({}) => {
       setAlert({
         show: true,
         color: ALERT_DANGER,
-        message: t('COMMON.ERROR.UNKNOWN_SERVER_ERROR'),
+        message: t("COMMON.ERROR.UNKNOWN_SERVER_ERROR"),
       });
     }
   };
@@ -115,7 +115,7 @@ export default ({}) => {
         <title>{!!itemId ? t("VIDEO.ADD.MODIFY_VIDEO") : t("VIDEO.ADD.ADD_VIDEO")} - {t("SITE_NAME")}</title>
       </Helmet>
       <MDBBreadcrumb>
-        <MDBBreadcrumbItem><Link to={routes.video.all}>{t('NAVBAR.VIDEO.VIDEO')}</Link></MDBBreadcrumbItem>
+        <MDBBreadcrumbItem><Link to={routes.video.all}>{t("NAVBAR.VIDEO.VIDEO")}</Link></MDBBreadcrumbItem>
         <MDBBreadcrumbItem active>{!!itemId ? t("VIDEO.ADD.MODIFY_VIDEO") : t("VIDEO.ADD.ADD_VIDEO")}</MDBBreadcrumbItem>
       </MDBBreadcrumb>
       {!!loading && <Loading/>}

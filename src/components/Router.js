@@ -17,6 +17,7 @@ const QuestionnairePage = lazy(() => import("pages/questionnaire/RootPage"));
 const VotePage = lazy(() => import("pages/vote/RootPage"));
 const UsersPage = lazy(() => import("pages/users/RootPage"));
 const AboutPage = lazy(() => import("pages/about/RootPage"));
+const MassEmailPage = lazy(() => import("pages/mass-email/RootPage"));
 
 export default () => {
   return (
@@ -31,6 +32,7 @@ export default () => {
       <SignedInRoute path={routes.vote.root} component={VotePage}/>
       <SignedInRoute path={routes.users.root} component={UsersPage}/>
       <SignedInRoute path={routes.about.root} component={AboutPage}/>
+      <SignedInRoute path={routes.massEmail.root} component={MassEmailPage}/>
       <SignedInRoute component={Error404Page}/>
     </Switch>
   );
