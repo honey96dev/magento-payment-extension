@@ -24,6 +24,8 @@ export const routes = {
     detail: `${ROUTE_BASE}/posts/detail`,
     topics: `${ROUTE_BASE}/posts/topics`,
     addTopic: `${ROUTE_BASE}/posts/topics/add`,
+    magazines: `${ROUTE_BASE}/posts/magazines`,
+    addMagazine: `${ROUTE_BASE}/posts/magazines/add`,
   },
   news: {
     root: `${ROUTE_BASE}/news`,

@@ -25,6 +25,10 @@ export default {
     saveTopic: "posts/save-topic",
     deleteTopic: "posts/delete-topic",
     getTopic: "posts/get-topic",
+    magazines: "posts/magazines",
+    saveMagazine: "posts/save-magazine",
+    deleteMagazine: "posts/delete-magazine",
+    getMagazine: "posts/get-magazine",
   },
   news: {
     list: "news/list",

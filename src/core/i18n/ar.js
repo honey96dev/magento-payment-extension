@@ -92,6 +92,7 @@ export default {
       ALLOWED: "المشاركات المسموح بها",
       DENIED: "المشاركات المرفوضة",
       TOPICS: "المواضيع",
+      MAGAZINES: "المجلة الشهرية",
     },
     NEWS: {
       NEWS: "الأخبار",
@@ -200,6 +201,13 @@ export default {
       TOPIC: "موضوع",
       ADD_TOPIC: "أضف موضوع",
       EDIT_TOPIC: "تحرير الموضوع",
+    },
+    MAGAZINES: {
+      DATE: "تاريخ",
+      TITLE: "عنوان",
+      DESCRIPTION: "وصف",
+      ADD_MAGAZINE: "إضافة مجلة",
+      EDIT_MAGAZINE: "تحرير مجلة",
     },
   },
   NEWS: {

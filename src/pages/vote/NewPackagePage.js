@@ -151,12 +151,12 @@ export default ({}) => {
             </MDBRow>
             <MDBRow>
               <MDBCol md={6}>
-                <MDBDatePicker ref={dateRef1} format={DATE_FORMAT_ISO} autoOk /*locale={moment.locale(t("CODE"))}*/ className="date-picker" value={startDate} getValue={val => setStartDate(val)}
+                <MDBDatePicker ref={dateRef1} format={DATE_FORMAT_ISO} autoOk keyboard /*locale={moment.locale(t("CODE"))}*/ className="date-picker" value={startDate} getValue={val => setStartDate(val)}
                 />
                 <label className="date-picker-label">{t("VOTE.START_DATE")}</label>
               </MDBCol>
               <MDBCol md={6}>
-                <MDBDatePicker ref={dateRef2} format={DATE_FORMAT_ISO} autoOk /*locale={moment.locale(t("CODE"))}*/ className="date-picker" value={endDate} getValue={val => setEndDate(val)}
+                <MDBDatePicker ref={dateRef2} format={DATE_FORMAT_ISO} autoOk keyboard /*locale={moment.locale(t("CODE"))}*/ className="date-picker" value={endDate} getValue={val => setEndDate(val)}
                 />
                 <label className="date-picker-label">{t("VOTE.END_DATE")}</label>
               </MDBCol>

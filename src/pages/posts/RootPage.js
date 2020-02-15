@@ -11,6 +11,8 @@ import AllPostsPage from "./AllPostsPage";
 import PostDetailPage from "./PostDetailPage";
 import TopicsPage from "./TopicsPage";
 import NewTopicPage from "./NewTopicPage";
+import MagazinesPage from "./MagazinesPage";
+import NewMagazinePage from "./NewMagazinePage";
 
 import "./RootPage.scss";
 
@@ -20,6 +22,8 @@ export default () => {
       <Navbar/>
       <MDBContainer className={"section"}>
         <Switch>
+          <Route path={`${routes.posts.addMagazine}/:id?`} exact component={NewMagazinePage}/>
+          <Route path={`${routes.posts.magazines}/:page?`} exact component={MagazinesPage}/>
           <Route path={`${routes.posts.addTopic}/:id?`} exact component={NewTopicPage}/>
           <Route path={`${routes.posts.topics}/:page?`} exact component={TopicsPage}/>
           <Route path={`${routes.posts.detail}/:id`} component={PostDetailPage}/>

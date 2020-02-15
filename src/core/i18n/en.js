@@ -92,6 +92,7 @@ export default {
       ALLOWED: "Allowed Articles",
       DENIED: "Denied Articles",
       TOPICS: "Topics",
+      MAGAZINES: "Monthly Magazines",
     },
     NEWS: {
       NEWS: "News",
@@ -200,6 +201,13 @@ export default {
       TOPIC: "Topic",
       ADD_TOPIC: "Add Topic",
       EDIT_TOPIC: "Edit Topic",
+    },
+    MAGAZINES: {
+      DATE: "Date",
+      TITLE: "Title",
+      DESCRIPTION: "Description",
+      ADD_MAGAZINE: "Add Magazine",
+      EDIT_MAGAZINE: "Edit Magazine",
     },
   },
   NEWS: {
