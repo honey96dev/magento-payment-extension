@@ -232,9 +232,9 @@ export default {
       MODIFY_VIDEO: "تعديل الفيديو",
     },
     SECTIONS: {
+      SECTION: "الجزء",
       ADD_SECTION: "إضافة قسم",
       EDIT_SECTION: "تحرير القسم",
-      SECTION: "الجزء",
     },
   },
   QUESTIONNAIRE: {

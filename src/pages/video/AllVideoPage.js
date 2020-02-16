@@ -17,17 +17,16 @@ import {animateScroll as scroll} from "react-scroll";
 import {Helmet} from "react-helmet";
 import {CSSTransition} from "react-transition-group";
 
+import {ALERT_DANGER, SUCCESS, TRANSITION_TIME} from "core/globals";
+import routes from "core/routes";
 import Videos from "components/Videos";
 import Loading from "components/Loading";
 import ErrorNoData from "components/ErrorNoData";
 import Pagination from "components/Pagination";
-import VideoService from "services/VideoService";
-import {ALERT_DANGER, SUCCESS, TRANSITION_TIME} from "core/globals";
-import routes from "core/routes";
+import SectionsList from "components/SectionsList";
+import Service from "services/VideoService";
 
 import "./AllVideoPage.scss";
-import SectionsList from "../../components/SectionsList";
-import Service from "../../services/VideoService";
 
 export default () => {
   const {page} = useParams();
@@ -50,7 +49,7 @@ export default () => {
     scroll.scrollToTop({
       duration: TRANSITION_TIME,
     });
-    VideoService.list({page, sections: sectionChecked})
+    Service.list({page, sections: sectionChecked})
       .then(res => {
         if (res.result === SUCCESS) {
           setPageCount(res.pageCount);
@@ -91,7 +90,7 @@ export default () => {
   };
 
   const deletePost = id => {
-    VideoService.delete({id: modal.deleteId, page})
+    Service.delete({id: modal.deleteId, page})
       .then(res => {
         if (res.result === SUCCESS) {
           setPageCount(res.pageCount);

@@ -232,9 +232,9 @@ export default {
       MODIFY_VIDEO: "Modify Video",
     },
     SECTIONS: {
+      SECTION: "Section",
       ADD_SECTION: "Add Section",
       EDIT_SECTION: "Edit Section",
-      SECTION: "Section",
     },
   },
   QUESTIONNAIRE: {

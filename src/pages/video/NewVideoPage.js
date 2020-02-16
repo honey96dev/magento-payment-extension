@@ -19,12 +19,12 @@ import {CSSTransition} from "react-transition-group";
 
 import routes from "core/routes";
 import validators from "core/validators";
-import Service from "services/VideoService";
 import {ALERT_DANGER, SUCCESS, TEXTAREA_ROWS2, TRANSITION_TIME} from "core/globals";
 import Loading from "components/Loading";
+import SectionsList from "components/SectionsList";
+import Service from "services/VideoService";
 
 import "./NewVideoPage.scss";
-import SectionsList from "../../components/SectionsList";
 
 
 export default ({}) => {
