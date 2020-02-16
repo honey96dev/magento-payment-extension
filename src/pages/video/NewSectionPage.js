@@ -20,9 +20,9 @@ import {CSSTransition} from "react-transition-group";
 import routes from "core/routes";
 import {ALERT_DANGER, SUCCESS, TRANSITION_TIME} from "core/globals";
 import Loading from "components/Loading"
-import Service from "services/PostsService";
+import Service from "services/VideoService";
 
-import "./NewTopicPage.scss";
+import "./NewSectionPage.scss";
 
 
 export default ({}) => {
@@ -36,7 +36,7 @@ export default ({}) => {
   const [modal, setModal] = useState({});
   const [touched, setTouched] = useState({});
   const [itemId, setItemId] = useState();
-  const [topic, setTopic] = useState("");
+  const [section, setSection] = useState("");
 
   useEffect(e => {
     scroll.scrollToTop({
@@ -45,11 +45,11 @@ export default ({}) => {
     setItemId(id);
     !id && setLoading(false);
     !id && setItemId(undefined);
-    !id && setTopic("");
-    !!id && Service.getTopic({id})
+    !id && setSection("");
+    !!id && Service.getSection({id})
       .then(res => {
         if (res.result === SUCCESS) {
-          setTopic(res.data.topic);
+          setSection(res.data.section);
         } else {
           setAlert({
             show: true,
@@ -74,7 +74,7 @@ export default ({}) => {
     e.preventDefault();
 
     try {
-      let res = await Service.saveTopic({id: itemId, topic});
+      let res = await Service.saveSection({id: itemId, section});
       !itemId && setItemId(res.data.insertId);
       setAlert({
         show: true,
@@ -93,10 +93,10 @@ export default ({}) => {
   const handleNew = e => {
     setAlert({});
     setItemId(undefined);
-    setTopic("");
+    setSection("");
     setTouched({});
 
-    history.push(routes.posts.addTopic);
+    history.push(routes.video.addSection);
   };
 
   const handleGoBack = e => {
@@ -106,12 +106,12 @@ export default ({}) => {
   return (
     <div>
       <Helmet>
-        <title>{!!itemId ? t("POSTS.TOPICS.EDIT_TOPIC") : t("POSTS.TOPICS.ADD_TOPIC")} - {t("SITE_NAME")}</title>
+        <title>{!!itemId ? t("VIDEO.SECTIONS.EDIT_SECTION") : t("VIDEO.SECTIONS.ADD_SECTION")} - {t("SITE_NAME")}</title>
       </Helmet>
       <MDBBreadcrumb>
-        <MDBBreadcrumbItem>{t("NAVBAR.POSTS.POSTS")}</MDBBreadcrumbItem>
-        <MDBBreadcrumbItem><Link to={routes.posts.topics}>{t("NAVBAR.POSTS.TOPICS")}</Link></MDBBreadcrumbItem>
-        <MDBBreadcrumbItem active>{!!itemId ? t("POSTS.TOPICS.EDIT_TOPIC") : t("POSTS.TOPICS.ADD_TOPIC")}</MDBBreadcrumbItem>
+        <MDBBreadcrumbItem>{t("NAVBAR.VIDEO.VIDEO")}</MDBBreadcrumbItem>
+        <MDBBreadcrumbItem><Link to={routes.video.sections}>{t("NAVBAR.VIDEO.SECTIONS")}</Link></MDBBreadcrumbItem>
+        <MDBBreadcrumbItem active>{!!itemId ? t("VIDEO.SECTIONS.EDIT_SECTION") : t("VIDEO.SECTIONS.ADD_SECTION")}</MDBBreadcrumbItem>
       </MDBBreadcrumb>
       {!!loading && <Loading/>}
       {!loading && <MDBCard>
@@ -119,13 +119,13 @@ export default ({}) => {
           <form onSubmit={handleSubmit}>
             <div className="text-center">
               <h3 className="dark-grey-text mt-3 mb-0">
-                <strong>{!!itemId ? t("POSTS.TOPICS.EDIT_TOPIC") : t("POSTS.TOPICS.ADD_TOPIC")}</strong>
+                <strong>{!!itemId ? t("VIDEO.SECTIONS.EDIT_SECTION") : t("VIDEO.SECTIONS.ADD_SECTION")}</strong>
               </h3>
             </div>
             <MDBRow>
               <MDBCol md={12}>
-                <MDBInput label={t("POSTS.TOPICS.TOPIC")} outline autoFocus value={topic} onChange={e => setTopic(e.target.value)} onBlur={e => setTouched(Object.assign({}, touched, {topic: true}))}>
-                  {touched.topic && topic.length === 0 && <div className="invalid-field">{t("COMMON.VALIDATION.REQUIRED", {field: t("POSTS.TOPICS.TOPIC")})}</div>}
+                <MDBInput label={t("VIDEO.SECTIONS.SECTION")} outline autoFocus value={section} onChange={e => setSection(e.target.value)} onBlur={e => setTouched(Object.assign({}, touched, {section: true}))}>
+                  {touched.section && section.length === 0 && <div className="invalid-field">{t("COMMON.VALIDATION.REQUIRED", {field: t("VIDEO.SECTIONS.SECTION")})}</div>}
                 </MDBInput>
               </MDBCol>
             </MDBRow>
@@ -133,7 +133,7 @@ export default ({}) => {
               <MDBAlert color={alert.color} dismiss onClosed={() => setAlert({})}>{alert.message}</MDBAlert>
             </CSSTransition>
             <Fragment>
-              <MDBBtn type="submit" color="indigo" size="sm" disabled={!topic || !topic.length}>{!!itemId ? t("COMMON.BUTTON.MODIFY") : t("COMMON.BUTTON.ADD")}</MDBBtn>
+              <MDBBtn type="submit" color="indigo" size="sm" disabled={!section || !section.length}>{!!itemId ? t("COMMON.BUTTON.MODIFY") : t("COMMON.BUTTON.ADD")}</MDBBtn>
               <MDBBtn type="button" color="primary" size="sm" disabled={!!loading}
                       onClick={handleNew}>{t("COMMON.BUTTON.NEW")}</MDBBtn>
               <MDBBtn flat size="sm" onClick={handleGoBack}>{t("COMMON.BUTTON.BACK")}</MDBBtn>

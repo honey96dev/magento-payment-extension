@@ -2,7 +2,7 @@ import {isDev} from "core/globals";
 
 export default {
   baseUrl: isDev ? "http://localhost:8080/admin/api/" : "/api/",
-  assetsBaseUrl: isDev ? "http://localhost:8080/admin/assets/" : "/assets/",
+  assetsBaseUrl: isDev ? "http://localhost:8080/admin/assets/" : "//admin-knowledge.hrgulf.org/assets/",
   auth: {
     signIn: "auth/sign-in",
     signUp: "auth/sign-up",
@@ -43,6 +43,10 @@ export default {
     delete: "video/delete",
     get: "video/get",
     count: "video/count",
+    sections: "video/sections",
+    saveSection: "video/save-section",
+    deleteSection: "video/delete-section",
+    getSection: "video/get-section",
   },
   questionnaire: {
     packages: "questionnaire/packages",

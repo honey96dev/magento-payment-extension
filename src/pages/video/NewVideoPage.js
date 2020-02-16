@@ -19,11 +19,12 @@ import {CSSTransition} from "react-transition-group";
 
 import routes from "core/routes";
 import validators from "core/validators";
-import VideoService from "services/VideoService";
+import Service from "services/VideoService";
 import {ALERT_DANGER, SUCCESS, TEXTAREA_ROWS2, TRANSITION_TIME} from "core/globals";
 import Loading from "components/Loading";
 
 import "./NewVideoPage.scss";
+import SectionsList from "../../components/SectionsList";
 
 
 export default ({}) => {
@@ -36,10 +37,14 @@ export default ({}) => {
   const [alert, setAlert] = useState({});
   const [modal, setModal] = useState({});
   const [touched, setTouched] = useState({});
+
+  const [sectionList, setSectionList] = useState([]);
+
   const [itemId, setItemId] = useState();
   const [title, setTitle] = useState("");
   const [url, setUrl] = useState("");
   const [isFile, setIsFile] = useState(false);
+  const [sections, setSections] = useState([]);
 
   useEffect(e => {
     scroll.scrollToTop({
@@ -51,12 +56,14 @@ export default ({}) => {
     !id && setTitle("");
     !id && setUrl("");
     !id && setIsFile(false);
-    !!id && VideoService.get({id})
+    !id && setSections([]);
+    !!id && Service.get({id})
       .then(res => {
         if (res.result === SUCCESS) {
           setTitle(res.data.title);
           setUrl(res.data.url);
           setIsFile(res.data.isFile);
+          setSections(res.data.sectionIds.split(","));
         } else {
           setAlert({
             show: true,
@@ -67,7 +74,6 @@ export default ({}) => {
         setLoading(false);
       })
       .catch(err => {
-        console.log(err);
         setAlert({
           show: true,
           color: ALERT_DANGER,
@@ -75,17 +81,33 @@ export default ({}) => {
         });
         setLoading(false);
       });
+    
+    Service.sections({})
+      .then(res => {
+        if (res.result === SUCCESS) {
+          setSectionList(res.data);
+        } else {
+          setSectionList([]);
+        }
+      })
+      .catch(err => {
+        setSectionList([]);
+      });
   }, [id]);
 
   const toggleModal = e => {
     setModal(Object.assign({}, modal, {show: !modal.show}));
   };
 
+  const handleSectionsUpdate = e => {
+    setSections(e);
+  };
+
   const handleSubmit = async e => {
     e.preventDefault();
 
     try {
-      let res = await VideoService.save({id: itemId, userId: auth.user.id, title, url, isFile});
+      let res = await Service.save({id: itemId, userId: auth.user.id, title, url, isFile, sectionIds: sections.join(",")});
       !itemId && setItemId(res.data.insertId);
       setAlert({
         show: true,
@@ -107,6 +129,7 @@ export default ({}) => {
     setTitle("");
     setUrl("");
     setIsFile(false);
+    setSections([]);
     setTouched({});
 
     history.push(routes.video.add);
@@ -130,7 +153,7 @@ export default ({}) => {
         <MDBBreadcrumbItem active>{!!itemId ? t("VIDEO.ADD.MODIFY_VIDEO") : t("VIDEO.ADD.ADD_VIDEO")}</MDBBreadcrumbItem>
       </MDBBreadcrumb>
       {!!loading && <Loading/>}
-      <MDBCard>
+      {!loading && <MDBCard>
         <MDBCardBody className="mx-md-4 mx-sm-1 text-left">
           <form onSubmit={handleSubmit}>
             <div className="text-center">
@@ -139,7 +162,7 @@ export default ({}) => {
               </h3>
             </div>
             <MDBRow>
-              <MDBCol md={12}>
+              <MDBCol md={8}>
                 <MDBInput label={t("VIDEO.TITLE")} outline autoFocus value={title} onChange={e => setTitle(e.target.value)} onBlur={e => setTouched(Object.assign({}, touched, {title: true}))}>
                   {touched.title && title.length === 0 && <div className="invalid-field">{t("COMMON.VALIDATION.REQUIRED", {field: t("VIDEO.TITLE")})}</div>}
                 </MDBInput>
@@ -148,6 +171,11 @@ export default ({}) => {
                 </MDBInput>
                 <div className="my-4">
                   <MDBInput label={t("VIDEO.IS_FILE")} type="checkbox" filled id="isFile" checked={isFile} onClick={e => setIsFile(!isFile)} />
+                </div>
+              </MDBCol>
+              <MDBCol md={4}>
+                <div className="md-form">
+                  <SectionsList sections={sectionList} initChecked={sections} onUpdate={handleSectionsUpdate}/>
                 </div>
               </MDBCol>
             </MDBRow>
@@ -162,7 +190,7 @@ export default ({}) => {
             </Fragment>
           </form>
         </MDBCardBody>
-      </MDBCard>
+      </MDBCard>}
     </div>
   )
 };

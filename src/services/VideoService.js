@@ -57,4 +57,48 @@ export default {
         });
     });
   },
+
+  sections: (params) => {
+    return new Promise((resolve, reject) => {
+      fetch(POST, apis.video.sections, params)
+        .then(res => {
+          resolve(res);
+        }, err => {
+          reject(err);
+        });
+    });
+  },
+
+  saveSection: (params) => {
+    return new Promise((resolve, reject) => {
+      fetch(POST, apis.video.saveSection, params)
+        .then(res => {
+          resolve(res);
+        }, err => {
+          reject(err);
+        });
+    });
+  },
+
+  deleteSection: (params) => {
+    return new Promise((resolve, reject) => {
+      fetch(POST, apis.video.deleteSection, params)
+        .then(res => {
+          resolve(res);
+        }, err => {
+          reject(err);
+        });
+    });
+  },
+
+  getSection: (params) => {
+    return new Promise((resolve, reject) => {
+      fetch(POST, apis.video.getSection, params)
+        .then(res => {
+          resolve(res);
+        }, err => {
+          reject(err);
+        });
+    });
+  },
 };

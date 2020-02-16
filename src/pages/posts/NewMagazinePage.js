@@ -152,7 +152,7 @@ export default ({}) => {
         <MDBBreadcrumbItem active>{!!itemId ? t("POSTS.MAGAZINES.EDIT_MAGAZINE") : t("POSTS.MAGAZINES.ADD_MAGAZINE")}</MDBBreadcrumbItem>
       </MDBBreadcrumb>
       {!!loading && <Loading/>}
-      <MDBCard>
+      {!loading && <MDBCard>
         <MDBCardBody className="mx-md-4 mx-sm-1 text-left">
           <form onSubmit={handleSubmit}>
             <div className="text-center">
@@ -209,7 +209,7 @@ export default ({}) => {
             </Fragment>
           </form>
         </MDBCardBody>
-      </MDBCard>
+      </MDBCard>}
     </div>
   )
 };

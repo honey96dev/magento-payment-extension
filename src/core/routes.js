@@ -36,6 +36,8 @@ export const routes = {
     root: `${ROUTE_BASE}/video`,
     all: `${ROUTE_BASE}/video`,
     add: `${ROUTE_BASE}/video/add`,
+    sections: `${ROUTE_BASE}/video/sections`,
+    addSection: `${ROUTE_BASE}/video/sections/add`,
   },
   questionnaire: {
     root: `${ROUTE_BASE}/questionnaire`,

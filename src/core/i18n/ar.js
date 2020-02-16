@@ -103,6 +103,7 @@ export default {
       VIDEO: "المقاطع التعليمية",
       ALL: "جميع المقاطع التعليمية",
       ADD: "أضف مقطع تعليمي",
+      SECTIONS: "الأقسام",
     },
     QUESTIONNAIRE: {
       QUESTIONNAIRE: "الإستفتاء",
@@ -229,6 +230,11 @@ export default {
     ADD: {
       ADD_VIDEO: "أضف فيديو",
       MODIFY_VIDEO: "تعديل الفيديو",
+    },
+    SECTIONS: {
+      ADD_SECTION: "إضافة قسم",
+      EDIT_SECTION: "تحرير القسم",
+      SECTION: "الجزء",
     },
   },
   QUESTIONNAIRE: {

@@ -105,6 +105,8 @@ export default ({thresholdY}) => {
               <MDBDropdownMenu className="text-left">
                 <MDBDropdownItem onClick={() => history.push(routes.video.all)}>{t("NAVBAR.VIDEO.ALL")}</MDBDropdownItem>
                 <MDBDropdownItem onClick={() => history.push(routes.video.add)}>{t("NAVBAR.VIDEO.ADD")}</MDBDropdownItem>
+                <MDBDropdownItem onClick={() => history.push(routes.video.sections)}>{t("NAVBAR.VIDEO.SECTIONS")}</MDBDropdownItem>
+                {/*<MDBDropdownItem onClick={() => history.push(routes.video.addSection)}>{t("NAVBAR.VIDEO.ADD")}</MDBDropdownItem>*/}
               </MDBDropdownMenu>
             </MDBDropdown>
           </MDBNavItem>

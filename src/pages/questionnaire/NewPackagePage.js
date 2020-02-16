@@ -134,7 +134,7 @@ export default ({}) => {
         <MDBBreadcrumbItem active>{!!itemId ? t("QUESTIONNAIRE.ADD_PACKAGE.MODIFY_PACKAGE") : t("QUESTIONNAIRE.ADD_PACKAGE.ADD_PACKAGE")}</MDBBreadcrumbItem>
       </MDBBreadcrumb>
       {!!loading && <Loading/>}
-      <MDBCard>
+      {!loading && <MDBCard>
         <MDBCardBody className="mx-md-4 mx-sm-1 text-left">
           <form onSubmit={handleSubmit}>
             <div className="text-center">
@@ -172,7 +172,7 @@ export default ({}) => {
             </Fragment>
           </form>
         </MDBCardBody>
-      </MDBCard>
+      </MDBCard>}
     </div>
   )
 };

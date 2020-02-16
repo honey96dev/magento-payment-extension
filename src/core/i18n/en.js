@@ -103,6 +103,7 @@ export default {
       VIDEO: "Video",
       ALL: "All Video",
       ADD: "Add Video",
+      SECTIONS: "Sections",
     },
     QUESTIONNAIRE: {
       QUESTIONNAIRE: "Questionnaire",
@@ -229,6 +230,11 @@ export default {
     ADD: {
       ADD_VIDEO: "Add Video",
       MODIFY_VIDEO: "Modify Video",
+    },
+    SECTIONS: {
+      ADD_SECTION: "Add Section",
+      EDIT_SECTION: "Edit Section",
+      SECTION: "Section",
     },
   },
   QUESTIONNAIRE: {

@@ -6,28 +6,27 @@ import {
   MDBBreadcrumbItem,
   MDBBtn,
   MDBCol,
+  MDBIcon,
   MDBModal,
   MDBModalBody,
   MDBModalFooter,
   MDBModalHeader,
-  MDBRow
+  MDBRow,
+  MDBTable,
+  MDBTableBody,
+  MDBTableHead
 } from "mdbreact";
 import {useTranslation} from "react-i18next";
 import {animateScroll as scroll} from "react-scroll";
 import {Helmet} from "react-helmet";
 import {CSSTransition} from "react-transition-group";
-
-import Videos from "components/Videos";
 import Loading from "components/Loading";
-import ErrorNoData from "components/ErrorNoData";
 import Pagination from "components/Pagination";
-import VideoService from "services/VideoService";
+import Service from "services/VideoService";
 import {ALERT_DANGER, SUCCESS, TRANSITION_TIME} from "core/globals";
 import routes from "core/routes";
 
-import "./AllVideoPage.scss";
-import SectionsList from "../../components/SectionsList";
-import Service from "../../services/VideoService";
+import "./SectionsPage.scss";
 
 export default () => {
   const {page} = useParams();
@@ -38,21 +37,39 @@ export default () => {
   const [alert, setAlert] = useState({});
   const [modal, setModal] = useState({});
 
-  const [sectionList, setSectionList] = useState([]);
-  const [sectionChecked, setSectionChecked] = useState([]);
-
   const [pageCount, setPageCount] = useState(0);
   const [items, setItems] = useState([]);
 
   const currentPage = page ? parseInt(page) : 1;
 
+  const columns = [
+    {
+      label: "#",
+      field: "id",
+      sort: "asc",
+    },
+    {
+      label: t("VIDEO.SECTIONS.SECTION"),
+      field: "section",
+      sort: "asc",
+    },
+    {
+      label: "",
+      field: "button",
+      sort: "asc"
+    }
+  ];
+
   useEffect(e => {
     scroll.scrollToTop({
       duration: TRANSITION_TIME,
     });
-    VideoService.list({page, sections: sectionChecked})
+    Service.sections({page})
       .then(res => {
         if (res.result === SUCCESS) {
+          for (let row of res.data) {
+            row["button"] = makeButtons(row.id, row.number);
+          }
           setPageCount(res.pageCount);
           setItems(res.data);
         } else {
@@ -72,28 +89,28 @@ export default () => {
         });
         setLoading(false);
       });
+  }, [page, t]);
 
-    Service.sections({})
-      .then(res => {
-        if (res.result === SUCCESS) {
-          setSectionList(res.data);
-        } else {
-          setSectionList([]);
-        }
-      })
-      .catch(err => {
-        setSectionList([]);
-      });
-  }, [page, t, sectionChecked]);
+  const makeButtons = (id, number) => {
+    return (
+      <Fragment>
+        <Link to={`${routes.video.addSection}/${id}`}><MDBBtn tag="a" size="sm" color="indigo" className="mr-2" floating><MDBIcon icon="edit"/></MDBBtn></Link>
+        <MDBBtn tag="a" size="sm" color="danger" floating onClick={e => handleDelete(id, "#" + number)}><MDBIcon icon="trash"/></MDBBtn>
+      </Fragment>
+    );
+  };
 
   const toggleModal = e => {
     setModal(Object.assign({}, modal, {show: !modal.show}));
   };
 
-  const deletePost = id => {
-    VideoService.delete({id: modal.deleteId, page})
+  const deleteItem = id => {
+    Service.deleteSection({id: modal.deleteId, page: currentPage})
       .then(res => {
         if (res.result === SUCCESS) {
+          for (let row of res.data) {
+            row["button"] = makeButtons(row.id, row.number);
+          }
           setPageCount(res.pageCount);
           setItems(res.data);
         } else {
@@ -124,58 +141,81 @@ export default () => {
   };
 
   const handlePageChange = page => {
-    history.push(`${routes.posts.all}/${page}`);
+    history.push(`${routes.video.sections}/${page}`);
   };
 
   const handleDelete = (id, title) => {
     setModal(Object.assign({}, modal, {show: true, title: t("COMMON.BUTTON.DELETE"), message: t("COMMON.QUESTION.DELETE", {item: title}), deleteId: id}));
   };
+
+  const handleGoBack = e => {
+    history.goBack();
+  };
   
   return (
     <Fragment>
       <Helmet>
-        <title>{t("NAVBAR.VIDEO.VIDEO")} - {t("SITE_NAME")}</title>
+        <title>{t("NAVBAR.VIDEO.SECTIONS")} - {t("SITE_NAME")}</title>
       </Helmet>
       <MDBBreadcrumb>
-        <MDBBreadcrumbItem active>{t("NAVBAR.VIDEO.VIDEO")}</MDBBreadcrumbItem>
+        <MDBBreadcrumbItem>{t("NAVBAR.VIDEO.VIDEO")}</MDBBreadcrumbItem>
+        <MDBBreadcrumbItem active>{t("NAVBAR.VIDEO.SECTIONS")}</MDBBreadcrumbItem>
       </MDBBreadcrumb>
       {!!loading && <Loading/>}
-      <MDBRow>
+      {!loading && <MDBRow>
+        <MDBCol md={12}>
+          <h3 className="mt-4 font-weight-bold text-center">{t("NAVBAR.VIDEO.SECTIONS")}</h3>
+        </MDBCol>
         <MDBCol md={12}>
           <CSSTransition in={alert.show} classNames="fade-transition" timeout={TRANSITION_TIME} unmountOnExit appear>
             <MDBAlert color={alert.color} dismiss onClosed={() => setAlert({})}>{alert.message}</MDBAlert>
           </CSSTransition>
         </MDBCol>
-        <MDBCol md={9} className="order-1 order-md-0">
-          {!loading && !items.length && <ErrorNoData/>}
-          {!loading && !!items.length && <Fragment>
-            <div className="mt-5 text-center">
-              <Pagination circle current={currentPage} pageCount={pageCount} onChange={handlePageChange}/>
-            </div>
-            <div className="full-width text-left">
-              <Link to={routes.video.add}>
-                <MDBBtn size="sm" color="primary">
-                  {t("NAVBAR.VIDEO.ADD")}
-                </MDBBtn>
-              </Link>
-            </div>
-            <Videos items={items} detailLabel={t("COMMON.BUTTON.MODIFY")} detailLink={routes.video.add} handleDelete={handleDelete} />
-            <div className="mt-5 text-center">
-              <Pagination circle current={currentPage} pageCount={pageCount} onChange={handlePageChange}/>
-            </div>
-          </Fragment>}
-        </MDBCol>
-        <MDBCol md={3} className="order-0 order-md-1">
-          <div className="section-list text-left">
-            <SectionsList sections={sectionList} onUpdate={setSectionChecked} />
+        {!!pageCount && <MDBCol md={12} className="text-center">
+          <div className="mt-5">
+            <Pagination circle current={currentPage} pageCount={pageCount} onChange={handlePageChange}/>
+          </div>
+        </MDBCol>}
+        <MDBCol md={12} className="text-left mt-3">
+          <div className="full-width">
+            <Link to={`${routes.video.addSection}`}>
+              <MDBBtn size="sm" color="primary">
+                {t("VIDEO.SECTIONS.ADD_SECTION")}
+              </MDBBtn>
+            </Link>
           </div>
         </MDBCol>
-      </MDBRow>
+        <MDBCol md={12}>
+          <MDBTable responsive striped>
+            <MDBTableHead>
+              <tr className="text-left">
+                {columns.map((item, index) => (
+                  <th key={index}>{item.label}</th>
+                ))}
+              </tr>
+            </MDBTableHead>
+            <MDBTableBody>
+              {items.map((item, index) => (
+                <tr key={index} className="text-left">
+                  <td>{item.number}</td>
+                  <td>{item.section}</td>
+                  <td className="p-2 edit-col">{item.button}</td>
+                </tr>
+              ))}
+            </MDBTableBody>
+          </MDBTable>
+        </MDBCol>
+        {!!pageCount && <MDBCol md={12} className="text-center">
+          <div className="mt-5">
+            <Pagination circle current={currentPage} pageCount={pageCount} onChange={handlePageChange}/>
+          </div>
+        </MDBCol>}
+      </MDBRow>}
       <MDBModal isOpen={!!modal.show} toggle={toggleModal} centered>
         <MDBModalHeader toggle={toggleModal}>{modal.title}</MDBModalHeader>
         <MDBModalBody className="text-left">{modal.message}</MDBModalBody>
         <MDBModalFooter>
-          <MDBBtn type="button" color="danger" onClick={deletePost}>{t("COMMON.BUTTON.DELETE")}</MDBBtn>
+          <MDBBtn type="button" color="danger" onClick={deleteItem}>{t("COMMON.BUTTON.DELETE")}</MDBBtn>
           <MDBBtn type="button" color="secondary" onClick={toggleModal}>{t("COMMON.BUTTON.CANCEL")}</MDBBtn>
         </MDBModalFooter>
       </MDBModal>
