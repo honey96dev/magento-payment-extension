@@ -20,7 +20,7 @@ import {CSSTransition} from "react-transition-group";
 import dateformat from "dateformat";
 
 import routes from "core/routes";
-import {ALERT_DANGER, DATE_FORMAT_ISO, SUCCESS, TEXTAREA_ROWS0, TRANSITION_TIME} from "core/globals";
+import {ALERT_DANGER, DATE_FORMAT_ISO, SUCCESS, TRANSITION_TIME} from "core/globals";
 import Loading from "components/Loading"
 import Service from "services/QuestionnaireService";
 
@@ -41,6 +41,7 @@ export default ({}) => {
   const [name, setName] = useState("");
   const [startDate, setStartDate] = useState();
   const [endDate, setEndDate] = useState();
+  const [requireAttachment, setRequireAttachment] = useState(false);
 
   const dateRef1 = createRef(null);
   const dateRef2 = createRef(null);
@@ -85,7 +86,7 @@ export default ({}) => {
     e.preventDefault();
 
     try {
-      let res = await Service.savePackage({id: itemId, userId: auth.user.id, name, startDate: dateformat(startDate, "yyyy-mm-dd"), endDate: dateformat(endDate, "yyyy-mm-dd")});
+      let res = await Service.savePackage({id: itemId, userId: auth.user.id, name, startDate: dateformat(startDate, "yyyy-mm-dd"), endDate: dateformat(endDate, "yyyy-mm-dd"), requireAttachment});
       !itemId && setItemId(res.data.insertId);
       setAlert({
         show: true,
@@ -159,6 +160,11 @@ export default ({}) => {
                 <MDBDatePicker ref={dateRef2} format={DATE_FORMAT_ISO} autoOk keyboard /*locale={moment.locale(t("CODE"))}*/ className="date-picker" value={endDate} getValue={val => setEndDate(val)}
                 />
                 <label className="date-picker-label">{t("QUESTIONNAIRE.END_DATE")}</label>
+              </MDBCol>
+            </MDBRow>
+            <MDBRow>
+              <MDBCol md="12" className="mb-4">
+                <MDBInput id="requireAttachment" type="checkbox" checked={requireAttachment} filled onClick={e => setRequireAttachment(!requireAttachment)} label={t("QUESTIONNAIRE.REQUIRE_ATTACHMENT")}/>
               </MDBCol>
             </MDBRow>
             <CSSTransition in={alert.show} classNames="fade-transition" timeout={TRANSITION_TIME} unmountOnExit appear>

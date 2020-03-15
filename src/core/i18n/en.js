@@ -245,6 +245,7 @@ export default {
     TYPE: "Answer Type",
     START_DATE: "Start Date",
     END_DATE: "End Date",
+    REQUIRE_ATTACHMENT: "Require Attachment",
     RELEASED_DATE: "Published Date",
     ADD_PACKAGE: {
       ADD_PACKAGE: "Add Questionnaire Package",

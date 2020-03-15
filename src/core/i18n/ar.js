@@ -245,6 +245,7 @@ export default {
     TYPE: "نوع الجواب",
     START_DATE: "تاريخ البدء",
     END_DATE: "تاريخ الانتهاء",
+    REQUIRE_ATTACHMENT: "يتطلب المرفق",
     RELEASED_DATE: "تاريخ النشر",
     ADD_PACKAGE: {
       ADD_PACKAGE: "إضافة حزمة",
