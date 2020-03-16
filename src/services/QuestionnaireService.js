@@ -167,4 +167,26 @@ export default {
         });
     });
   },
+
+  downloadAttachment: (params) => {
+    return new Promise((resolve, reject) => {
+      fetch(POST, apis.questionnaire.downloadAttachment, params)
+        .then(res => {
+          resolve(res);
+        }, err => {
+          reject(err);
+        });
+    });
+  },
+
+  downloadResult: (params) => {
+    return new Promise((resolve, reject) => {
+      fetch(POST, apis.questionnaire.downloadResult, params)
+        .then(res => {
+          resolve(res);
+        }, err => {
+          reject(err);
+        });
+    });
+  },
 };

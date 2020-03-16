@@ -211,7 +211,7 @@ export default () => {
                   <td>{item.date}</td>
                   <td>{item.title}</td>
                   <td>{item.description}</td>
-                  <td className="p-2 edit-col">{item.button}</td>
+                  <td className="p-2 edit-col2">{item.button}</td>
                 </tr>
               ))}
             </MDBTableBody>

@@ -270,6 +270,7 @@ export default {
     },
     RESULT: {
       RESULT: "نتيجة الاستبيان",
+      DOWNLOAD_RESULT: "تحميل النتيجة",
     },
   },
   VOTE: {

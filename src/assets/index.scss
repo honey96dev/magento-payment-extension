@@ -231,6 +231,41 @@ textarea.form-control {
   text-align: left !important;
 }
 
+@media (max-width: $screen-breakpoint-lg) {
+  .stepper {
+    margin-left: -0.9rem !important;
+    margin-right: -0.9rem !important;
+  }
+}
+
+.no-col {
+  width: $no-col-width;
+}
+
+.date-col {
+  width: $date-col-width;
+}
+
+.edit-col2 {
+  width: calc(#{$edit-col-width});
+  min-width: calc(#{$edit-col-width});
+}
+
+.edit-col3 {
+  width: calc(#{$edit-col-width} + 43px);
+  min-width: calc(#{$edit-col-width} + 43px);
+}
+
+.edit-col4 {
+  width: 185px;
+  min-width: 185px;
+}
+
+.edit-col5 {
+  width: 229px;
+  min-width: 229px;
+}
+
 .rtl-content {
   direction: rtl;
 

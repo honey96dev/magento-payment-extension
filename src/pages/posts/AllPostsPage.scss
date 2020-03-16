@@ -3,3 +3,9 @@
 .topic-list {
   margin-top: 8rem;
 }
+
+@media (max-width: $screen-breakpoint-lg) {
+  .topic-list {
+    margin-top: 0;
+  }
+}

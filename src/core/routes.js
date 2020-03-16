@@ -48,6 +48,7 @@ export const routes = {
     answers: `${ROUTE_BASE}/questionnaire/answers`,
     addAnswer: `${ROUTE_BASE}/questionnaire/answers/add`,
     result: `${ROUTE_BASE}/questionnaire/result`,
+    attachments: `${ROUTE_BASE}/questionnaire/attachments`,
   },
   vote: {
     root: `${ROUTE_BASE}/vote`,

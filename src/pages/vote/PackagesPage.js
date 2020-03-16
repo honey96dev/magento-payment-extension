@@ -217,7 +217,7 @@ export default () => {
                   <td className="date-col">{item.startDate}</td>
                   <td className="date-col">{item.endDate}</td>
                   <td className="date-col2">{item.releasedDate}</td>
-                  <td className="p-2 edit-col2">{item.button}</td>
+                  <td className="p-2 edit-col4">{item.button}</td>
                 </tr>
               ))}
             </MDBTableBody>

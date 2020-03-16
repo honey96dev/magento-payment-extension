@@ -6,9 +6,11 @@ import {animateScroll as scroll} from "react-scroll";
 import {Helmet} from "react-helmet";
 import {CSSTransition} from "react-transition-group";
 
+import apis from "core/apis";
 import Loading from "components/Loading";
 import Pagination from "components/Pagination";
 import Service from "services/QuestionnaireService";
+import GlobalService from "services/GlobalService";
 import {ALERT_DANGER, SUCCESS, TRANSITION_TIME} from "core/globals";
 import routes from "core/routes";
 import Result from "./partial/Result";
@@ -112,6 +114,13 @@ export default () => {
       });
   };
 
+  const handleDownload = e => {
+    const url = `${apis.questionnaire.downloadResult}/${packageData.id}`;
+    const filename = `${packageData.name}`;
+    console.log(url, filename);
+    GlobalService.downloadFile({url, filename});
+  };
+
   const handleGoBack = e => {
     history.goBack();
   };
@@ -146,28 +155,31 @@ export default () => {
           <div className="full-width">
             {packageData.endDate >= packageData.today && <MDBBtn size="sm" color="primary" disabled>{t("COMMON.BUTTON.NOT_FINISHED")}</MDBBtn>}
             {packageData.endDate < packageData.today && <MDBBtn size="sm" color={!!releasedDate.length ? "danger" : "primary"} onClick={handleRelease}>{!!releasedDate.length ? t("COMMON.BUTTON.UNPUBLISH") : t("COMMON.BUTTON.PUBLISH")}</MDBBtn>}
+            <MDBBtn size="sm" color="secondary" onClick={handleDownload}>{t("QUESTIONNAIRE.RESULT.DOWNLOAD_RESULT")}</MDBBtn>
             <MDBBtn size="sm" color="warning" onClick={handleGoBack}>{t("COMMON.BUTTON.BACK")}</MDBBtn>
           </div>
         </MDBCol>
-        <MDBCol md={12} className="survey-card z-depth-1">
-          {/*<Votes items={items}/>*/}
-          <MDBStepper vertical className="text-left">
-            {items.map((item, index) => (
-              <MDBStep key={index} className="completed">
-                <a>
-                  <span className="circle">{item.index}</span>
-                </a>
-                <Fragment>
-                  <div className="step-content lighten-4 white-text">
-                    <h6 className="mb-0">{item.question}</h6>
-                  </div>
-                  <div className="step-content mt-3 progress-group">
-                    <Result data={item} />
-                  </div>
-                </Fragment>
-              </MDBStep>
-            ))}
-          </MDBStepper>
+        <MDBCol md={12}>
+          <div className="survey-card z-depth-1">
+            {/*<Votes items={items}/>*/}
+            <MDBStepper vertical className="text-left">
+              {items.map((item, index) => (
+                <MDBStep key={index} className="completed">
+                  <a>
+                    <span className="circle">{item.index}</span>
+                  </a>
+                  <Fragment>
+                    <div className="step-content lighten-4 white-text">
+                      <h6 className="mb-0">{item.question}</h6>
+                    </div>
+                    <div className="step-content mt-3 progress-group">
+                      <Result data={item} />
+                    </div>
+                  </Fragment>
+                </MDBStep>
+              ))}
+            </MDBStepper>
+          </div>
         </MDBCol>
         <MDBCol md={12} className="text-center">
           <div className="mt-5">

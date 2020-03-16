@@ -15,6 +15,11 @@ export const cancelRequest = () => {
 };
 
 const getQueryString = (params) => {
+  if (!params) {
+    return "";
+  } else if (!Object.keys(params).length) {
+    return "";
+  }
   let esc = encodeURIComponent;
   return (
     "?" +

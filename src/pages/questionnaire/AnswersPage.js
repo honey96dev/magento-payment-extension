@@ -224,7 +224,7 @@ export default () => {
                 <tr key={index} className="text-left">
                   <td>{item.number}</td>
                   <td>{item.answer}</td>
-                  <td className="p-2 answer-edit-col">{item.button}</td>
+                  <td className="p-2 edit-col2">{item.button}</td>
                 </tr>
               ))}
             </MDBTableBody>

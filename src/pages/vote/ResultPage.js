@@ -149,25 +149,27 @@ export default () => {
             <MDBBtn size="sm" color="warning" onClick={handleGoBack}>{t("COMMON.BUTTON.BACK")}</MDBBtn>
           </div>
         </MDBCol>
-        <MDBCol md={12} className="survey-card z-depth-1">
-          {/*<Votes items={items}/>*/}
-          <MDBStepper vertical className="text-left">
-            {items.map((item, index) => (
-              <MDBStep key={index} className="completed">
-                <a>
-                  <span className="circle">{item.index}</span>
-                </a>
-                <Fragment>
-                  <div className="step-content lighten-4 white-text">
-                    <h6 className="mb-0">{item.question}</h6>
-                  </div>
-                  <div className="step-content mt-3 progress-group">
-                    <Result data={item} />
-                  </div>
-                </Fragment>
-              </MDBStep>
-            ))}
-          </MDBStepper>
+        <MDBCol md={12}>
+          <div className="survey-card z-depth-1">
+            {/*<Votes items={items}/>*/}
+            <MDBStepper vertical className="text-left">
+              {items.map((item, index) => (
+                <MDBStep key={index} className="completed">
+                  <a>
+                    <span className="circle">{item.index}</span>
+                  </a>
+                  <Fragment>
+                    <div className="step-content lighten-4 white-text">
+                      <h6 className="mb-0">{item.question}</h6>
+                    </div>
+                    <div className="step-content mt-3 progress-group">
+                      <Result data={item} />
+                    </div>
+                  </Fragment>
+                </MDBStep>
+              ))}
+            </MDBStepper>
+          </div>
         </MDBCol>
         <MDBCol md={12} className="text-center">
           <div className="mt-5">

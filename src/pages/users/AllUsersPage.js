@@ -192,7 +192,7 @@ export default () => {
   };
 
   const deleteItem = id => {
-    Service.delete({id: modal.itemId, page, scope})
+    Service.delete({id: modal.itemId, page, scope, search})
       .then(res => {
         if (res.result === SUCCESS) {
           for (let row of res.data) {
@@ -295,7 +295,7 @@ export default () => {
                     <td>{item.lastName}</td>
                     <td>{item.gender}</td>
                     <td>{`${item.countryCode}${item.phone}`}</td>
-                    <td className="p-2 edit-col2">{item.button}</td>
+                    <td className="p-2 edit-col3">{item.button}</td>
                   </tr>
                 ))}
                 {!items.length && <tr>

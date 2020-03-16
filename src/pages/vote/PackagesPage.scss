@@ -1,19 +1,1 @@
 @import "../../assets/consts";
-
-.no-col {
-  width: $no-col-width;
-}
-
-.date-col {
-  width: $date-col-width;
-}
-
-.date-col2 {
-  width: calc(#{$date-col-width} + 25px);
-  min-width: calc(#{$date-col-width} + 25px);
-}
-
-.edit-col2 {
-  width: calc(#{$edit-col-width} + 100px);
-  min-width: calc(#{$edit-col-width} + 100px);
-}

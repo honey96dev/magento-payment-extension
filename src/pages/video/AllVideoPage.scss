@@ -3,3 +3,9 @@
 .section-list {
   margin-top: 8rem;
 }
+
+@media (max-width: $screen-breakpoint-lg) {
+  .section-list {
+    margin-top: 0;
+  }
+}

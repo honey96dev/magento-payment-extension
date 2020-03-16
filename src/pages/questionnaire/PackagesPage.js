@@ -113,6 +113,7 @@ export default () => {
         <Link to={`${routes.questionnaire.addPackage}/${page || 1}/${id}`}><MDBBtn tag="a" size="sm" color="indigo" floating><MDBIcon icon="edit"/></MDBBtn></Link>
         <Link to={`${routes.questionnaire.questions}/${id}/1/${page || 1}`}><MDBBtn tag="a" size="sm" color="primary" className="mx-2" floating><MDBIcon icon="list"/></MDBBtn></Link>
         <Link to={`${routes.questionnaire.result}/${id}/1/${page || 1}`}><MDBBtn tag="a" size="sm" color="indigo" className="mr-2" floating><MDBIcon icon="eye"/></MDBBtn></Link>
+        <Link to={`${routes.questionnaire.attachments}/${id}/1/${page || 1}`}><MDBBtn tag="a" size="sm" color="default" className="mr-2" floating><MDBIcon icon="download"/></MDBBtn></Link>
         <MDBBtn tag="a" size="sm" color="danger" floating onClick={e => handleDelete(id, "#" + number)}><MDBIcon icon="trash"/></MDBBtn>
       </Fragment>
     );
@@ -217,7 +218,7 @@ export default () => {
                   <td className="date-col">{item.startDate}</td>
                   <td className="date-col">{item.endDate}</td>
                   <td className="date-col2">{item.releasedDate}</td>
-                  <td className="p-2 edit-col2">{item.button}</td>
+                  <td className="p-2 edit-col5">{item.button}</td>
                 </tr>
               ))}
             </MDBTableBody>

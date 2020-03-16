@@ -270,6 +270,7 @@ export default {
     },
     RESULT: {
       RESULT: "Questionnaire Result",
+      DOWNLOAD_RESULT: "Download Result",
     },
   },
   VOTE: {
