@@ -16,6 +16,7 @@ import routes from "core/routes";
 import Result from "./partial/Result";
 
 import "./ResultPage.scss";
+import {POST} from "apis/constants";
 
 export default () => {
   const {packageId, page, page2} = useParams();
@@ -115,10 +116,14 @@ export default () => {
   };
 
   const handleDownload = e => {
-    const url = `${apis.questionnaire.downloadResult}/${packageData.id}`;
+    const url = `${apis.questionnaire.downloadResult}`;
+    const params = {
+      packageId,
+      pageSize: 1000,
+    };
     const filename = `${packageData.name}`;
-    console.log(url, filename);
-    GlobalService.downloadFile({url, filename});
+
+    GlobalService.downloadFile({method: POST, url, params, filename});
   };
 
   const handleGoBack = e => {
