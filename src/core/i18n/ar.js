@@ -268,6 +268,11 @@ export default {
       ADD_ANSWER: "أضف إجابة",
       MODIFY_ANSWER: "تعديل الجواب",
     },
+    ATTACHMENTS: {
+      APPLICANT: "طالب وظيفة",
+      GUEST: "زائر",
+      TIMESTAMP: "الطابع الزمني",
+    },
     RESULT: {
       RESULT: "نتيجة الاستبيان",
       DOWNLOAD_RESULT: "تحميل النتيجة",

@@ -1,10 +1,5 @@
-import React from "react";
 import axios from "axios";
-import {DELETE, GET, PATCH, POST, PUT} from "apis/constants";
-import apis from "core/apis";
-import authActions from "actions/auth";
-import AuthService from "services/AuthService";
-import store from "core/store";
+import {DELETE, GET, PATCH, POST, PUT} from "./constants";
 
 let CancelToken = axios.CancelToken;
 
@@ -15,11 +10,9 @@ export const cancelRequest = () => {
 };
 
 const getQueryString = (params) => {
-  if (!params) {
+  if (!params)
     return "";
-  } else if (!Object.keys(params).length) {
-    return "";
-  }
+
   let esc = encodeURIComponent;
   return (
     "?" +
@@ -33,15 +26,8 @@ const getJsonBody = (params) => {
   return params;
 };
 
-const signOutOn401 = (err) => {
-  if (!!err && !!err.response && err.response.status === 401) {
-    store.dispatch(authActions.signOut());
-    AuthService.signOut();
-  }
-};
-
 export const setBaseUrl = (value) => {
-  axios.defaults.baseURL = apis.baseUrl;
+  axios.defaults.baseURL = value;
 };
 
 export const setHeader = (params) => {
@@ -49,7 +35,7 @@ export const setHeader = (params) => {
     axios.defaults.headers.common[key] = value;
   });
 };
-export default (requestType, resourceURL, parameters, headers) => {
+export default (requestType, resourceURL, parameters, headers, config) => {
   // Object.entries(headers).forEach(([key, value]) => {
   //   axios.defaults.headers.common[key] = value;
   // });
@@ -60,6 +46,7 @@ export default (requestType, resourceURL, parameters, headers) => {
         const queryString = getQueryString(parameters);
         axios
           .get(resourceURL + queryString, {
+            ...config,
             cancelToken: new CancelToken(c => {
               cancel = c;
             }),
@@ -69,7 +56,6 @@ export default (requestType, resourceURL, parameters, headers) => {
             resolve(response.data);
           })
           .catch(error => {
-            signOutOn401(error);
             reject(error);
           });
       });
@@ -79,6 +65,7 @@ export default (requestType, resourceURL, parameters, headers) => {
         const jsonBody = getJsonBody(parameters);
         axios
           .post(resourceURL, jsonBody, {
+            ...config,
             cancelToken: new CancelToken(c => {
               cancel = c;
             }),
@@ -88,7 +75,6 @@ export default (requestType, resourceURL, parameters, headers) => {
             resolve(response.data);
           })
           .catch(error => {
-            signOutOn401(error);
             reject(error);
           });
       });
@@ -98,6 +84,7 @@ export default (requestType, resourceURL, parameters, headers) => {
         const jsonBody = getJsonBody(parameters);
         axios
           .put(resourceURL, jsonBody, {
+            ...config,
             cancelToken: new CancelToken(c => {
               cancel = c;
             }),
@@ -107,7 +94,6 @@ export default (requestType, resourceURL, parameters, headers) => {
             resolve(response.data);
           })
           .catch(error => {
-            signOutOn401(error);
             reject(error);
           });
       });
@@ -117,6 +103,7 @@ export default (requestType, resourceURL, parameters, headers) => {
         const jsonBody = getJsonBody(parameters);
         axios
           .patch(resourceURL, jsonBody, {
+            ...config,
             cancelToken: new CancelToken(c => {
               cancel = c;
             }),
@@ -126,7 +113,6 @@ export default (requestType, resourceURL, parameters, headers) => {
             resolve(response.data);
           })
           .catch(error => {
-            signOutOn401(error);
             reject(error);
           });
       });
@@ -136,6 +122,7 @@ export default (requestType, resourceURL, parameters, headers) => {
         const queryString = getQueryString(parameters);
         axios
           .delete(resourceURL + queryString, {
+            ...config,
             cancelToken: new CancelToken(c => {
               cancel = c;
             }),
@@ -145,7 +132,6 @@ export default (requestType, resourceURL, parameters, headers) => {
             resolve(response.data);
           })
           .catch(error => {
-            signOutOn401(error);
             reject(error);
           });
       });

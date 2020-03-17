@@ -84,7 +84,7 @@ export default () => {
       .then(res => {
         if (res.result === SUCCESS) {
           for (let row of res.data) {
-            row["button"] = makeButtons(row.id, row.number);
+            row["button"] = makeButtons(row);
           }
           setPageCount(res.pageCount);
           setItems(res.data);
@@ -107,13 +107,13 @@ export default () => {
       });
   }, [page, t]);
 
-  const makeButtons = (id, number) => {
+  const makeButtons = ({id, number, requireAttachment}) => {
     return (
       <Fragment>
         <Link to={`${routes.questionnaire.addPackage}/${page || 1}/${id}`}><MDBBtn tag="a" size="sm" color="indigo" floating><MDBIcon icon="edit"/></MDBBtn></Link>
         <Link to={`${routes.questionnaire.questions}/${id}/1/${page || 1}`}><MDBBtn tag="a" size="sm" color="primary" className="mx-2" floating><MDBIcon icon="list"/></MDBBtn></Link>
         <Link to={`${routes.questionnaire.result}/${id}/1/${page || 1}`}><MDBBtn tag="a" size="sm" color="indigo" className="mr-2" floating><MDBIcon icon="eye"/></MDBBtn></Link>
-        <Link to={`${routes.questionnaire.attachments}/${id}/1/${page || 1}`}><MDBBtn tag="a" size="sm" color="default" className="mr-2" floating><MDBIcon icon="download"/></MDBBtn></Link>
+        <MDBBtn tag="a" size="sm" color="default" className="mr-2" floating onClick={e => handleAttachments({id, number})} disabled={!requireAttachment}><MDBIcon icon="download"/></MDBBtn>
         <MDBBtn tag="a" size="sm" color="danger" floating onClick={e => handleDelete(id, "#" + number)}><MDBIcon icon="trash"/></MDBBtn>
       </Fragment>
     );
@@ -128,7 +128,7 @@ export default () => {
       .then(res => {
         if (res.result === SUCCESS) {
           for (let row of res.data) {
-            row["button"] = makeButtons(row.id, row.number);
+            row["button"] = makeButtons(row);
           }
           setPageCount(res.pageCount);
           setItems(res.data);
@@ -161,6 +161,10 @@ export default () => {
 
   const handlePageChange = page => {
     history.push(`${routes.questionnaire.packages}/${page}`);
+  };
+
+  const handleAttachments = ({id, number}) => {
+    history.push(`${routes.questionnaire.attachments}/${id}/1/${page || 1}`);
   };
 
   const handleDelete = (id, title) => {

@@ -64,6 +64,7 @@ export default {
     result: "questionnaire/result",
     publish: "questionnaire/publish",
     count: "questionnaire/count",
+    attachments: "questionnaire/attachments",
     downloadAttachment: "questionnaire/download-attachment",
     downloadResult: "questionnaire/download-result",
   },

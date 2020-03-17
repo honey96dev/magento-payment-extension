@@ -246,6 +246,11 @@ textarea.form-control {
   width: $date-col-width;
 }
 
+.edit-col1 {
+  width: 54px;
+  min-width: 54px;
+}
+
 .edit-col2 {
   width: calc(#{$edit-col-width});
   min-width: calc(#{$edit-col-width});

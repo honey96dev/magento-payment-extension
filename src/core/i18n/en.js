@@ -111,6 +111,7 @@ export default {
       ADD_PACKAGE: "Add Questionnaire Package",
       QUESTIONS: "Questionnaire Questions",
       ADD_QUESTION: "Add Questionnaire Question",
+      ATTACHMENTS: "Questionnaire Attachments",
       RESULT: "Questionnaire Result",
     },
     VOTE: {
@@ -267,6 +268,11 @@ export default {
     ADD_ANSWER: {
       ADD_ANSWER: "Add Questionnaire Answer",
       MODIFY_ANSWER: "Modify Questionnaire Answer",
+    },
+    ATTACHMENTS: {
+      APPLICANT: "Applicant",
+      GUEST: "Guest",
+      TIMESTAMP: "Timestamp",
     },
     RESULT: {
       RESULT: "Questionnaire Result",

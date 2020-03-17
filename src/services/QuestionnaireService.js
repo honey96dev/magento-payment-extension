@@ -168,6 +168,17 @@ export default {
     });
   },
 
+  attachments: (params) => {
+    return new Promise((resolve, reject) => {
+      fetch(POST, apis.questionnaire.attachments, params)
+        .then(res => {
+          resolve(res);
+        }, err => {
+          reject(err);
+        });
+    });
+  },
+
   downloadAttachment: (params) => {
     return new Promise((resolve, reject) => {
       fetch(POST, apis.questionnaire.downloadAttachment, params)
